@@ -1,8 +1,8 @@
-package AgenciaDeApuesta;
+package src.models;
 
 import java.sql.Date;
 
-public class Deportista {
+public class Deportista implements Oponente {
 	String nombre;
 	String apellido;
 	Date fechaNacimiento;

@@ -1,8 +1,8 @@
-package models;
+package src.models;
 
 import java.util.List;
 
-public class Equipo {
+public class Equipo implements Oponente{
 	
 	private List<Deportista> plantel;
 	private String nombre;
