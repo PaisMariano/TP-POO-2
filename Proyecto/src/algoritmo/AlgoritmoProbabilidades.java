@@ -6,6 +6,6 @@ import oponentes.Oponente;
 
 public interface AlgoritmoProbabilidades {
 
-	Float calcularProbabilidades(BBDD _base, Oponente _oponente, EventoDeportivo _evento);
+	Float calcularCuota(BBDD _base, Oponente _oponente, EventoDeportivo _evento);
 
 }

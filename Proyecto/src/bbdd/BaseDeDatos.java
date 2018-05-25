@@ -36,40 +36,6 @@ public class BaseDeDatos implements BBDD{
 				return new Exception("El evento aun no ha fnalizado.");
 			}
 		
-			public List historicoCompleto(Oponente _op1, Oponente _op2) {
-				
-				ArrayList<EventoDeportivo> historico = new ArrayList<EventoDeportivo>();
-				
-				for(EventoDeportivo eD : this.historicoEventos) {
-					
-					if (eD.participaronVs(_op1, _op2)) {
-						
-						historico.add(eD);
-			        			
-			        }
-					
-				}
-				
-				return historico;
-			}
 			
-			public List historicoUltimosN(Oponente _op1, Oponente _op2) {
-				
-				ArrayList<EventoDeportivo> historico = new ArrayList<EventoDeportivo>();
-				Integer ultimosN = new Integer(10);
-				
-				for(EventoDeportivo eD : this.historicoEventos) {
-					
-					if (eD.participaronVs(_op1, _op2)) {
-						
-						historico.add(eD);
-			        			
-			        }
-					
-				}
-				
-				
-				return historico;
-				
-			}
+			
 }
