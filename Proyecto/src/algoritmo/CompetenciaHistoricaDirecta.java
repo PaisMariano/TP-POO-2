@@ -1,20 +1,48 @@
 package algoritmo;
 
+import java.util.List;
+
 import algoritmo.AlgoritmoProbabilidades;
 import bbdd.BBDD;
 import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
 
-public class CompetenciaHistoricaDirecta implements AlgoritmoProbabilidades {
+public class CompetenciaHistoricaDirecta extends AlgoritmoProbabilidades {
 
-	//Falta implementar
 	@Override
-	public Float calcularProbabilidades(BBDD _base, Oponente _oponente, EventoDeportivo _evento) {
-		// TODO Auto-generated method stub
-		return null;
+	public Float[] calcularProbabilidad(List historicoCompleto, Oponente _op1, Oponente _op2) {
+		
+		List historico = this.calcularHistoricoEntre(historicoCompleto, _op1, _op2);
+		
+		return calcularCoeficientes(historico, _op1, _op2);
 	}
-
-	//Competencia historica directa --> (cantidadDePartidosGanados * 0.5) /10
 	
-	//Historia reciente --> cantidadDeVictorias / 10; cambia por empatados.hay que delegarlo al estado ganado, perdido o empatado.
+	private Float[] calcularCoeficientes(List<EventoDeportivo> historico, Oponente _op1, Oponente _op2) {
+		
+		Float coeficiente[] = new Float[3];
+		Float coeficienteGanadorA, coeficienteGanadorB, coeficienteEmpate;
+		
+		
+		coeficienteGanadorA = this.probabilidadGanador(historico, _op1);
+		coeficienteGanadorB = this.probabilidadGanador(historico, _op2);
+		coeficienteEmpate   = historico.size() - coeficienteGanadorA - coeficienteGanadorB;
+		
+		
+		coeficiente[0] = coeficienteGanadorA / sizeConsistente(historico);
+		coeficiente[1] = coeficienteGanadorB / sizeConsistente(historico);
+		coeficiente[2] = (coeficiente[0] + coeficiente[1]) / 2;
+		
+		return coeficiente;
+	}
+	
+	private Float sizeConsistente(List historico) {
+		
+		int size = historico.size();
+		
+		if (size == 0) {
+			size = 1;
+		}
+		return (float) size;
+	}
+	
 }
