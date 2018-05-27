@@ -10,7 +10,7 @@ import org.junit.Before;
 import eventoDeportivo.Deporte;
 
 
-
+public static 
 
 public class Tests {
 

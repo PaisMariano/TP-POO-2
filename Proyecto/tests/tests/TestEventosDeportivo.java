@@ -14,6 +14,7 @@ import eventoDeportivo.EventoDeportivo;
 
 
 
+
 public class TestEventosDeportivo {
 
 	private Deporte unDeporte;
@@ -33,4 +34,5 @@ public class TestEventosDeportivo {
 		assertEquals((unDeporte.getNombre()),"Boxeo");	
 		
 	}
+}
 }
