@@ -3,39 +3,56 @@ package algoritmo;
 import java.util.ArrayList;
 import java.util.List;
 
-import bbdd.BBDD;
 import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
 
-public class CompetenciaHistoriaReciente implements AlgoritmoProbabilidades {
+public class CompetenciaHistoriaReciente extends AlgoritmoProbabilidades {
 	
-	//Falta implementar
+	
 	@Override
-	public Float cuotaGana(List coleccionPartidos, Oponente _op1, Oponente _op2) {
+	public Float[] calcularProbabilidad(List historicoCompleto, Oponente _op1, Oponente _op2) {
 		
-		List subHistorico = this.ultimosX(coleccionPartidos, _op1, _op2);
-				
-		this.
+		//Calculo Historico completo entre los dos oponentes.
+		List subHistorico = this.calcularHistoricoEntre(historicoCompleto, _op1, _op2); 
+			
+		//Calculo Historico de los ultimos 10 partidos entre los dos oponentes.
+		subHistorico = this.calcularHistoricoUltimosX(subHistorico, _op1, _op2, 10);
+		
+		//Calculo la probabilidad en base a los ultimos 10 partidos.
+		return this.probabilidad(subHistorico, _op1, _op2, 10);
 	}
 	
-	private List ultimosX(List subHistorico, Oponente _op1, Oponente _op2) {
+	private Float[] probabilidad(List<EventoDeportivo> subHistorico, Oponente _op1, Oponente _op2, Integer cantidadATraer) {
 		
-		ArrayList<EventoDeportivo> historico = new ArrayList<EventoDeportivo>();
+		Float coeficiente[] = new Float[3];
+		float coeficienteGanadorA, coeficienteGanadorB, coeficienteEmpate;
 		
-		for(EventoDeportivo eD : coleccionPartidos) {
-			
-			if (eD.participaronVs(_op1, _op2)) {
-					historico.add(eD);
-	        }		
+		coeficienteGanadorA = this.probabilidadGanador(subHistorico, _op1);
+		coeficienteGanadorB = this.probabilidadGanador(subHistorico, _op2);
+		coeficienteEmpate   = cantidadATraer - coeficienteGanadorA - coeficienteGanadorB;
 		
-		while(subHistorico.size() > 10) {
-			
-			subHistorico.remove(0);
+		
+		coeficiente[0] = coeficienteGanadorA / cantidadATraer;
+		coeficiente[1] = coeficienteGanadorB / cantidadATraer;
+		coeficiente[2] = coeficienteEmpate / cantidadATraer;
+		
+		
+		return coeficiente;
+		
+	}
+	
+	private Integer probabilidadGanador(List<EventoDeportivo> subHistorico, Oponente _op1) {
+		
+		Integer probabilidad = new Integer(0);
+		
+		for(EventoDeportivo eD : subHistorico) {
+			if (eD.getResultado() = _op1) {
+				probabilidad += 1;
+			}
 		}
 		
-		return subHistorico;
+		return probabilidad;
+		
 	}
-	
-	public Float cuotaEmpate(BBDD _base, Oponente _op1, Oponente _op2) {
 
 }

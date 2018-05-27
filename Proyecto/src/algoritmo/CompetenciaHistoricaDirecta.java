@@ -5,7 +5,7 @@ import bbdd.BBDD;
 import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
 
-public class CompetenciaHistoricaDirecta implements AlgoritmoProbabilidades {
+public class CompetenciaHistoricaDirecta extends AlgoritmoProbabilidades {
 
 	//Falta implementar
 	@Override
