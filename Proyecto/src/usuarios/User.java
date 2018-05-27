@@ -14,6 +14,8 @@ public class User {
 			apuestas = new ArrayList<Apuesta>(0);
 		}
 		
+		
+		//creo que hay que pasarle la apuesta a la cual se refiere la ganacia bruta y neta 
 		public Float gananciaBruta(CasaDeApuestas _casa) {
 			Float total = new Float(0); 
 			for(Apuesta apuesta : apuestas) {
@@ -30,4 +32,8 @@ public class User {
 			return total;
 		}
 	
+		public void agregarNuevaApuesta(Apuesta _apuesta) {
+			apuestas.add(_apuesta);
+			
+		}
 }
