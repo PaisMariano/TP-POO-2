@@ -22,18 +22,20 @@ public abstract class AlgoritmoProbabilidades {
 		
 		}
 		return historialEntre;
-		
-		
 	}
 	
-	protected List calcularHistoricoUltimosX(List subHistorico, Oponente _op1, Oponente _op2, Integer val) {
-			
-		while(subHistorico.size() > val) {
-				
-			subHistorico.remove(0);
+	protected Float probabilidadGanador(List<EventoDeportivo> hist, Oponente _op) {
+		
+		Float probabilidad = new Float(0);
+		
+		for(EventoDeportivo eD : hist) {
+			if (eD.getResultado() = _op) {
+				probabilidad += 1;
+			}
 		}
-			
-		return subHistorico;
+		return probabilidad;
 	}
-}
+	
+}	
+
 

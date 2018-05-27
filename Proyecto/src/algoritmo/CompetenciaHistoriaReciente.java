@@ -10,49 +10,58 @@ public class CompetenciaHistoriaReciente extends AlgoritmoProbabilidades {
 	
 	
 	@Override
-	public Float[] calcularProbabilidad(List historicoCompleto, Oponente _op1, Oponente _op2) {
-		
-		//Calculo Historico completo entre los dos oponentes.
-		List subHistorico = this.calcularHistoricoEntre(historicoCompleto, _op1, _op2); 
+	public Float[] calcularProbabilidad(List historicoCompleto, Oponente _op1, Oponente _op2) { 
 			
-		//Calculo Historico de los ultimos 10 partidos entre los dos oponentes.
-		subHistorico = this.calcularHistoricoUltimosX(subHistorico, _op1, _op2, 10);
+		//Calculo Historico de los ultimos 10 partidos del Oponente 1
+		List historicoOp1 = this.calcularHistoricoIndividualUltimosDiez(historicoCompleto, _op1);
 		
-		//Calculo la probabilidad en base a los ultimos 10 partidos.
-		return this.probabilidad(subHistorico, _op1, _op2, 10);
+		//Calculo Historico de los ultimos 10 partidos del Oponente 2
+		List historicoOp2 = this.calcularHistoricoIndividualUltimosDiez(historicoCompleto, _op2);
+				
+		//Calculo los coeficientes en base a los ultimos 10 partidos de cada oponente.
+		return this.calcularCoeficientes(historicoOp1, _op1, historicoOp2, _op2);
 	}
 	
-	private Float[] probabilidad(List<EventoDeportivo> subHistorico, Oponente _op1, Oponente _op2, Integer cantidadATraer) {
+	private Float[] calcularCoeficientes(List<EventoDeportivo> histOp1, Oponente _op1, List<EventoDeportivo> histOp2, Oponente _op2) {
 		
 		Float coeficiente[] = new Float[3];
-		float coeficienteGanadorA, coeficienteGanadorB, coeficienteEmpate;
+		Float coeficienteGanadorA, coeficienteGanadorB;
 		
-		coeficienteGanadorA = this.probabilidadGanador(subHistorico, _op1);
-		coeficienteGanadorB = this.probabilidadGanador(subHistorico, _op2);
-		coeficienteEmpate   = cantidadATraer - coeficienteGanadorA - coeficienteGanadorB;
+		coeficienteGanadorA = this.probabilidadGanador(histOp1, _op1);
+		coeficienteGanadorB = this.probabilidadGanador(histOp2, _op2);		
 		
-		
-		coeficiente[0] = coeficienteGanadorA / cantidadATraer;
-		coeficiente[1] = coeficienteGanadorB / cantidadATraer;
-		coeficiente[2] = coeficienteEmpate / cantidadATraer;
+		coeficiente[0] = coeficienteGanadorA / 10;
+		coeficiente[1] = coeficienteGanadorB / 10;
+		coeficiente[2] = (coeficiente[0] + coeficiente[1]) / 2;
 		
 		
 		return coeficiente;
 		
 	}
 	
-	private Integer probabilidadGanador(List<EventoDeportivo> subHistorico, Oponente _op1) {
+	private List calcularHistoricoIndividualUltimosDiez(List<EventoDeportivo> hist, Oponente _op) {
 		
-		Integer probabilidad = new Integer(0);
+		List<EventoDeportivo> historico = calcularHistoricoIndividual(hist, _op);
 		
-		for(EventoDeportivo eD : subHistorico) {
-			if (eD.getResultado() = _op1) {
-				probabilidad += 1;
+		for(EventoDeportivo eD : historico) {
+			if (historico.size() > 10) {
+				historico.remove(0);
+			}
+		}		
+		return historico;
+		
+	}
+	
+	private List calcularHistoricoIndividual(List<EventoDeportivo> hist, Oponente _op) {
+		
+		List historico = new ArrayList<EventoDeportivo>();
+		
+		for(EventoDeportivo eD : hist) {
+			if (eD.participo(_op){
+				historico.add(eD);
 			}
 		}
-		
-		return probabilidad;
-		
+		return historico;
 	}
 
 }
