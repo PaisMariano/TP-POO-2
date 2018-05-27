@@ -1,22 +1,27 @@
 package oponentes;
 
-import java.sql.Date;
+import java.util.Date;
 
-public class Deportista extends Oponentes{
+public class Deportista implements Oponente{
 	String nombre;
 	String apellido;
 	Date fechaNacimiento;
 	String lugarDeNacimiento;
 	
-	public Deportista(String nombre,String apellido,Date fechaNacimiento,String  lugarDeNacimiento) {
+	public Deportista(String nombre,String apellido,Date fNac,String  lugarDeNacimiento) {
 		
 		this.nombre=nombre;
 		this.apellido = apellido;
-		this.fechaNacimiento=fechaNacimiento;
+		this.fechaNacimiento=fNac;
 		this.lugarDeNacimiento=lugarDeNacimiento;
 		
 	}
 
+	@Override
+	public boolean es(Oponente _oppnente) {
+		return this.hashCode() == _oppnente.hashCode();
+	}
+	
 	@Override
 	public String nombre() {
 		return this.getNombre() + " " + this.getApellido();
@@ -29,6 +34,17 @@ public class Deportista extends Oponentes{
 	private String getApellido() {
 		return apellido;
 	}
+	
+	public Date getFnacimiento() {
+		
+		return this.fechaNacimiento;		
+	}
+	
+	public String getLugarDeNacimiento() {
+		
+		return this.lugarDeNacimiento;
+	}
+	
 	
 }
 
