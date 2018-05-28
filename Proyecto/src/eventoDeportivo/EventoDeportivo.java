@@ -36,7 +36,6 @@ public class EventoDeportivo {
 				return this.participo(_oponente1) && this.participo(_oponente2);
 			}
 
-			//Falta implementar
 			public Boolean estaFinalizado() {
 				return estado.estafinalizado();
 			}
