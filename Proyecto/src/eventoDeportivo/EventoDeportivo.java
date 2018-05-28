@@ -90,4 +90,8 @@ public class EventoDeportivo {
 			public Resultado getResultado(){
 				return resultado;
 			}
+
+			public Oponente getGanador(){
+				return resultado.getGanador();
+			}
 }

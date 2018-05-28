@@ -89,6 +89,10 @@ public abstract class Apuesta {
 		
 		package void serReactivadaSiPuede(){
 			eventoDeportivo.getEstado().reactivar(this);
+		}
+
+		public Boolean esAcertada(){
+			return this.getResultado().ganador() = eventoDeportivo.ganador()
 		}	
 
 }
