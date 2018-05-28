@@ -5,6 +5,7 @@ import java.util.List;
 
 import casaDeApuesta.*;
 import oponentes.*;
+import resultados.*;
 
 public class EventoDeportivo {
 	
@@ -12,12 +13,14 @@ public class EventoDeportivo {
 	List<Oponente> oponentes;
 	String lugar; //String o clase?
 	EstadoEventoDeportivo estado;
+	Resultado resultado;
 
 		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2) {
 			deporte = _deporte;
 			oponentes = new ArrayList<Oponente>(2);
 			this.setOponentes(oponente1, oponente2);
 			estado = new NoComenzado();
+			resultado = new Empate() //Esto no sirve si por ejemplo se usara un ganador (considerando None o un Oponente?)
 		}
 
 			private void setOponentes(Oponente _oponente1, Oponente _oponente2) {
@@ -36,6 +39,10 @@ public class EventoDeportivo {
 			//Falta implementar
 			public Boolean estaFinalizado() {
 				return null;
+			}
+
+			public void setResultado(Resultado _resultado){
+				resultado = _resultado;
 			}
 			
 			public Float cuota(CasaDeApuestas _casa, EventoDeportivo _evento, Oponente _oponenteAlQueSeApuesta) {
