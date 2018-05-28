@@ -1,14 +1,20 @@
 package apuesta;
 
-public class Final extends TipoApuesta {
+public class Final implements TipoApuesta {
 
 	@Override
-	protected void cancelarApuesta(Apuesta _apuesta) {
-		//No deberia de llegar aca.
+	public void cancelar(Apuesta _apuesta) {
+		// No deberia llegar aca.
 	}
 
 	@Override
-	public gananciaBruta(Apuesta _apuesta){
-		return super(_apuesta);
+	public void reactivar(Apuesta _apuesta) {
+		// No deberia llegar aca.
 	}
+
+	@Override
+	public Float gananciaBruta(Apuesta _apuesta) {
+		return _apuesta.bruta();
+	}
+
 }

@@ -25,10 +25,10 @@ public abstract class Apuesta {
 		}
 
 		private void setTipo(TipoApuesta _tipo){
-			return tipo = _tipo;
+			tipo = _tipo;
 		}
 
-		package void setMonto(Float _monto) {
+		public void setMonto(Float _monto) {
 			if(eventoDeportivo.estaFinalizado()) {//Esto es redundante?
 				this.error();
 			}
@@ -44,7 +44,7 @@ public abstract class Apuesta {
 		}
 		
 		public Boolean empezoEvento() {
-			return eventoDeportivo.empezoPartido();
+			return eventoDeportivo.empezoEvento();
 		}
 		
 		public Float gananciaBruta() {
@@ -71,23 +71,23 @@ public abstract class Apuesta {
 			tipo.reactivar(this);		
 		}
 
-		package void cancelarApuesta(){
+		public void cancelarApuesta(){
 			this.setTipo(new Cancelada());			
 		}
 		
-		package void reactivarApuesta(){
+		public void reactivarApuesta(){
 			this.setTipo(new Segura());
 		}
 
-		package Float bruta(){
-			reuturn this.cuotaConvenida() - this.monto();
+		public Float bruta(){
+			return this.cuotaConvenida() - this.monto();
 		} 
 
-		package void serCanceladaSiPuede(){
+		public void canceladaSiPuede(){
 			eventoDeportivo.getEstado().cancelar(this);
 		}	
 		
-		package void serReactivadaSiPuede(){
+		public void reactivarSiPuede(){
 			eventoDeportivo.getEstado().reactivar(this);
 		}
 

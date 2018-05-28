@@ -1,23 +1,23 @@
 package apuesta;
 
-public class Cancelada extends TipoApuesta {
+public class Cancelada implements TipoApuesta {
 
 	@Override
-	protected void cancelar(Apuesta _apuesta) {
+	public void cancelar(Apuesta _apuesta) {
 		//Ya esta cancelada si llego aca.
 	}
 	
 	@Override
-	protected void reactivar(Apuesta _apuesta) {
-		_apuesta.reactivarApuestaSiSePuede()
+	public void reactivar(Apuesta _apuesta) {
+		_apuesta.reactivarSiPuede();
 	}
 
 	@Override
-	public gananciaBruta(Apuesta _apuesta){
-		return super(_apuesta) * this.descuento()
+	public Float gananciaBruta(Apuesta _apuesta){
+		return this.descuento(_apuesta);
 	}
 
-	private descuento(){
-		return 0.85;
+	private Float descuento(Apuesta _apuesta){
+		return new Float(0.85 * new Float(2));
 	}
 }
