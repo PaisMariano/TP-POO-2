@@ -16,7 +16,7 @@ public abstract class Apuesta {
 		this.setMonto(_monto);
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
-		tipo = _tipo;
+		this.setTipo(_tipo);
 		//cuotaConvenida = _evento.cuota() aca lo que quiero es lo que pagaba de cuota ese partido en ese momento;
 	}
 	
@@ -24,8 +24,12 @@ public abstract class Apuesta {
 			resultadoApostado = _resultado;
 		}
 
-		public void setMonto(Float _monto) {
-			if(eventoDeportivo.estaFinalizado()) {
+		private void setTipo(TipoApuesta _tipo){
+			return tipo = _tipo;
+		}
+
+		package void setMonto(Float _monto) {
+			if(eventoDeportivo.estaFinalizado()) {//Esto es redundante?
 				this.error();
 			}
 			montoApostado = _monto;	
@@ -39,7 +43,7 @@ public abstract class Apuesta {
 			return montoApostado;
 		}
 		
-		public Boolean empezoPartido() {
+		public Boolean empezoEvento() {
 			return eventoDeportivo.empezoPartido();
 		}
 		
@@ -56,7 +60,7 @@ public abstract class Apuesta {
 		}
 
 		public Float gananciaNeta() {
-			return this.gananciaBruta() - this.monto();
+			return this.gananciaBruta();
 		}
 		
 		public void cancelar() {
@@ -66,6 +70,20 @@ public abstract class Apuesta {
 		public void reactivar(){
 			tipo.reactivar(this);		
 		}
+
+		package void cancelarApuesta(){
+			this.setTipo(new Cancelada());			
+		}
 		
-	
+		package void reactivarApuesta(){
+			this.setTipo(new Reactivada());
+		}
+
+		package Float bruta(){
+			reuturn this.cuotaConvenida() - this.monto();
+		} 
+
+		package void serCanceladaSiPuede(){
+			eventoDeportivo.getEstado().cancelar(this);
+		}	
 }

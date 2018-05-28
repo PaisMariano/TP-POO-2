@@ -2,15 +2,12 @@ package apuesta;
 
 public abstract class TipoApuesta {
 	
-	public void cancelar(Apuesta _apuesta) {
-		if(this.puedeSerCancelada(_apuesta)) {
-			this.cancelarApuesta(_apuesta);
-		}
+	package Float gananciaBruta(Apuesta _apuesta){
+		return _apuesta.bruta();
 	}
 
-	protected abstract Boolean puedeSerCancelada(Apuesta _apuesta);
-	
-	protected abstract Float gananciaBruta();
+	package abstract void cancelar(Apuesta _apuesta);
 
-	protected abstract void cancelarApuesta(Apuesta _apuesta);
+	package abstract void reactivar(Apuesta _apuesta);
+	
 }

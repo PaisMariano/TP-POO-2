@@ -11,11 +11,13 @@ public class EventoDeportivo {
 	Deporte deporte;
 	List<Oponente> oponentes;
 	String lugar; //String o clase?
-	
+	EstadoEventoDeportivo estado;
+
 		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2) {
 			deporte = _deporte;
 			oponentes = new ArrayList<Oponente>(2);
 			this.setOponentes(oponente1, oponente2);
+			estado = new NoComenzado();
 		}
 
 			private void setOponentes(Oponente _oponente1, Oponente _oponente2) {
@@ -69,5 +71,9 @@ public class EventoDeportivo {
 
 			private Exception errorNoParticipa() {
 				return new Exception("El oponente no pertenece a este evento.");
+			}
+
+			public Estado getEstado(){
+				return estado;
 			}
 }

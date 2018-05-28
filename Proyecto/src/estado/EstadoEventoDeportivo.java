@@ -10,11 +10,18 @@ public abstract class EstadoEventoDeportivo {
 		return new Exception("La apuesta no puede ser cancelada");
 	}
 
-	public abstract void activar();
-	
-	public abstract void desactivar();
-
 	public Boolean empezo() {
 		return ! this.estaFinalizado();
 	}
+
+	public abstract void cancelar(Apuesta _apuesta){
+		_apuesta.setMonto(this.montoPenalizacion(_apuesta))
+	}
+
+	public Float montoPenalizacion(Apuesta _apuesta){
+		return _apuesta.monto();
+	}
+
+	public abstract void reactivar(Apuesta _apuesta);
+
 }
