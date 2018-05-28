@@ -12,4 +12,9 @@ public class Segura extends TipoApuesta {
 		//Aca _apuesta.cancelar();
 	}
 
+	@Override 
+	public Float gananciaBruta(Apuesta _apuesta){
+		
+	}
+
 }

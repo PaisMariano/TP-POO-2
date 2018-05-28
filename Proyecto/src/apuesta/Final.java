@@ -11,4 +11,9 @@ public class Final extends TipoApuesta {
 	protected void cancelarApuesta(Apuesta _apuesta) {
 		//No deberia de llegar aca.
 	}
+
+	@Override
+	public gananciaBruta(){
+		return _apuesta.cuotaConvenida() * this.monto()
+	}
 }

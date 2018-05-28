@@ -9,6 +9,8 @@ public abstract class TipoApuesta {
 	}
 
 	protected abstract Boolean puedeSerCancelada(Apuesta _apuesta);
+	
+	protected abstract Float gananciaBruta();
 
 	protected abstract void cancelarApuesta(Apuesta _apuesta);
 }
