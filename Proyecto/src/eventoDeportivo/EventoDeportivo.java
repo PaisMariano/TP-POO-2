@@ -38,7 +38,11 @@ public class EventoDeportivo {
 
 			//Falta implementar
 			public Boolean estaFinalizado() {
-				return null;
+				return estado.estafinalizado();
+			}
+			
+			public Boolean estaEmpezado() {
+				return ! this.estaFinalizado();
 			}
 
 			public void setResultado(Resultado _resultado){
