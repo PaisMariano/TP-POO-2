@@ -9,33 +9,31 @@ import java.util.List;
 
 import Usuarios.User;
 import algoritmo.*;
-import bbdd.BBDD;
-import bbdd.BaseDeDatos;
-import eventoDeportivo.EventoDeportivo;
+import eventoDeportivo.*;
 import notifier.BalanceNotifier;
 import notifier.TextMessageBalanceNotifier;
-import oponentes.Oponente;
+import oponentes.*;
 
 public class CasaDeApuestas {
 
 	private List<User> usuarios;
 	private AlgoritmoProbabilidades algoritmo; 
 	private BalanceNotifier textMessageBalanceNotifier;
-	private BBDD baseDeDatos;
+	private List<EventoDeportivo> eventosHistoricos;
 	
 		public CasaDeApuestas() {
 			usuarios = new ArrayList<User>();
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
 			this.setNotifier(new TextMessageBalanceNotifier());
-			this.setBBDD(new BaseDeDatos());
+			eventosHistoricos = new Arraylist<EventoDeportivo>();		
 		}
 		
 		
-		public CasaDeApuestas(List<User> _usuarios, AlgoritmoProbabilidades _algoritmo,BalanceNotifier _notifier, BBDD _baseDeDatos) {
+		public CasaDeApuestas(List<User> _usuarios, AlgoritmoProbabilidades _algoritmo,BalanceNotifier _notifier, List<EventoDeportivo> _historico) {
 			usuarios = _usuarios;
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
 			this.setNotifier(new TextMessageBalanceNotifier());
-			this.setBBDD(_baseDeDatos);
+			eventosHistoricos = _historico;		
 		}
 		
 			//Flexibility
@@ -48,15 +46,15 @@ public class CasaDeApuestas {
 			}
 
 			//Flexibility
-			public void setBBDD(BBDD _baseDeDatos) {
-				baseDeDatos = _baseDeDatos;
-			}
-
-			//Flexibility
 			public void agregarusuario(User _usuario) {
 				usuarios.add(_usuario);
 			}
 			
+			//Flexibility
+			public void agregarEvento(EventoDeportivo _evento) {
+				eventosHistoricos.add(_evento);
+			}
+
 			public void notificarBalanceUsuarios() {
 				Integer month = new Integer(this.numeroDelMes());
 				
@@ -80,6 +78,6 @@ public class CasaDeApuestas {
 
 
 			public Float calcularProbabilidadesDe(Oponente _oponente, EventoDeportivo _evento) {
-				return algoritmo.calcularProbabilidades(baseDeDatos, _oponente, _evento);
+				return algoritmo.calcularProbabilidades(eventosHistoricos, _oponente, _evento);
 			}
 }
