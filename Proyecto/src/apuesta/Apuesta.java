@@ -58,5 +58,6 @@ public abstract class Apuesta {
 		public void cancelar() {
 			tipo.cancelar(this);
 		}
+		
 	
 }

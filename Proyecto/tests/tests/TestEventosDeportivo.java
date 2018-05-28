@@ -34,5 +34,32 @@ public class TestEventosDeportivo {
 		assertEquals((unDeporte.getNombre()),"Boxeo");	
 		
 	}
+	
+
+	@Test
+	public void testAnteDosOponentesMedianteResulatadoHistorico (){
+		
+		
+		
+	
 }
+	
+	
+	@Test
+	public void testAnteDosOponentesMedianteResulatadoNoHistorico(){
+		
+	}
+	
+	
+	
+	@Test
+	public void testErrorAlIngresarUnSoloOponente(){
+}
+	
+	
+	@Test
+	public void testErrorAnIngresarMasDeDosOponentes() {
+		
+		
+	}
 }

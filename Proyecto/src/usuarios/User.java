@@ -36,4 +36,11 @@ public class User {
 			apuestas.add(_apuesta);
 			
 		}
+		
+		
+		public List<Apuesta> apuestasPropias(){
+			
+			return apuestas;
+			
+		}
 }
