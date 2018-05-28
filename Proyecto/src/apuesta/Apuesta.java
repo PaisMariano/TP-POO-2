@@ -76,7 +76,7 @@ public abstract class Apuesta {
 		}
 		
 		package void reactivarApuesta(){
-			this.setTipo(new Reactivada());
+			this.setTipo(new Segura());
 		}
 
 		package Float bruta(){
