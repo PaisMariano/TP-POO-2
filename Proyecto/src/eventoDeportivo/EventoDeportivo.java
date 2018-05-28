@@ -86,4 +86,8 @@ public class EventoDeportivo {
 			public Estado getEstado(){
 				return estado;
 			}
+
+			public Resultado getResultado(){
+				return resultado;
+			}
 }
