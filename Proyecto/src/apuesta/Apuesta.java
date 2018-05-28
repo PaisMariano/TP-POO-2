@@ -49,14 +49,16 @@ public abstract class Apuesta {
 			return resultadoApostado;
 		}
 
-		//Falta
-		public Float gananciaNeta(CasaDeApuestas _casa) {
-			return this.gananciaBruta(_casa) - this.monto();
+		public Float gananciaNeta() {
+			return this.gananciaBruta() - this.monto();
 		}
 		
-		//No esta terminado
 		public void cancelar() {
 			tipo.cancelar(this);
+		}
+
+		public void reactivar(){
+			tipo.reactivar(this);		
 		}
 		
 	
