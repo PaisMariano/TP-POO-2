@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import casaDeApuesta.*;
+import estado.*;
 import oponentes.*;
 import resultados.*;
 
@@ -20,7 +21,7 @@ public class EventoDeportivo {
 			oponentes = new ArrayList<Oponente>(2);
 			this.setOponentes(oponente1, oponente2);
 			estado = new NoComenzado();
-			resultado = new Empate() //Esto no sirve si por ejemplo se usara un ganador (considerando None o un Oponente?)
+			resultado = new Empate(); //Esto no sirve si por ejemplo se usara un ganador (considerando None o un Oponente?)
 		}
 
 			private void setOponentes(Oponente _oponente1, Oponente _oponente2) {
@@ -37,10 +38,10 @@ public class EventoDeportivo {
 			}
 
 			public Boolean estaFinalizado() {
-				return estado.estafinalizado();
+				return estado.estaFinalizado();
 			}
 			
-			public Boolean estaEmpezado() {
+			public Boolean empezoEvento() {
 				return ! this.estaFinalizado();
 			}
 
@@ -83,7 +84,7 @@ public class EventoDeportivo {
 				return new Exception("El oponente no pertenece a este evento.");
 			}
 
-			public Estado getEstado(){
+			public EstadoEventoDeportivo getEstado(){
 				return estado;
 			}
 

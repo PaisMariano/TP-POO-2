@@ -1,10 +1,16 @@
 package estado;
 
+import apuesta.*;
+
 public abstract class EstadoEventoDeportivo {
 
 	public Boolean estaFinalizado() {
 		return new Boolean(false);
 	}
+	
+	public Boolean estaEmpezado() {
+		return !this.estaFinalizado();
+	} 
 	
 	protected Exception errorCancelar() {
 		return new Exception("La apuesta no puede ser cancelada");
@@ -14,8 +20,8 @@ public abstract class EstadoEventoDeportivo {
 		return ! this.estaFinalizado();
 	}
 
-	public abstract void cancelar(Apuesta _apuesta){
-		_apuesta.setMonto(this.montoPenalizacion(_apuesta))
+	public void cancelar(Apuesta _apuesta){
+		_apuesta.setMonto(this.montoPenalizacion(_apuesta));
 	}
 
 	public Float montoPenalizacion(Apuesta _apuesta){
