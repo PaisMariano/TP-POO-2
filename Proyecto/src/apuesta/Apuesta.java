@@ -86,4 +86,9 @@ public abstract class Apuesta {
 		package void serCanceladaSiPuede(){
 			eventoDeportivo.getEstado().cancelar(this);
 		}	
+		
+		package void serReactivadaSiPuede(){
+			eventoDeportivo.getEstado().reactivar(this);
+		}	
+
 }

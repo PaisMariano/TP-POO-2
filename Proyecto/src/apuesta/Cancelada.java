@@ -9,7 +9,7 @@ public class Cancelada extends TipoApuesta {
 	
 	@Override
 	protected void reactivar(Apuesta _apuesta) {
-		_apuesta.reactivarApuesta()
+		_apuesta.reactivarApuestaSiSePuede()
 	}
 
 	@Override
