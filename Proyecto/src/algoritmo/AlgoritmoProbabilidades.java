@@ -29,7 +29,7 @@ public abstract class AlgoritmoProbabilidades {
 		Float probabilidad = new Float(0);
 		
 		for(EventoDeportivo eD : hist) {
-			if (eD.getResultado() = _op) {
+			if (eD.getGanador() ==_op) {
 				probabilidad += 1;
 			}
 		}

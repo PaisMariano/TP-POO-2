@@ -29,7 +29,7 @@ public class EventoDeportivo {
 				oponentes.add(_oponente2);
 			}
 			
-			private Boolean participo(Oponente _oponente) {
+			public Boolean participo(Oponente _oponente) {
 				return oponentes.contains(_oponente);
 			}
 			
