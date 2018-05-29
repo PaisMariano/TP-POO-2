@@ -88,7 +88,9 @@ public class CasaDeApuestas {
 				//probabilidades[2] = Empate.   
 				Float[] probabilidades = this.calcularProbabilidadesDe(this.eventosHistoricos, _op1, _op2);
 				
-				EventoDeportivo evento = new EventoDeportivo(_op1, _op2, deporte, probabilidades);
+				EventoDeportivo evento = new EventoDeportivo(deporte, _op1, _op2);
+				
+				evento.calcularCuotas(probabilidades);
 				
 				this.agregarEvento(evento);			
 				
