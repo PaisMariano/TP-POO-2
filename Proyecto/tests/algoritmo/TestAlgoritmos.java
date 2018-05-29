@@ -1,25 +1,19 @@
 package algoritmo;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import algoritmo.AlgoritmoProbabilidades;
+class TestAlgoritmos {
 
-public class TestAlgoritmos{
-	
-	
-	
 	@BeforeEach
-	public void setUp() {
-		
-	
+	void setUp() throws Exception {
 	}
-	
+
 	@Test
-	void testCreationTarjeta() {
-		
-		assertEquals(new Integer(1000), new Integer(1000));
-		assertEquals(new Integer(0), new Integer(0));
+	void test() {
+		fail("Not yet implemented");
 	}
-	
+
+}
