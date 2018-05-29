@@ -18,8 +18,7 @@ public abstract class AlgoritmoProbabilidades {
 			
 			if (eD.participaronVs(_op1, _op2)) {
 					historialEntre.add(eD);
-	        }	
-		
+	        }			
 		}
 		return historialEntre;
 	}
