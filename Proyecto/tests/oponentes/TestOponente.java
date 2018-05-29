@@ -1,17 +1,14 @@
 package oponentes;
+
 import static org.junit.Assert.*; 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 import static org.mockito.Mockito.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Date;
-
-
-
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -19,11 +16,7 @@ import static org.mockito.Mockito.spy;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
-
-import oponentes.Equipo;
-import oponentes.Oponente;
-import oponentes.Deportista;
-import usuarios.User;
+import usuarios.*;
 
 
 class TestOponente {

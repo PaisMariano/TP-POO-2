@@ -7,14 +7,6 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.Test;
 import org.junit.Before;
 
-
-import eventoDeportivo.Deporte;
-import eventoDeportivo.EventoDeportivo;
-
-
-
-
-
 public class TestEventosDeportivo {
 
 	private Deporte unDeporte;

@@ -3,19 +3,15 @@ package usuarios;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import apuesta.Apuesta;
-import apuesta.Resultado;
-import apuesta.TipoApuesta;
+import apuesta.*;
 import casaDeApuesta.CasaDeApuestas;
 import eventoDeportivo.EventoDeportivo;
-import oponentes.Deportista;
+import oponentes.*;
 import usuarios.User;
 import org.mockito.InOrder;
 import static org.mockito.Mockito.*;
