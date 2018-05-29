@@ -23,7 +23,7 @@ import org.junit.jupiter.api.BeforeEach;
 import oponentes.Equipo;
 import oponentes.Oponente;
 import oponentes.Deportista;
-
+import usuarios.User;
 
 
 class TestOponente {

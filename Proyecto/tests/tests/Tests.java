@@ -14,6 +14,5 @@ public static
 
 public class Tests {
 
-	
-	
+		
 }
