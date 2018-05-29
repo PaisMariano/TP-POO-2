@@ -54,11 +54,11 @@ class TestsUsuarios {
 	}
 
 	
-	@Test//la idea es que ante una apuesta ganadora se sepa la ganacia neta.hay que ver como se toma el resultado.
+	@Test//la idea es que ante una apuesta ganadora se sepa la ganacia neta.hay que ver como se toma el resultado. se tiene que poner 
 	void testunUsuarioHaceUnaApuestaGanadoraYTieneGananciaNetaYBruta(){
 
-		usuario1.agregarNuevaApuesta(apuesta1);
-		apuesta1.
+		usuario1.agregarNuevaApuesta(apuestaDummy);
+		apuestaDummy.
 		
 		when(tipoDeApuestaMock.resultado()).thenReturn(Ganador); //o su paralelo
 		assertEquals(gananciaNeta(CasaDeApuestas _casa))

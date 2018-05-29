@@ -11,6 +11,10 @@ public class EventoDeportivo {
 	Deporte deporte;
 	List<Oponente> oponentes;
 	String lugar; //String o clase?
+	Resultado resultado;
+	Cuota ganadorOp1;
+	Cuota ganaforOp2;
+	Cuota empate;
 	
 		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2) {
 			deporte = _deporte;
