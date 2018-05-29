@@ -1,4 +1,4 @@
-package tests;
+package apuesta;
 
 import static org.junit.jupiter.api.Assertions.*;
 

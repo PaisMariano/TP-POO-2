@@ -1,4 +1,4 @@
-package tests;
+package eventoDeportivo;
 
 
 import static org.junit.Assert.*;

@@ -1,4 +1,4 @@
-package tests;
+package algoritmo;
 
 import tests.TestAlgoritmos;
 
