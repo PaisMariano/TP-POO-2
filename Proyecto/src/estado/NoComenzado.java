@@ -1,23 +1,25 @@
 package estado;
 
+import apuesta.Apuesta;
+
 public class NoComenzado extends EstadoEventoDeportivo {
 	
 	public NoComenzado() {
 		
 	}
-		public abstract void cancelar(Apuesta _apuesta){
-			super(_apuesta);/*Si se quisiera calcular la ganancia de la casa de apuestas este seria un problema*/
-			_apuesta.sercancelada();
+		public  void cancelar(Apuesta _apuesta){
+		
+			_apuesta.cancelarApuesta();
 		}
 
-		public abstract void reactivar(Apuesta _apuesta){
+		public  void reactivar(Apuesta _apuesta){
 			_apuesta.reactivar();
 		}
 			
 
 		@Override
 		public Float montoPenalizacion(Apuesta _apuesta){
-			return super(_apuesta) - this.descuento();
+			return _apuesta.monto() - this.descuento();
 		}
 
 		private Float descuento(){

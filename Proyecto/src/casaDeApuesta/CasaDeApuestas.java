@@ -1,6 +1,6 @@
 package casaDeApuesta;
 
-import java.math.BigDecimal;
+import java.math.BigDecimal; 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -81,14 +81,14 @@ public class CasaDeApuestas {
 				return algoritmo.calcularProbabilidad(eventosHistoricos, _op1, _op2);
 			}
 			
-			public void crearEventoDeportivo(Oponente _op1, Oponente _op2, Deporte deporte) {
+			public void crearEventoDeportivo(Oponente _op1, Oponente _op2, Deporte deporte, Date unaFechaYHora, String unLugar) {
 				
 				//probabilidades[0] = Ganador _op1
 				//probabilidades[1] = Ganador _op2
-				//probabilidades[2] = Empate.   
+				//probabilidades[2] = Empate.    
 				Float[] probabilidades = this.calcularProbabilidadesDe(this.eventosHistoricos, _op1, _op2);
-				
-				EventoDeportivo evento = new EventoDeportivo(deporte, _op1, _op2);
+			
+				EventoDeportivo evento = new EventoDeportivo(deporte, _op1, _op2, unaFechaYHora, unLugar);
 				
 				evento.calcularCuotas(probabilidades);
 				

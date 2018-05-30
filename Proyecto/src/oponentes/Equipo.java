@@ -25,10 +25,6 @@ public class Equipo implements Oponente {
 		return nombre;
 	}
 
-	@Override
-	public boolean es(Oponente _oppnente) {
-		return this.hashCode() == _oppnente.hashCode();
-	}
 
 	/*
 	 * Lo agrego por flexibilidad, se me ocurren mas parecidos. Ejemplo, reemplazar
@@ -40,20 +36,19 @@ public class Equipo implements Oponente {
 
 	// Cambia al primer jugador, por el segundo.
 	public void cambiarDeportista(Deportista _jugador1, Deportista _jugador2) {
-		this.sacarJugador(_jugador1);
-		this.agregarJugador(_jugador2);
+		this.sacarDeportista(_jugador1);
+		this.agregarDeportista(_jugador2);
 	}
 
 	public void sacarDeportista(Deportista _jugador) {
 		plantel.remove(_jugador);
 	}
 
-	public void agregarJugador(Deportista _jugador) {
-		plantel.add(_jugador);
-	}
+
 
 	public Integer cantidadDeDeportistas() {
 		return plantel.size();
 	}
 
-}
+	}
+

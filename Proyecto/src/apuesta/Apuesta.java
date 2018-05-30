@@ -4,7 +4,7 @@ import casaDeApuesta.*;
 import eventoDeportivo.*;
 import resultados.*;
 
-public abstract class Apuesta {
+public  class Apuesta {
 	
 	private Float montoApostado;
 	private EventoDeportivo eventoDeportivo;
@@ -92,7 +92,8 @@ public abstract class Apuesta {
 		}
 
 		public Boolean esAcertada(){
-			return this.getResultado().ganador() = eventoDeportivo.ganador()
+			this.getResultadoApostado().getGanador() equals(eventoDeportivo.getGanador());
+			return this.getResultadoApostado().getGanador() = eventoDeportivo.ganador();
 		}	
 
 }

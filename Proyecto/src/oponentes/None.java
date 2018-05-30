@@ -9,7 +9,7 @@ public class None implements Oponente, Identificable {
 		return " ";
 	}
 
-	@Override
+
 	public Boolean es(Object _object) {
 		return new Boolean(false);
 	}

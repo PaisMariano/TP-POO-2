@@ -40,20 +40,18 @@ public class TestOponente {
 		assertEquals( deportista1.getLugarDeNacimiento(),"Adrogue");		
 		assertEquals(new Date(1,2,88), deportista1.getFnacimiento());
 		assertEquals(oponente.nombre(), "Maria Marta SerraLima");
-		/*equals(oponente.es(new Deportista( "Maria Marta","SerraLima",fNac,"Adrogue")));*/
-		
+	
 		}
 	
 	@Test 
 	public void testSeAgreganJugadoresAlPlantel() {
 		List<Deportista> spyDeports= spy(new ArrayList <Deportista>());
-		Equipo eq1=	new Equipo(spyDeports,"equipoLaConchaDeTuMAdre");
+		Equipo eq1=new Equipo(spyDeports,"feo");		
 		eq1.agregarDeportista(deportistaDummy);
-		eq1.agregarDeportista(otroDeportistaDummy);
-		
-		/*assertEquals((Integer)2),eq1.cantidadDeDeportistas());*/
-		verify(spyDeports).size();
-		doReturn((Integer)2).when(eq1).cantidadDeDeportistas();
+		assertEquals("feo",eq1.nombre());
+		assertEquals((Integer)1, eq1.cantidadDeDeportistas());
+		verify (spyDeports).add(deportistaDummy);
+	
 		
 	}
 	
@@ -66,8 +64,8 @@ public class TestOponente {
 		
 		otroEquipo.agregarDeportista(deportista1);
 		otroEquipo.cambiarDeportista(deportista1, deportista2);
-		verify(spyDeports.remove(deportista1));
-		verify(spyDeports.add(deportista2));
+		verify(spyDeports).remove(deportista1);
+		verify(spyDeports).add(deportista2);
 		
 	}
 	
@@ -80,7 +78,7 @@ public class TestOponente {
 		otroEquipo.agregarDeportista(deportista2);
 		otroEquipo.sacarDeportista(deportista1);
 		
-		verify(spyDeports.remove(deportista1));
+		verify(spyDeports).remove(deportista1);
 		
 	}
 	

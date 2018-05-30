@@ -1,5 +1,6 @@
 package eventoDeportivo;
 
+import java.util.Date; 
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class EventoDeportivo {
 	Deporte deporte;
 	List<Oponente> oponentes;
 	String lugar; //String o clase?
-
+	Date fechaYHora;
 	EstadoEventoDeportivo estado;
 	Resultado resultado;
 	private float cuotaGanador1;
@@ -21,14 +22,15 @@ public class EventoDeportivo {
 	private float cuotaEmpate;
 
 
-	
-	
-		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2) {
+
+		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2,Date unaFechaYHora,String unLugar) {
 			deporte = _deporte;
 			oponentes = new ArrayList<Oponente>(2);
 			this.setOponentes(oponente1, oponente2);
 			estado = new NoComenzado();
 			resultado = new Empate(); //Esto no sirve si por ejemplo se usara un ganador (considerando None o un Oponente?)
+			fechaYHora= unaFechaYHora;
+			lugar= unLugar;
 		}
 
 			private void setOponentes(Oponente _oponente1, Oponente _oponente2) {

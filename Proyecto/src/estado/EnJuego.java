@@ -1,5 +1,6 @@
 package estado;
 
+import apuesta.Apuesta;
 
 public class EnJuego extends EstadoEventoDeportivo{
 
@@ -27,8 +28,8 @@ public class EnJuego extends EstadoEventoDeportivo{
 		return super(_apuesta) * this.porcentaje();
 	}
 
-	public Integer porcentaje(){
-		return new Integer(100) - this.descuento();
+	public Float porcentaje(){
+		return new Float(100) - this.descuento();
 	}
 
 	public Integer descuento(){
