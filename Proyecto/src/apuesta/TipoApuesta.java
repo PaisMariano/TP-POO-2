@@ -1,14 +1,11 @@
 package apuesta;
 
-public abstract class TipoApuesta {
-	
-	public void cancelar(Apuesta _apuesta) {
-		if(this.puedeSerCancelada(_apuesta)) {
-			this.cancelarApuesta(_apuesta);
-		}
-	}
+public interface TipoApuesta {
+		
+		public abstract Float gananciaBruta(Apuesta _apuesta);
 
-	protected abstract Boolean puedeSerCancelada(Apuesta _apuesta);
+		public abstract void cancelar(Apuesta _apuesta);
 
-	protected abstract void cancelarApuesta(Apuesta _apuesta);
+		public abstract void reactivar(Apuesta _apuesta);
+		
 }

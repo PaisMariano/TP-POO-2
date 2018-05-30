@@ -4,22 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import casaDeApuesta.*;
+import estado.*;
 import oponentes.*;
+import resultados.*;
 
 public class EventoDeportivo {
 	
 	Deporte deporte;
 	List<Oponente> oponentes;
 	String lugar; //String o clase?
-	Resultado resultado;
-	Cuota ganadorOp1;
-	Cuota ganaforOp2;
-	Cuota empate;
+
+	Integer ganadorOp1;
+	Integer ganaforOp2;
+	Integer empate;
+
+	EstadoEventoDeportivo estado;
 	
 		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2) {
 			deporte = _deporte;
 			oponentes = new ArrayList<Oponente>(2);
 			this.setOponentes(oponente1, oponente2);
+			estado = new NoComenzado();
+			resultado = new Empate(); //Esto no sirve si por ejemplo se usara un ganador (considerando None o un Oponente?)
 		}
 
 			private void setOponentes(Oponente _oponente1, Oponente _oponente2) {
@@ -35,9 +41,16 @@ public class EventoDeportivo {
 				return this.participo(_oponente1) && this.participo(_oponente2);
 			}
 
-			//Falta implementar
 			public Boolean estaFinalizado() {
-				return null;
+				return estado.estaFinalizado();
+			}
+			
+			public Boolean empezoEvento() {
+				return ! this.estaFinalizado();
+			}
+
+			public void setResultado(Resultado _resultado){
+				resultado = _resultado;
 			}
 			
 			public Float cuota(CasaDeApuestas _casa, EventoDeportivo _evento, Oponente _oponenteAlQueSeApuesta) {
@@ -73,5 +86,17 @@ public class EventoDeportivo {
 
 			private Exception errorNoParticipa() {
 				return new Exception("El oponente no pertenece a este evento.");
+			}
+
+			public EstadoEventoDeportivo getEstado(){
+				return estado;
+			}
+
+			public Resultado getResultado(){
+				return resultado;
+			}
+
+			public Oponente getGanador(){
+				return resultado.getGanador();
 			}
 }

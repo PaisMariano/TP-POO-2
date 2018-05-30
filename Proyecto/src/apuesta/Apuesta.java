@@ -1,6 +1,6 @@
 package apuesta;
 
-import casaDeApuestas.*;
+import casaDeApuesta.*;
 import eventoDeportivo.*;
 import resultados.*;
 
@@ -10,20 +10,26 @@ public abstract class Apuesta {
 	private EventoDeportivo eventoDeportivo;
 	private Resultado resultadoApostado;
 	private TipoApuesta tipo;
+	private Float cuotaConvenida;
 	
-	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo) {
+	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo, CasaDeApuestas _casa) {
 		this.setMonto(_monto);
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
-		tipo = _tipo;
+		this.setTipo(_tipo);
+		//cuotaConvenida = _evento.cuota() aca lo que quiero es lo que pagaba de cuota ese partido en ese momento;
 	}
 	
 		private void setResultadoAlQueSeApuesta(Resultado _resultado) {
 			resultadoApostado = _resultado;
 		}
 
+		private void setTipo(TipoApuesta _tipo){
+			tipo = _tipo;
+		}
+
 		public void setMonto(Float _monto) {
-			if(eventoDeportivo.estaFinalizado()) {
+			if(eventoDeportivo.estaFinalizado()) {//Esto es redundante?
 				this.error();
 			}
 			montoApostado = _monto;	
@@ -37,27 +43,56 @@ public abstract class Apuesta {
 			return montoApostado;
 		}
 		
-		public Boolean empezoPartido() {
-			return eventoDeportivo.empezo();
+		public Boolean empezoEvento() {
+			return eventoDeportivo.empezoEvento();
 		}
 		
-		public Float gananciaBruta(CasaDeApuestas _casa) {
-			return eventoDeportivo.cuota(_casa, this.getResultadoApostado()) * this.monto();
+		public Float gananciaBruta() {
+			return tipo.gananciaBruta(this);
 		}
 		
-		private Resultado getResultadoApostado() {
+		private Float cuotaConvenida() {
+			return cuotaConvenida;
+		}
+
+		public Resultado getResultadoApostado() {
 			return resultadoApostado;
 		}
 
-		//Falta
-		public Float gananciaNeta(CasaDeApuestas _casa) {
-			return this.gananciaBruta(_casa) - this.monto();
+		public Float gananciaNeta() {
+			return this.gananciaBruta();
 		}
 		
-		//No esta terminado
 		public void cancelar() {
 			tipo.cancelar(this);
 		}
+
+		public void reactivar(){
+			tipo.reactivar(this);		
+		}
+
+		public void cancelarApuesta(){
+			this.setTipo(new Cancelada());			
+		}
 		
-	
+		public void reactivarApuesta(){
+			this.setTipo(new Segura());
+		}
+
+		public Float bruta(){
+			return this.cuotaConvenida() - this.monto();
+		} 
+
+		public void canceladaSiPuede(){
+			eventoDeportivo.getEstado().cancelar(this);
+		}	
+		
+		public void reactivarSiPuede(){
+			eventoDeportivo.getEstado().reactivar(this);
+		}
+
+		public Boolean esAcertada(){
+			return this.getResultado().ganador() = eventoDeportivo.ganador()
+		}	
+
 }

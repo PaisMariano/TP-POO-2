@@ -1,19 +1,20 @@
 package apuesta;
 
-public class Final extends TipoApuesta {
+public class Final implements TipoApuesta {
 
-	private Exception errorCancelar() {
-		return new Exception("La apuesta no puede ser cancelada");
+	@Override
+	public void cancelar(Apuesta _apuesta) {
+		// No deberia llegar aca.
 	}
 
 	@Override
-	protected Boolean puedeSerCancelada(Apuesta _apuesta) {
-		Boolean no = new Boolean(false); 
-		return no;
+	public void reactivar(Apuesta _apuesta) {
+		// No deberia llegar aca.
 	}
 
 	@Override
-	protected void cancelarApuesta(Apuesta _apuesta) {
-		this.errorCancelar();
+	public Float gananciaBruta(Apuesta _apuesta) {
+		return _apuesta.bruta();
 	}
+
 }

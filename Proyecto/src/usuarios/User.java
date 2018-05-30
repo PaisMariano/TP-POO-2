@@ -19,7 +19,7 @@ public class User {
 		public Float gananciaBruta(CasaDeApuestas _casa) {
 			Float total = new Float(0); 
 			for(Apuesta apuesta : apuestas) {
-				total += apuesta.gananciaBruta(_casa);
+				total += apuesta.gananciaBruta();
 			}
 			return total;
 		}
@@ -27,7 +27,7 @@ public class User {
 		public Float gananciaNeta(CasaDeApuestas _casa) {
 			Float total = new Float(0); 
 			for(Apuesta apuesta : apuestas) {
-				total += apuesta.gananciaNeta(_casa);
+				total += apuesta.gananciaNeta();
 			}
 			return total;
 		}

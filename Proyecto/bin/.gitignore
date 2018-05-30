@@ -1,8 +1,11 @@
-/tests/
-/notifier/
-/usuarios/
-/eventoDeportivo/
-/oponentes/
-/bbdd/
+/Tests.class
 /algoritmo/
+/apuesta/
 /casaDeApuesta/
+/estado/
+/eventoDeportivo/
+/notifier/
+/oponentes/
+/resultados/
+/tests/
+/usuarios/
