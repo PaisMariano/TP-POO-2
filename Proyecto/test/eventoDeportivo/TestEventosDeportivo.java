@@ -1,11 +1,15 @@
 package eventoDeportivo;
 
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
-import org.junit.jupiter.api.Test;
+
+import static org.junit.Assert.assertEquals;
+import apuesta.Apuesta;
+import eventoDeportivo.EventoDeportivo;
+import eventoDeportivo.Deporte;
 import org.junit.Before;
+import org.junit.Test;
+import estado.EstadoEventoDeportivo;
+import static org.mockito.Mockito.*;
 
 public class TestEventosDeportivo {
 

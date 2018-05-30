@@ -1,12 +1,17 @@
 package apuesta;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import apuesta.Apuesta;
+import eventoDeportivo.EventoDeportivo;
+import eventoDeportivo.Deporte;
+import org.junit.Before;
+import org.junit.Test;
+import estado.EstadoEventoDeportivo;
+import static org.mockito.Mockito.*;
+
 
 class TestsApuestas {
 
-	@BeforeEach
+	@Before
 	void setUp() throws Exception {
 	}
 

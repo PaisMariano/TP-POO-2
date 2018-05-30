@@ -1,26 +1,25 @@
 package algoritmo;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import algoritmo.AlgoritmoProbabilidades;
+import static org.junit.Assert.fail;
+import apuesta.Apuesta;
+import eventoDeportivo.EventoDeportivo;
+import eventoDeportivo.Deporte;
+import org.junit.Before;
+import org.junit.Test;
+import estado.EstadoEventoDeportivo;
+import static org.mockito.Mockito.*;
 
-public class TestAlgoritmos{
-	
-	
-	
-	@BeforeEach
-	public void setUp() {
-		
-	
+class TestAlgoritmos {
+
+	@Before
+	void setUp() throws Exception {
 	}
-	
+
 	@Test
-	void testCreationTarjeta() {
-		
-		assertEquals(new Integer(1000), new Integer(1000));
-		assertEquals(new Integer(0), new Integer(0));
+	void test() {
+		fail("Not yet implemented");
 	}
+
+
 }
-	

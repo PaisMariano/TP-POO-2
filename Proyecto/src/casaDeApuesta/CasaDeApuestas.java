@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import Usuarios.User;
+import usuarios.User;
 import algoritmo.*;
 import eventoDeportivo.*;
 import notifier.BalanceNotifier;
@@ -23,11 +23,11 @@ public class CasaDeApuestas {
 	
 		public CasaDeApuestas() {
 			usuarios = new ArrayList<User>();
+			eventosHistoricos = new ArrayList<EventoDeportivo>();	
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
 			this.setNotifier(new TextMessageBalanceNotifier());
-			eventosHistoricos = new Arraylist<EventoDeportivo>();		
-		}
-		
+							
+		}		
 		
 		public CasaDeApuestas(List<User> _usuarios, AlgoritmoProbabilidades _algoritmo,BalanceNotifier _notifier, List<EventoDeportivo> _historico) {
 			usuarios = _usuarios;
@@ -77,7 +77,22 @@ public class CasaDeApuestas {
 			}
 
 
-			public Float calcularProbabilidadesDe(Oponente _oponente, EventoDeportivo _evento) {
-				return algoritmo.calcularProbabilidades(eventosHistoricos, _oponente, _evento);
+			public Float[] calcularProbabilidadesDe(List eventoHistorico, Oponente _op1, Oponente _op2) {
+				return algoritmo.calcularProbabilidad(eventosHistoricos, _op1, _op2);
+			}
+			
+			public void crearEventoDeportivo(Oponente _op1, Oponente _op2, Deporte deporte) {
+				
+				//probabilidades[0] = Ganador _op1
+				//probabilidades[1] = Ganador _op2
+				//probabilidades[2] = Empate.   
+				Float[] probabilidades = this.calcularProbabilidadesDe(this.eventosHistoricos, _op1, _op2);
+				
+				EventoDeportivo evento = new EventoDeportivo(deporte, _op1, _op2);
+				
+				evento.calcularCuotas(probabilidades);
+				
+				this.agregarEvento(evento);			
+				
 			}
 }

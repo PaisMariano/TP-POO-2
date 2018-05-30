@@ -14,11 +14,14 @@ public class EventoDeportivo {
 	List<Oponente> oponentes;
 	String lugar; //String o clase?
 
-	Integer ganadorOp1;
-	Integer ganaforOp2;
-	Integer empate;
-
 	EstadoEventoDeportivo estado;
+	Resultado resultado;
+	private float cuotaGanador1;
+	private float cuotaGanador2;
+	private float cuotaEmpate;
+
+
+	
 	
 		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2) {
 			deporte = _deporte;
@@ -33,7 +36,7 @@ public class EventoDeportivo {
 				oponentes.add(_oponente2);
 			}
 			
-			private Boolean participo(Oponente _oponente) {
+			public Boolean participo(Oponente _oponente) {
 				return oponentes.contains(_oponente);
 			}
 			
@@ -53,12 +56,10 @@ public class EventoDeportivo {
 				resultado = _resultado;
 			}
 			
-			public Float cuota(CasaDeApuestas _casa, EventoDeportivo _evento, Oponente _oponenteAlQueSeApuesta) {
-				return this.probabilidades(_casa, this, _oponenteAlQueSeApuesta);
-			}
-			
-			private Float probabilidades(CasaDeApuestas _casa, EventoDeportivo _evento, Oponente _alQueSeApuesta){
-				return 1 + (1 - _casa.calcularProbabilidadesDe(_evento.elOponenteDe(_alQueSeApuesta), _evento)); 
+			public void calcularCuotas(Float[] _probabilidades){
+				this.cuotaGanador1 = 1 + (1 - _probabilidades[0]);
+				this.cuotaGanador2 = 1 + (1 - _probabilidades[1]);
+				this.cuotaEmpate   = 1 + (1 - _probabilidades[2]);
 			}
 			
 			private Oponente primerOponente() {

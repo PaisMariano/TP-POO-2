@@ -18,8 +18,7 @@ public abstract class AlgoritmoProbabilidades {
 			
 			if (eD.participaronVs(_op1, _op2)) {
 					historialEntre.add(eD);
-	        }	
-		
+	        }			
 		}
 		return historialEntre;
 	}
@@ -29,7 +28,7 @@ public abstract class AlgoritmoProbabilidades {
 		Float probabilidad = new Float(0);
 		
 		for(EventoDeportivo eD : hist) {
-			if (eD.getResultado() = _op) {
+			if (eD.getGanador() ==_op) {
 				probabilidad += 1;
 			}
 		}
