@@ -1,0 +1,17 @@
+package oponentes;
+
+import identificables.*;
+
+public class None implements Oponente, Identificable {
+
+	@Override
+	public String nombre() {
+		return " ";
+	}
+
+	@Override
+	public Boolean es(Oponente primerOponente) {
+		return (new Boolean(false))
+	}
+
+}

@@ -37,9 +37,10 @@ public class Equipo implements Oponente {
 	// Cambia al primer jugador, por el segundo.
 	public void cambiarDeportista(Deportista _jugador1, Deportista _jugador2) {
 		this.sacarDeportista(_jugador1);
-		this.agregarDeportista(_jugador2);
-	}
 
+		this.agregarDeportista(_jugador2);
+
+	}
 	public void sacarDeportista(Deportista _jugador) {
 		plantel.remove(_jugador);
 	}

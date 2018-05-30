@@ -17,7 +17,7 @@ public class Deportista implements Oponente{
 		
 	}
 
-	
+
 	
 	@Override
 	public String nombre() {

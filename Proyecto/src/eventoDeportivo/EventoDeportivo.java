@@ -24,6 +24,7 @@ public class EventoDeportivo {
 
 
 		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2,Date unaFechaYHora,String unLugar) {
+
 			deporte = _deporte;
 			oponentes = new ArrayList<Oponente>(2);
 			this.setOponentes(oponente1, oponente2);
@@ -70,21 +71,6 @@ public class EventoDeportivo {
 			
 			private Oponente segundoOponente() {
 				return oponentes.get(1);
-			}
-
-			//Esto hace (mucho) ruido
-			public Oponente elOponenteDe(Oponente _oponente) {
-				Oponente contrario;
-				if(! this.participo(_oponente)) {
-					this.errorNoParticipa();
-				}
-				if(_oponente.es(this.primerOponente())) {
-					contrario = this.segundoOponente(); 
-				}
-				else {
-					contrario = this.primerOponente();
-				}
-				return contrario;
 			}
 
 			private Exception errorNoParticipa() {
