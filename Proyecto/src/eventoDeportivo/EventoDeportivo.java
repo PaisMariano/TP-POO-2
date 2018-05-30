@@ -20,8 +20,6 @@ public class EventoDeportivo {
 	private float cuotaGanador2;
 	private float cuotaEmpate;
 
-
-	
 	
 		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2) {
 			deporte = _deporte;
@@ -68,21 +66,6 @@ public class EventoDeportivo {
 			
 			private Oponente segundoOponente() {
 				return oponentes.get(1);
-			}
-
-			//Esto hace (mucho) ruido
-			public Oponente elOponenteDe(Oponente _oponente) {
-				Oponente contrario;
-				if(! this.participo(_oponente)) {
-					this.errorNoParticipa();
-				}
-				if(_oponente.es(this.primerOponente())) {
-					contrario = this.segundoOponente(); 
-				}
-				else {
-					contrario = this.primerOponente();
-				}
-				return contrario;
 			}
 
 			private Exception errorNoParticipa() {

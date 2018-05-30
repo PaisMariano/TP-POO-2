@@ -18,7 +18,7 @@ public class Deportista implements Oponente{
 	}
 
 	@Override
-	public boolean es(Oponente _oppnente) {
+	public Boolean es(Oponente _oppnente) {
 		return this.hashCode() == _oppnente.hashCode();
 	}
 	

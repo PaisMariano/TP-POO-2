@@ -57,7 +57,7 @@ public class CompetenciaHistoriaReciente extends AlgoritmoProbabilidades {
 		List historico = new ArrayList<EventoDeportivo>();
 		
 		for(EventoDeportivo eD : hist) {
-			if (eD.participo(_op){
+			if (eD.participo(_op)){
 				historico.add(eD);
 			}
 		}

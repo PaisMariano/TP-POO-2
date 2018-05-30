@@ -3,7 +3,6 @@ package algoritmo;
 import java.util.List;
 
 import algoritmo.AlgoritmoProbabilidades;
-import bbdd.BBDD;
 import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
 

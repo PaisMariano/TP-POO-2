@@ -26,7 +26,7 @@ public class Equipo implements Oponente {
 	}
 
 	@Override
-	public boolean es(Oponente _oppnente) {
+	public Boolean es(Oponente _oppnente) {
 		return this.hashCode() == _oppnente.hashCode();
 	}
 
@@ -40,7 +40,7 @@ public class Equipo implements Oponente {
 
 	// Cambia al primer jugador, por el segundo.
 	public void cambiarDeportista(Deportista _jugador1, Deportista _jugador2) {
-		this.sacarJugador(_jugador1);
+		this.sacarDeportista(_jugador1);
 		this.agregarJugador(_jugador2);
 	}
 

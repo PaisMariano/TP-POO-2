@@ -1,8 +1,6 @@
 package oponentes;
 
-import identificables.*;
-
-public class None implements Oponente, Identificable {
+public class None implements Oponente{
 
 	@Override
 	public String nombre() {
@@ -10,7 +8,7 @@ public class None implements Oponente, Identificable {
 	}
 
 	@Override
-	public Boolean es(Object _object) {
+	public Boolean es(Oponente primerOponente) {
 		return new Boolean(false);
 	}
 

@@ -4,5 +4,5 @@ public interface Oponente {
 
 	public String nombre();
 
-	public boolean es(Oponente primerOponente);
+	public Boolean es(Oponente primerOponente);
 }
