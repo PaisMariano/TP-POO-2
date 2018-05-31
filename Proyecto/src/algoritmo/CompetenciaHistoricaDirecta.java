@@ -19,17 +19,16 @@ public class CompetenciaHistoricaDirecta extends AlgoritmoProbabilidades {
 	private Float[] calcularCoeficientes(List<EventoDeportivo> historico, Oponente _op1, Oponente _op2) {
 		
 		Float coeficiente[] = new Float[3];
-		Float coeficienteGanadorA, coeficienteGanadorB, coeficienteEmpate;
+		Float coeficienteGanadorA, coeficienteGanadorB;
 		
 		
 		coeficienteGanadorA = this.probabilidadGanador(historico, _op1);
 		coeficienteGanadorB = this.probabilidadGanador(historico, _op2);
-		coeficienteEmpate   = historico.size() - coeficienteGanadorA - coeficienteGanadorB;
 		
 		
 		coeficiente[0] = coeficienteGanadorA / sizeConsistente(historico);
 		coeficiente[1] = coeficienteGanadorB / sizeConsistente(historico);
-		coeficiente[2] = (coeficiente[0] + coeficiente[1]) / 2;
+		coeficiente[2] = 1 - coeficiente[0] - coeficiente[1];
 		
 		return coeficiente;
 	}
