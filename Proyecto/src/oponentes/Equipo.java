@@ -41,6 +41,7 @@ public class Equipo implements Oponente {
 		this.agregarDeportista(_jugador2);
 
 	}
+	
 	public void sacarDeportista(Deportista _jugador) {
 		plantel.remove(_jugador);
 	}

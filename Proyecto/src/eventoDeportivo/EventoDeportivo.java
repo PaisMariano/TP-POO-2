@@ -13,7 +13,7 @@ public class EventoDeportivo {
 	
 	Deporte deporte;
 	List<Oponente> oponentes;
-	String lugar; //String o clase?
+	String lugar; 
 	Date fechaYHora;
 	EstadoEventoDeportivo estado;
 	Resultado resultado;
@@ -29,7 +29,7 @@ public class EventoDeportivo {
 			oponentes = new ArrayList<Oponente>(2);
 			this.setOponentes(oponente1, oponente2);
 			estado = new NoComenzado();
-			resultado = new Empate(); //Esto no sirve si por ejemplo se usara un ganador (considerando None o un Oponente?)
+			resultado = new Empate(); 
 			fechaYHora= unaFechaYHora;
 			lugar= unLugar;
 		}
@@ -65,6 +65,19 @@ public class EventoDeportivo {
 				this.cuotaEmpate   = 1 + (1 - _probabilidades[2]);
 			}
 			
+			public float getCuotaOponente1() {
+				return this.cuotaGanador1;
+				
+			}
+			public float getCuotaOponente2() {
+				return this.cuotaGanador2;
+				
+			}
+			public float getCuotaEmpate() {
+				return this.cuotaEmpate;
+				
+			}
+			
 			private Oponente primerOponente() {
 				return oponentes.get(0);
 			}
@@ -79,6 +92,9 @@ public class EventoDeportivo {
 
 			public EstadoEventoDeportivo getEstado(){
 				return estado;
+			}
+			public void  setEstado(EstadoEventoDeportivo nuevoEstado){
+				this.estado=nuevoEstado;
 			}
 
 			public Resultado getResultado(){

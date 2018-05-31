@@ -26,7 +26,7 @@ public class CompetenciaHistoricaDirecta extends AlgoritmoProbabilidades {
 		coeficienteGanadorB = this.probabilidadGanador(historico, _op2);
 		coeficienteEmpate   = historico.size() - coeficienteGanadorA - coeficienteGanadorB;
 		
-		
+		//Mmmmmmhh caro
 		coeficiente[0] = coeficienteGanadorA / sizeConsistente(historico);
 		coeficiente[1] = coeficienteGanadorB / sizeConsistente(historico);
 		coeficiente[2] = (coeficiente[0] + coeficiente[1]) / 2;

@@ -1,6 +1,6 @@
 package oponentes;
 
-import org.junit.Before;
+import org.junit.Before; 
 import org.junit.Test;
 import org.mockito.InOrder;
 import static org.junit.Assert.*;

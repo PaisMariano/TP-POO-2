@@ -25,15 +25,11 @@ public class EnJuego extends EstadoEventoDeportivo{
 
 	@Override 
 	public Float montoPenalizacion(Apuesta _apuesta){
-		return super(_apuesta) * this.porcentaje();
+		return _apuesta.monto() * this.porcentaje();
 	}
 
 	public Float porcentaje(){
 		return new Float(100) - this.descuento();
-	}
-
-	public Integer descuento(){
-		return new Integer(30);
 	}
 
 }
