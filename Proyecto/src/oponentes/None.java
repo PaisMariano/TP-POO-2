@@ -1,5 +1,6 @@
 package oponentes;
 
+//NullObject
 public class None implements Oponente{
 
 	@Override

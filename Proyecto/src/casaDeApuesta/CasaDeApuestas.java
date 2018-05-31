@@ -41,6 +41,7 @@ public class CasaDeApuestas {
 				algoritmo = _algoritmo;
 			}
 			
+			//Flexibility
 			public void setNotifier(BalanceNotifier _notifier) {
 				textMessageBalanceNotifier = _notifier;
 			}
@@ -63,7 +64,7 @@ public class CasaDeApuestas {
 				}
 			}
 		
-			//LLevar esto al calendario?
+			//Esto no va a aca
 			private int numeroDelMes() {
 				Date date = new Date();
 				LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -90,9 +91,15 @@ public class CasaDeApuestas {
 			
 				EventoDeportivo evento = new EventoDeportivo(deporte, _op1, _op2, unaFechaYHora, unLugar);
 				
-				evento.calcularCuotas(probabilidades);
+				evento.calcularCuotas(probabilidades); //Las calcula pero cuando las pasa?
 				
 				this.agregarEvento(evento);			
 				
 			}
+
+			/*
+			public Float calcularProbabilidades(Partido _partido, Resultado _resultado){
+				return algoritmo.calcProb(_partido, _resultado);
+			}
+			*/
 }
