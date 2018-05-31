@@ -9,7 +9,7 @@ import oponentes.Oponente;
 public class CompetenciaHistoricaDirecta extends AlgoritmoProbabilidades {
 
 	@Override
-	public Float[] calcularProbabilidad(List historicoCompleto, Oponente _op1, Oponente _op2) {
+	public Float[] calcularProbabilidad(List<EventoDeportivo> historicoCompleto, Oponente _op1, Oponente _op2) {
 		//Calculo el historico completo de ambos oponentes.
 		List historico = this.calcularHistoricoEntre(historicoCompleto, _op1, _op2);
 		//Calculo los coeficientes en base al historico completo.

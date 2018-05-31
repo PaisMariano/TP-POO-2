@@ -8,9 +8,9 @@ import oponentes.Oponente;
 
 public abstract class AlgoritmoProbabilidades {
 
-	public abstract Float[] calcularProbabilidad(List historialCompleto, Oponente _op1, Oponente _op2);
+	public abstract Float[] calcularProbabilidad(List<EventoDeportivo> historialCompleto, Oponente _op1, Oponente _op2);
 	
-	public List calcularHistoricoEntre(List<EventoDeportivo> historialCompleto, Oponente _op1, Oponente _op2) {
+	public List<EventoDeportivo> calcularHistoricoEntre(List<EventoDeportivo> historialCompleto, Oponente _op1, Oponente _op2) {
 		
 		ArrayList<EventoDeportivo> historialEntre = new ArrayList<EventoDeportivo>();
 		

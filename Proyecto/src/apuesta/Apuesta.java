@@ -12,7 +12,7 @@ public  class Apuesta {
 	private TipoApuesta tipo;
 	private Float cuotaConvenida;
 	
-	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo, /*CasaDeApuestas _casa*/) {
+	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo/*, CasaDeApuestas _casa*/) {
 		this.setMonto(_monto);
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);

@@ -14,6 +14,9 @@ public class User {
 			apuestas = new ArrayList<Apuesta>(0);
 		}
 		
+		public User(List<Apuesta> _apuestas){
+			apuestas = _apuestas;
+		}
 		
 		//creo que hay que pasarle la apuesta a la cual se refiere la ganacia bruta y neta 
 		public Float gananciaBruta(CasaDeApuestas _casa) {

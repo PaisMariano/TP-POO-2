@@ -49,10 +49,10 @@ public class TestsUsuarios {
 	
 
 	@Test
-	public	void testUnUsuarioAgregaUnaNuevaApuesta() {
-		//List<Apuesta> spyApuestas= spy(new ArrayList <Apuesta>());		
+	public	void testUnUsuarioAgregaUnaNuevaApuesta() {	
+		int apuestasDeUsuario1 = usuario1.apuestasPropias().size();
 		usuario1.agregarNuevaApuesta(apuestaMock);
-		verify(usuario1, (usuario1.apuestasPropias().add(apuestaMock)));
+		assertEquals(apuestasDeUsuario1 + 1, usuario1.apuestasPropias().size());
 	}
 
 	/*
@@ -61,12 +61,9 @@ public class TestsUsuarios {
 
 		usuario1.agregarNuevaApuesta(apuestaDummy);
 		apuestaDummy.
-		
 		when(tipoDeApuestaMock.resultado()).thenReturn(Ganador); //o su paralelo
 		assertEquals(gananciaNeta(CasaDeApuestas _casa))
-		
 	}
-	
 	
 	@Test
 	public	void testUsuarioHaceUnaApuestaYNoTieneTieneGanacia() {
