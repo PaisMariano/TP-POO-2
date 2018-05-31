@@ -52,6 +52,7 @@ public class TestEventosDeportivo {
 		assertFalse(unEventoDeportivo.participo(chacarita));
 		assertTrue(unEventoDeportivo.participo(river));
 	}
+	
 	@Test public void testCompararLosOponentesCompitieron() {
 		
 		assertFalse(unEventoDeportivo.participaronVs(chacarita, boca));
@@ -59,31 +60,4 @@ public class TestEventosDeportivo {
 		assertTrue(unEventoDeportivo.participaronVs(boca , river));
 	}
 	
-
-	@Test
-	public void testAnteDosOponentesMedianteResulatadoHistorico (){
-		
-		
-		
-	
-}
-	
-	
-	@Test
-	public void testAnteDosOponentesMedianteResulatadoNoHistorico(){
-		
-	}
-	
-	
-	
-	@Test
-	public void testErrorAlIngresarUnSoloOponente(){
-}
-	
-	
-	@Test
-	public void testErrorAnIngresarMasDeDosOponentes() {
-		
-		
-	}
 }

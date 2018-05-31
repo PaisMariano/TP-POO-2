@@ -77,7 +77,7 @@ public class CasaDeApuestas {
 			}
 
 
-			public Float[] calcularProbabilidadesDe(List eventoHistorico, Oponente _op1, Oponente _op2) {
+			public Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2) {
 				return algoritmo.calcularProbabilidad(eventosHistoricos, _op1, _op2);
 			}
 			

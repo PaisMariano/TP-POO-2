@@ -2,7 +2,7 @@ package notifier;
 
 import java.math.BigDecimal;
 
-import Usuarios.User;
+import usuarios.User;
 
 public class TextMessageBalanceNotifier implements BalanceNotifier {
 

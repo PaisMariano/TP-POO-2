@@ -54,10 +54,9 @@ public class TestAlgoritmos {
 	}
 
 	@Test
-	public void testVerificoQueLaProbabilidadDelOponenteUnoSeaCuatro() {
+	public void testVerificoQueLaCantidadDeVictoriasDelOponenteUnoSeaCuatro() {
 		
 		when(evento.getGanador()).thenReturn(dummyOp1);
-		
 		assertEquals(algPro.probabilidadGanador(historico, dummyOp1),new Float(4));
 		
 	}

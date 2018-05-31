@@ -32,33 +32,27 @@ public class TestsUsuarios {
 	private Resultado resultadoMock;
 	private CasaDeApuestas casaMock;
 	
+	
 	@Before
-	
-		public	void setUp() throws Exception {
-		
-		eventoDeportivoMock= mock(EventoDeportivo.class);
-		EstadoEventoDeportivo resultado1 = mock(EstadoEventoDeportivo.class);//ver como poner el tema de los resultados
-		tipoDeApuestaMock= mock(Final.class);
-		usuario1= mock(User.class);
-		unMonto = (float)400 ;
-		resultadoMock = mock(Resultado.class);
-		casaMock= mock(CasaDeApuestas.class);
-		apuestaMock= mock(Apuesta.class);
-		//apuesta1= new Apuesta(unMonto, eventoDeportivoMock, resultadoMock,tipoDeApuestaMock,casaMock);
-
-
+	public	void setUp() throws Exception {	
+	eventoDeportivoMock= mock(EventoDeportivo.class);
+	EstadoEventoDeportivo resultado1 = mock(EstadoEventoDeportivo.class);//ver como poner el tema de los resultados
+	tipoDeApuestaMock= mock(Final.class);
+	usuario1= mock(User.class);
+	unMonto = (float)400 ;
+	resultadoMock = mock(Resultado.class);
+	casaMock= mock(CasaDeApuestas.class);
+	apuestaMock= mock(Apuesta.class);
+	//apuesta1= new Apuesta(unMonto, eventoDeportivoMock, resultadoMock,tipoDeApuestaMock,casaMock);
 	}
-	
 	
 	
 
 	@Test
 	public	void testUnUsuarioAgregaUnaNuevaApuesta() {
 		//List<Apuesta> spyApuestas= spy(new ArrayList <Apuesta>());		
-
 		usuario1.agregarNuevaApuesta(apuestaMock);
 		verify(usuario1, (usuario1.apuestasPropias().add(apuestaMock)));
-		
 	}
 
 	/*

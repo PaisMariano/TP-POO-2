@@ -17,7 +17,7 @@ public  class Apuesta {
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
 		this.setTipo(_tipo);
-		//cuotaConvenida = _evento.cuota() aca lo que quiero es lo que pagaba de cuota ese partido en ese momento;
+		//cuotaConvenida = _evento.cuota(_casa, _resultado) Aca lo que quiero es lo que pagaba de cuota ese partido en ese momento;
 	}
 	
 		private void setResultadoAlQueSeApuesta(Resultado _resultado) {
@@ -92,8 +92,7 @@ public  class Apuesta {
 		}
 
 		public Boolean esAcertada(){
-			this.getResultadoApostado().getGanador() equals(eventoDeportivo.getGanador());
-			return this.getResultadoApostado().getGanador() = eventoDeportivo.ganador();
+			return this.getResultadoApostado().getGanador().equals(eventoDeportivo.getGanador());
 		}	
 
 }

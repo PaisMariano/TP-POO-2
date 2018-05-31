@@ -8,12 +8,11 @@ public class NoComenzado extends EstadoEventoDeportivo {
 		
 	}
 		public  void cancelar(Apuesta _apuesta){
-		
 			_apuesta.cancelarApuesta();
 		}
 
 		public  void reactivar(Apuesta _apuesta){
-			_apuesta.reactivar();
+			_apuesta.reactivar();//Esto no deberia ir aca, sino deberia ir en apuesta, de tal forma que no sea recusivo.
 		}
 			
 
