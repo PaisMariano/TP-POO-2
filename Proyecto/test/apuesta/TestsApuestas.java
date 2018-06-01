@@ -9,27 +9,27 @@ import estado.EstadoEventoDeportivo;
 import static org.mockito.Mockito.*;
 
 
-class TestsApuestas {
+public class TestsApuestas {
 
 	@Before
-	void setUp() throws Exception {
+	public void setUp() throws Exception {
 	}
 
 	@Test //se tiene que impactar que se descuentan 200 pe de multa
-	void testUnaApuestaSeguraSeCancelaAntesDeEmpezar() {
+	public void testUnaApuestaSeguraSeCancelaAntesDeEmpezar() {
 		
 	}
 	
 	@Test//tiene que calcular lo que se descuenta y los saldos que quedan
-	void testUnaApuestaSeguraSeCancelaAntesDeTerminar() {
+	public void testUnaApuestaSeguraSeCancelaAntesDeTerminar() {
 		
 	}
 	@Test //se tiene que ver el cambio de estado en la apuesta, tiene que volver a ser activada , y cobrar la penalidad
-	void testUnaApuestaSeguraSeReactivaAntesDeComenzar() {
+	public void testUnaApuestaSeguraSeReactivaAntesDeComenzar() {
 		
 	}
 	@Test //ver que tiene que pasar, tiene que cambiar el estado de la apuesta?
-	void testUnaApuestaNoSeguraSeCancela() {
+	public void testUnaApuestaNoSeguraSeCancela() {
 		
 	}
 	
