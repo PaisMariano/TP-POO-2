@@ -84,18 +84,6 @@ public class EventoDeportivo {
 			public String nombreDeporte() {
 				return this.deporte.getNombre();
 			}
-			
-			private Oponente primerOponente() {
-				return oponentes.get(0);
-			}
-			
-			private Oponente segundoOponente() {
-				return oponentes.get(1);
-			}
-
-			private Exception errorNoParticipa() {
-				return new Exception("El oponente no pertenece a este evento.");
-			}
 
 			public EstadoEventoDeportivo getEstado(){
 				return estado;

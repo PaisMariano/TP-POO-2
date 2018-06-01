@@ -13,7 +13,7 @@ public  class Apuesta {
 	private Float cuotaConvenida;
 	
 	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo/*, CasaDeApuestas _casa*/) {
-		this.setMonto(_monto);
+		this.setMonto(_monto);// Si monto <= 0, error.
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
 		this.setTipo(_tipo);
