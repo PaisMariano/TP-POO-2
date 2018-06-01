@@ -21,6 +21,7 @@ public abstract class AlgoritmoProbabilidades {
 	        }			
 		}
 		return historialEntre;
+		
 	}
 	
 	protected Float probabilidadGanador(List<EventoDeportivo> hist, Oponente _op) {
