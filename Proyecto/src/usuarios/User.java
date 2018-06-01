@@ -19,7 +19,7 @@ public class User {
 		}
 		
 		//creo que hay que pasarle la apuesta a la cual se refiere la ganacia bruta y neta 
-		public Float gananciaBruta(CasaDeApuestas _casa) {
+		public Float gananciaBruta() {
 			Float total = new Float(0); 
 			for(Apuesta apuesta : apuestas) {
 				total += apuesta.gananciaBruta();
@@ -27,7 +27,7 @@ public class User {
 			return total;
 		}
 		
-		public Float gananciaNeta(CasaDeApuestas _casa) {
+		public Float gananciaNeta() {
 			Float total = new Float(0); 
 			for(Apuesta apuesta : apuestas) {
 				total += apuesta.gananciaNeta();
@@ -41,8 +41,7 @@ public class User {
 		}
 		
 		
-		public List<Apuesta> apuestasPropias(){
-			
+		public List<Apuesta> apuestasPropias(){			
 			return apuestas;
 			
 		}

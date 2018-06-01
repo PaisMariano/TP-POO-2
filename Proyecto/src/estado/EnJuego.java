@@ -1,17 +1,17 @@
 package estado;
 
 import apuesta.Apuesta;
+import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacionDeApuesta;
 
-public class EnJuego extends EstadoEventoDeportivo{
+public class EnJuego extends EstadoEventoDeportivo implements FactorDeCancelacionOReactivacionDeApuesta{
 
-	
-	private Float porcentajeDesc = new Float (30);
 
 		public EnJuego(){
 
 		}
 
 		private Float descuento(){
+			Float porcentajeDesc = new Float (30);
 			return new Float(100) - porcentajeDesc;
 		}
 	

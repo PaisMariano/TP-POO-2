@@ -1,8 +1,9 @@
 package estado;
 
 import apuesta.Apuesta;
+import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacionDeApuesta;
 
-public class NoComenzado extends EstadoEventoDeportivo {
+public class NoComenzado extends EstadoEventoDeportivo implements FactorDeCancelacionOReactivacionDeApuesta{
 	
 	public NoComenzado() {
 		
