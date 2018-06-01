@@ -4,17 +4,17 @@ public class Final implements TipoApuesta {
 
 	@Override
 	public void cancelar(Apuesta _apuesta) {
-		// No deberia llegar aca.
+		// Error? No deberia llegar aca, no es cancelable.
 	}
 
 	@Override
 	public void reactivar(Apuesta _apuesta) {
-		// No deberia llegar aca.
+		// Error? No deberia llegar aca, no es reactivable entonces no es cancelable.
 	}
 
 	@Override
 	public Float gananciaBruta(Apuesta _apuesta) {
-		return _apuesta.bruta();
+		return _apuesta.bruta(); 
 	}
 
 }

@@ -58,7 +58,7 @@ public class TestOponente {
 	
 	@Test 
 	public void testSeIntecambiaUnDeportistaPorOtro(){
-			
+		//Faltaria ver que pasa cuando queres intercambiar a un jugador por otro, pero no esta en el plantel. 
 		List<Deportista> spyDeports= spy(new ArrayList <Deportista>());
 		Equipo otroEquipo=	new Equipo(spyDeports,"AverSiEstoAnda");
 		

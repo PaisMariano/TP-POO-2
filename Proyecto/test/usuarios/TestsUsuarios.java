@@ -13,7 +13,7 @@ import java.util.Date;
 import usuarios.*;
 
 public class TestsUsuarios{
-
+	/*
  	@Before
  		
 
@@ -31,23 +31,19 @@ public class TestsUsuarios{
 		resultadoMock = mock(Resultado.class);
 		casaMock= mock(CasaDeApuestas.class);
 		apuestaMock= mock(Apuesta.class);
-	//apuesta1= new Apuesta(unMonto, eventoDeportivoMock, resultadoMock,tipoDeApuestaMock,casaMock);
 
- 
+	@Test//la idea es que ante una apuesta ganadora se sepa la ganacia neta.hay que ver como se toma el resultado. se tiene que poner 
+	public	void testunUsuarioHaceUnaApuestaGanadoraYTieneGananciaNetaYBruta(){
+
+		usuario1.agregarNuevaApuesta(apuestaDummy);
+		apuestaDummy.
+		when(tipoDeApuestaMock.resultado()).thenReturn(Ganador); //o su paralelo
+		assertEquals(gananciaNeta(CasaDeApuestas _casa))
+	}
+	
+	@Test
+	public	void testUsuarioHaceUnaApuestaYNoTieneTieneGanacia() {
 		
- 	}
- 	
- 	
- 	
- 
- 	@Test
- 	public	void testUnUsuarioAgregaUnaNuevaApuesta() {
-		List<Apuesta> spyApuestas= spy(new ArrayList <Apuesta>());		
-	//List<Apuesta> spyApuestas= spy(new ArrayList <Apuesta>());		
- 
-		usuario1.agregarNuevaApuesta(apuesta1);
-		verify((usuario1.apuestasPropias()).add(apuestaDummy));
-		usuario1.agregarNuevaApuesta(apuestaMock);
-	verify(usuario1, (usuario1.apuestasPropias().add(apuestaMock)));
- 		
- 	}
+		
+	}*/
+}

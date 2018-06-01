@@ -40,7 +40,9 @@ public class CasaDeApuestas {
 			public void setAlgoritmo(AlgoritmoProbabilidades _algoritmo) {
 				algoritmo = _algoritmo;
 			}
+		
 			
+			//Flexibility
 			public void setNotifier(BalanceNotifier _notifier) {
 				textMessageBalanceNotifier = _notifier;
 			}
@@ -50,11 +52,19 @@ public class CasaDeApuestas {
 				usuarios.add(_usuario);
 			}
 			
+			public  List<User> getUsuarios(){
+				return usuarios;
+			}
 			//Flexibility
 			public void agregarEvento(EventoDeportivo _evento) {
 				eventosHistoricos.add(_evento);
 			}
-
+			
+			public  List<EventoDeportivo> getEventosDeportivos(){
+				return eventosHistoricos;
+			}
+			
+			/*
 			public void notificarBalanceUsuarios() {
 				Integer month = new Integer(this.numeroDelMes());
 				
@@ -62,14 +72,14 @@ public class CasaDeApuestas {
 					textMessageBalanceNotifier.notifyBalance(user, month, this.ganancias());
 				}
 			}
-		
-			//LLevar esto al calendario?
+	
+			//Esto no va a aca
 			private int numeroDelMes() {
 				Date date = new Date();
 				LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 				int month = localDate.getMonthValue();
 				return month;
-			}
+			}*/
 
 			//Falta implementar
 			private BigDecimal ganancias() {
@@ -77,7 +87,7 @@ public class CasaDeApuestas {
 			}
 
 
-			public Float[] calcularProbabilidadesDe(List eventoHistorico, Oponente _op1, Oponente _op2) {
+			public Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2) {
 				return algoritmo.calcularProbabilidad(eventosHistoricos, _op1, _op2);
 			}
 			
@@ -86,13 +96,19 @@ public class CasaDeApuestas {
 				//probabilidades[0] = Ganador _op1
 				//probabilidades[1] = Ganador _op2
 				//probabilidades[2] = Empate.    
-				Float[] probabilidades = this.calcularProbabilidadesDe(this.eventosHistoricos, _op1, _op2);
+				Float[] probabilidades = this.calcularProbabilidadesDe(this.getEventosDeportivos(), _op1, _op2);
 			
 				EventoDeportivo evento = new EventoDeportivo(deporte, _op1, _op2, unaFechaYHora, unLugar);
 				
-				evento.calcularCuotas(probabilidades);
+				evento.calcularCuotas(probabilidades); //Las calcula pero cuando las pasa?
 				
 				this.agregarEvento(evento);			
 				
 			}
+
+			/*
+			public Float calcularProbabilidades(Partido _partido, Resultado _resultado){
+				return algoritmo.calcProb(_partido, _resultado);
+			}
+			*/
 }

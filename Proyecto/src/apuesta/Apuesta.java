@@ -12,12 +12,12 @@ public  class Apuesta {
 	private TipoApuesta tipo;
 	private Float cuotaConvenida;
 	
-	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo, CasaDeApuestas _casa) {
+	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo/*, CasaDeApuestas _casa*/) {
 		this.setMonto(_monto);
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
 		this.setTipo(_tipo);
-		//cuotaConvenida = _evento.cuota() aca lo que quiero es lo que pagaba de cuota ese partido en ese momento;
+		//cuotaConvenida = _evento.cuota(_casa, _resultado) Aca lo que quiero es lo que pagaba de cuota ese partido en ese momento;
 	}
 	
 		private void setResultadoAlQueSeApuesta(Resultado _resultado) {
@@ -34,6 +34,7 @@ public  class Apuesta {
 			}
 			montoApostado = _monto;	
 		}
+		
 		
 		private Exception error() {
 			return new Exception("El evento ya ha finalizado. ");
@@ -71,10 +72,13 @@ public  class Apuesta {
 			tipo.reactivar(this);		
 		}
 
+		//este metodo es comun para cualquier tipo de apuesta. Pero no se conserva 
 		public void cancelarApuesta(){
 			this.setTipo(new Cancelada());			
 		}
 		
+		//La unica apuesta que se puede cancelar es la segura. Al reactivar vuelve al mismo tipo. 
+		//Sino deberia de guardarse el ultimo tipo en una variable para volver a el, en caso de que haya mas tipos de apuestas que 			//puedan ser cancelables.  		
 		public void reactivarApuesta(){
 			this.setTipo(new Segura());
 		}
@@ -92,8 +96,7 @@ public  class Apuesta {
 		}
 
 		public Boolean esAcertada(){
-			this.getResultadoApostado().getGanador() equals(eventoDeportivo.getGanador());
-			return this.getResultadoApostado().getGanador() = eventoDeportivo.ganador();
+			return this.getResultadoApostado().getGanador().equals(eventoDeportivo.getGanador());
 		}	
 
 }

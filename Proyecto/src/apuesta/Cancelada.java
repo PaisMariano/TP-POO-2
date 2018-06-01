@@ -9,15 +9,12 @@ public class Cancelada implements TipoApuesta {
 	
 	@Override
 	public void reactivar(Apuesta _apuesta) {
-		_apuesta.reactivarSiPuede();
+		_apuesta.reactivarSiPuede();//Depende del estado si se puede o no
 	}
 
 	@Override
 	public Float gananciaBruta(Apuesta _apuesta){
-		return this.descuento(_apuesta);
+		return new Float(0);
 	}
 
-	private Float descuento(Apuesta _apuesta){
-		return new Float(0.85 * new Float(2));
-	}
 }

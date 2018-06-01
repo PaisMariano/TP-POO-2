@@ -16,6 +16,7 @@ public class Finalizado extends EstadoEventoDeportivo {
 		public void cancelar(Apuesta _apuesta) {
 			//NO puede ser cancelada. Excepcion?
 		}
+
 		@Override
 		public void reactivar(Apuesta _apuesta){
 			//Tampoco deberia ser reactivada con el partido finalizado.

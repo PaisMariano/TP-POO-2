@@ -96,7 +96,8 @@ public class EventoDeportivo {
 			public void  setEstado(EstadoEventoDeportivo nuevoEstado){
 				this.estado=nuevoEstado;
 			}
-
+		
+			
 			public Resultado getResultado(){
 				return resultado;
 			}
@@ -104,4 +105,14 @@ public class EventoDeportivo {
 			public Oponente getGanador(){
 				return resultado.getGanador();
 			}
+
+			/*
+			public cuota(Casa _casa, Resultado _resultado){
+				return 1 + (1 - this.prob(_casa, _resultado));
+			}
+
+			private prob(_casa, _resultado){
+				return _casa.calcProb(this, _resultado);
+			}
+			+*/
 }

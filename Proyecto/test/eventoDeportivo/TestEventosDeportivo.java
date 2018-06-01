@@ -65,12 +65,14 @@ public class TestEventosDeportivo {
 		assertFalse(unEventoDeportivo.participo(chacarita));
 		assertTrue(unEventoDeportivo.participo(river));
 	}
+	
 	@Test public void testCompararLosOponentesCompitieron() {
 		
 		assertFalse(unEventoDeportivo.participaronVs(chacarita, boca));
 		assertTrue(unEventoDeportivo.participaronVs(river, boca));
 		assertTrue(unEventoDeportivo.participaronVs(boca , river));
-	}
+	} 
+	
 	@Test public void testVerificarQueUnEventoEstaFinalizado() {
 		
 		EstadoEventoDeportivo finalizado=new Finalizado(); 
@@ -105,6 +107,7 @@ public class TestEventosDeportivo {
 		
 		
 	}
+
 }
 
 
