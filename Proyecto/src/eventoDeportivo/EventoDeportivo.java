@@ -77,6 +77,13 @@ public class EventoDeportivo {
 				return this.cuotaEmpate;
 				
 			}
+			public  Deporte getDeporte() {
+				return this.deporte;
+			}
+			
+			public String nombreDeporte() {
+				return this.deporte.getNombre();
+			}
 			
 			private Oponente primerOponente() {
 				return oponentes.get(0);

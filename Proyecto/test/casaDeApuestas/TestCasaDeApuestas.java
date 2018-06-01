@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -58,10 +59,8 @@ public class TestCasaDeApuestas {
 	
 		balanceMock= mock(TextMessageBalanceNotifier.class);
 		algoritmoMock = mock(AlgoritmoProbabilidades.class);
-		casaDeApuestasMock=mock(CasaDeApuestas.class);
+	
 
-		
-		
 }
 
 	@Test 
@@ -93,25 +92,68 @@ public class TestCasaDeApuestas {
 		 casaDeApuestas1= new  CasaDeApuestas(usuariosEmpty, algoritmoMock,balanceMock,spyEventos);
 		 casaDeApuestas1.agregarEvento(eventoDeportivoMock);
 		
+		 assertEquals(casaDeApuestas1.getEventosDeportivos().size(),1);
 		verify(spyEventos).add(eventoDeportivoMock);
 		assertEquals(casaDeApuestas1.getEventosDeportivos(),spyEventos);
 
 	
-}
+}/*//ver manana 
 	@Test
 	public void testSeCreaUnEventoDeportivo(){
+		casaDeApuestas= new  CasaDeApuestas(usuarios,algoritmoHistorico,balanceMock,eventosEmpty);
 		
 		Oponente oponenteDummy1=mock(Oponente.class);
 		Oponente oponenteDummy2=mock(Oponente.class);
 		Date fechaDummy= mock(Date.class);
 		Deporte tenis=mock(Deporte.class);
-		EventoDeportivo evDummy= mock(EventoDeportivo.class);
-		casaDeApuestasMock.crearEventoDeportivo(oponenteDummy1, oponenteDummy2,tenis, fechaDummy, "ElDocke");
+		//casaDeApuestas1=mock(CasaDeApuestas.class);
+	
 		
-		//verify(casaDeApuestasMock).calcularProbabilidadesDe((casaDeApuestasMock.getEventosDeportivos()),oponenteDummy1,oponenteDummy2);
-		verify(casaDeApuestasMock).agregarEvento(evDummy);
+		casaDeApuestas.agregarEvento(eventoDeportivoMock);
+		casaDeApuestas.agregarEvento(eventoDeportivoMock);		
+		casaDeApuestas.crearEventoDeportivo(oponenteDummy1, oponenteDummy2,tenis, fechaDummy, "ElDocke");
+		
+		String ultimoEvento= (casaDeApuestas.getEventosDeportivos().get(2)).nombreDeporte();
+		
+	
+
+		EventoDeportivo eventOriginal= new EventoDeportivo(tenis,oponenteDummy1, oponenteDummy2, fechaDummy, "ElDocke");
+		
+		assertEquals(casaDeApuestas.getEventosDeportivos().size(),3);
+
+		assertEquals("tenis", (ultimoEvento));
+		//verify(casaDeApuestasMock).agregarEvento(eventoOriginal);
+
+		//verify(casaDeApuestas).calcularProbabilidadesDe((casaDeApuestasMock.getEventosDeportivos()),oponenteDummy1,oponenteDummy2);
+				// assertTrue(ultimoEvento==eventoOriginal);
 	}
+	*/
 	
 	
+	
+	@Test //raro y mal 
+	public void testAlTenerDosOponentesSeConoceSusProbabilidadesDeGanar() {
+
+		Oponente oponenteDummy1=mock(Oponente.class);
+		Oponente oponenteDummy2=mock(Oponente.class);
+		
+		Float[] probabilidades = {new Float(0.7),new Float(0.2),new Float(0.1)};
+		List <EventoDeportivo> eventosOp1 =new ArrayList <EventoDeportivo>();
+
+		
+		AlgoritmoProbabilidades algPro =new  CompetenciaHistoricaDirecta();
+		
+		casaDeApuestas= new  CasaDeApuestas(usuarios,algPro,balanceMock,eventosEmpty);
+		Date fechaDummy= mock(Date.class);
+		
+		
+		when(algPro.calcularProbabilidad(eventosOp1,oponenteDummy1,oponenteDummy2)).thenReturn(probabilidades);
+		assertEquals(casaDeApuestas.calcularProbabilidadesDe(eventosOp1, oponenteDummy1, oponenteDummy2),probabilidades);
+		//Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2)
+		
+		
+		
+	}
+
 
 }
