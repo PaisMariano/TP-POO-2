@@ -9,21 +9,11 @@ public class NoComenzado extends EstadoEventoDeportivo implements FactorDeCancel
 		
 	}
 		public  void cancelar(Apuesta _apuesta){
-			_apuesta.cancelarApuesta();
+			_apuesta.cancelarApuestaConPartidoNoComenzado();
 		}
 
 		public  void reactivar(Apuesta _apuesta){
-			_apuesta.reactivar();//Esto no deberia ir aca, sino deberia ir en apuesta, de tal forma que no sea recusivo.
-		}
-			
-
-		@Override
-		public Float montoPenalizacion(Apuesta _apuesta){
-			return _apuesta.monto() - this.descuento();
-		}
-
-		private Float descuento(){
-			return new Float(200);
+			_apuesta.reactivarApuesta();
 		}
 		
 }

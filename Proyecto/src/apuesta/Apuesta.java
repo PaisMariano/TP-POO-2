@@ -1,6 +1,6 @@
 package apuesta;
 
-import casaDeApuesta.*;
+import estado.*;
 import eventoDeportivo.*;
 import resultados.*;
 
@@ -28,16 +28,8 @@ public  class Apuesta {
 			tipo = _tipo;
 		}
 
-		public void setMonto(Float _monto) {
-			if(eventoDeportivo.estaFinalizado()) {//Esto es redundante?
-				this.error();
-			}
+		private void setMonto(Float _monto) {
 			montoApostado = _monto;	
-		}
-		
-		
-		private Exception error() {
-			return new Exception("El evento ya ha finalizado. ");
 		}
 		
 		public Float monto() {
@@ -73,7 +65,7 @@ public  class Apuesta {
 		}
 
 		//este metodo es comun para cualquier tipo de apuesta. Pero no se conserva 
-		public void cancelarApuesta(){
+		private void cancelarApuesta(){
 			this.setTipo(new Cancelada());			
 		}
 		
@@ -85,18 +77,49 @@ public  class Apuesta {
 
 		public Float bruta(){
 			return this.cuotaConvenida() - this.monto();
-		} 
-
-		public void canceladaSiPuede(){
-			eventoDeportivo.getEstado().cancelar(this);
-		}	
-		
-		public void reactivarSiPuede(){
-			eventoDeportivo.getEstado().reactivar(this);
 		}
 
 		public Boolean esAcertada(){
 			return this.getResultadoApostado().getGanador().equals(eventoDeportivo.getGanador());
+		}
+
+		public void cancelarApuestaConPartidoNoComenzado() {
+			this.cancelarApuestaRestandole(this.penalidadPartidoNoComenzado());//Asumimos que el monto es mayor a 200.
+		}
+		
+		private void restarAlMonto(Float unaPenalidad) {
+			this.setMonto(Math.max(this.montoApostado - unaPenalidad, new Float(0))); //El maximo entre 0 y el monto menos la penalidad. Con esto salvo la diferencia de si la apuesta es menor a 200$
+		}
+		
+		private Float penalidadPartidoNoComenzado() {
+			Float descuentoDe200pesos = new Float(200); 
+			return descuentoDe200pesos;
+		}
+
+		public void cancelarApuestaConPartidoEnJuego() {
+			this.cancelarApuestaRestandole(this.penalidadPartidoEnJuego());
+		}
+
+		private Float penalidadPartidoEnJuego() {
+			Float descuentoPorcentaje = new Float(30);
+			return this.montoApostado * descuentoPorcentaje;
 		}	
+		
+		private void cancelarApuestaRestandole(Float unMonto) {
+			this.cancelarApuesta();
+			this.restarAlMonto(unMonto);
+		}
+
+		public void cancelarSiSePuede() {
+			eventoDeportivo.getEstado().cancelar(this);
+		}
+
+		public void reactivarSiPuede() {
+			eventoDeportivo.getEstado().reactivar(this);
+		}
+		
+		private EstadoEventoDeportivo elEstadoDelPartidoDeLaApuesta() {
+			return eventoDeportivo.getEstado();
+		}
 
 }
