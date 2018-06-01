@@ -1,13 +1,15 @@
 package estado;
 
 import apuesta.Apuesta;
+import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacionDeApuesta;
 
-public class Finalizado extends EstadoEventoDeportivo {
+public class Finalizado extends EstadoEventoDeportivo  implements FactorDeCancelacionOReactivacionDeApuesta{
 	
 	public Finalizado() {
 		
 	}
 	
+		@Override
 		public Boolean estaFinalizado() {
 			return new Boolean(true);
 		}
