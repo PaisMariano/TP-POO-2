@@ -84,6 +84,5 @@ public class TestAlgoritmos {
 		assertEquals(coeficiente[0], new Float(1));
 		//assertEquals(coeficiente[0], new Float(0));
 		//assertEquals(coeficiente[0], new Float(0.5));
-		
 	}
 }

@@ -79,13 +79,13 @@ public class CasaDeApuestas {
 				LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 				int month = localDate.getMonthValue();
 				return month;
-			}*/
+			
 
 			//Falta implementar
 			private BigDecimal ganancias() {
 				return null;	
 			}
-
+			}*/
 
 			public Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2) {
 				return algoritmo.calcularProbabilidad(eventosHistoricos, _op1, _op2);
@@ -105,9 +105,6 @@ public class CasaDeApuestas {
 				this.agregarEvento(evento);			
 				
 			}
-			
-			
-			
 
 			/*
 			public Float calcularProbabilidades(Partido _partido, Resultado _resultado){

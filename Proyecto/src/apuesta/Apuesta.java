@@ -111,14 +111,14 @@ public  class Apuesta {
 		}
 
 		public void cancelarSiSePuede() {
-			eventoDeportivo.getEstado().cancelar(this);
+			this.elEstadoDelPartidoDeLaApuesta().cancelar(this);
 		}
 
 		public void reactivarSiPuede() {
-			eventoDeportivo.getEstado().reactivar(this);
+			this.elEstadoDelPartidoDeLaApuesta().reactivar(this);
 		}
 		
-		private EstadoEventoDeportivo elEstadoDelPartidoDeLaApuesta() {
+		public EstadoEventoDeportivo elEstadoDelPartidoDeLaApuesta() {
 			return eventoDeportivo.getEstado();
 		}
 
