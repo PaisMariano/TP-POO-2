@@ -87,8 +87,16 @@ public class CasaDeApuestas {
 			}
 
 
-			public Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2) {
+			public Float[] calcularProbabilidadesDe(Oponente _op1, Oponente _op2) {
 				return algoritmo.calcularProbabilidad(eventosHistoricos, _op1, _op2);
+			}
+			
+			public List<EventoDeportivo> getEventosFinalizados(){
+				//List<EventoDeportivo> list = newArra seguir
+				
+				
+				
+				return eventosHistoricos;
 			}
 			
 			public void crearEventoDeportivo(Oponente _op1, Oponente _op2, Deporte deporte, Date unaFechaYHora, String unLugar) {
@@ -96,7 +104,7 @@ public class CasaDeApuestas {
 				//probabilidades[0] = Ganador _op1
 				//probabilidades[1] = Ganador _op2
 				//probabilidades[2] = Empate.    
-				Float[] probabilidades = this.calcularProbabilidadesDe(this.getEventosDeportivos(), _op1, _op2);
+				Float[] probabilidades = this.calcularProbabilidadesDe( _op1, _op2);
 			
 				EventoDeportivo evento = new EventoDeportivo(deporte, _op1, _op2, unaFechaYHora, unLugar);
 				

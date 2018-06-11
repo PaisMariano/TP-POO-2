@@ -124,14 +124,14 @@ public class TestCasaDeApuestas {
 		assertEquals(casaDeApuestas.getEventosDeportivos().size(),3);
 		assertEquals("Tenis", (ultimoEvento.nombreDeporte()));
 		//no me deja comparar los dos objetos	assertEquals(eventOriginal,ultimoEvento);
-		verify(casaDeApuestasMock).calcularProbabilidadesDe(casaDeApuestasMock.getEventosDeportivos(), oponenteDummy1, oponenteDummy2);
-		//verify(casaDeApuestas).calcularProbabilidadesDe((casaDeApuestasMock.getEventosDeportivos()),oponenteDummy1,oponenteDummy2);
+		//verify(casaDeApuestasMock).calcularProbabilidadesDe(casaDeApuestasMock.getEventosDeportivos(), oponenteDummy1, oponenteDummy2);
+		//verify((casaDeApuestas).calcularProbabilidadesDe((casaDeApuestasMock.getEventosDeportivos()),oponenteDummy1,oponenteDummy2));
 		// assertTrue(ultimoEvento==eventoOriginal);
 	}
 	
 	
 	
-	/*
+	
 	@Test //raro y mal 
 	public void testAlTenerDosOponentesSeConoceSusProbabilidadesDeGanar() {
 
@@ -142,19 +142,26 @@ public class TestCasaDeApuestas {
 		List <EventoDeportivo> eventosOp1 =new ArrayList <EventoDeportivo>();
 
 		
-		AlgoritmoProbabilidades algPro =new  CompetenciaHistoricaDirecta();
+		AlgoritmoProbabilidades algPro =mock(AlgoritmoProbabilidades.class);
+	
 		
-		casaDeApuestas= new  CasaDeApuestas(usuarios,algPro,balanceMock,eventosEmpty);
+		casaDeApuestas= new  CasaDeApuestas(usuarios,algPro,balanceMock,eventosOp1);
 		Date fechaDummy= mock(Date.class);
 		
+	
 		
 		when(algPro.calcularProbabilidad(eventosOp1,oponenteDummy1,oponenteDummy2)).thenReturn(probabilidades);
-		assertEquals(casaDeApuestas.calcularProbabilidadesDe(eventosOp1, oponenteDummy1, oponenteDummy2),probabilidades);
+		Float[] probabilidadesFinal =  casaDeApuestas.calcularProbabilidadesDe( oponenteDummy1, oponenteDummy2);
+		
+		assertEquals(probabilidadesFinal[0],new Float(0.7));
+		assertEquals(probabilidadesFinal[1],new Float(0.2));
+		assertEquals(probabilidadesFinal[2],new Float(0.1));
+		
 		//Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2)
 		
 		
 		
 	}
-*/
+
 
 }
