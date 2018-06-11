@@ -3,11 +3,9 @@ package resultados;
 import oponentes.Oponente;
 
 public class Ganado extends Resultado {
-
-	private Oponente ganador;
 	
 	public Ganado(Oponente _ganador) {
-		ganador = _ganador;
+		super(_ganador);
 	}
 	
 		@Override

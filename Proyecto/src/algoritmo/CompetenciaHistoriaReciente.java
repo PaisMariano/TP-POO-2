@@ -43,11 +43,10 @@ public class CompetenciaHistoriaReciente extends AlgoritmoProbabilidades {
 		
 		List<EventoDeportivo> historico = calcularHistoricoIndividual(hist, _op);
 		
-		for(EventoDeportivo eD : historico) {
-			if (historico.size() > 10) {
+			while(historico.size() > 10){
 				historico.remove(0);
 			}
-		}		
+				
 		return historico;
 		
 	}

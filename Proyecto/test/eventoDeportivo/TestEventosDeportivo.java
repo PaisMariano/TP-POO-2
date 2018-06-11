@@ -79,7 +79,6 @@ public class TestEventosDeportivo {
 		unEventoDeportivo.setEstado(finalizado);
 		assertTrue(unEventoDeportivo.estaFinalizado());
 		
-				
 	}
 
 	@Test public void testAnteDosOponentesSeCalculaLaCuota() {
@@ -94,18 +93,18 @@ public class TestEventosDeportivo {
 	}
 
 	@Test public void testSeModificaElResultadoDelEventoDeportivo() {
-		//por default se inicializa como empatado
 		
+		//por default se inicializa como empatado
 		unEventoDeportivo.setResultado(unEstadoGanado1);
 		assertEquals(unEventoDeportivo.getResultado(),unEstadoGanado1);	
 	}
 	
 	@Test public void  testSeModificaElEstadoActualDelEvento() {
+	
 		//no lo toma bien por que toma identidad assertEquals(unEventoDeportivo.getEstado(), new NoComenzado());
 		unEventoDeportivo.setEstado(estadoFinalizado);
-	assertEquals(unEventoDeportivo.getEstado(), estadoFinalizado);
-		
-		
+		assertEquals(unEventoDeportivo.getEstado(), estadoFinalizado);
+	
 	}
 
 }

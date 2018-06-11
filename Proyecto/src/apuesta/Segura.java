@@ -2,6 +2,10 @@ package apuesta;
 
 public class Segura implements TipoApuesta { 
 	
+	public Segura() {
+		
+	}
+	
 	private Float porcentajeDescuento = new Float(15);
 
 	private Float descuento(){
@@ -16,7 +20,7 @@ public class Segura implements TipoApuesta {
 	public void cancelar(Apuesta _apuesta) {
 		//Asumimos que una apuesta segura tiene que ser >= a $200?
 		//No se contempla el caso de que se cancele, se reactive y vuelva a cancelarse una vez mas la apuesta.  		
-		_apuesta.canceladaSiPuede();
+		_apuesta.cancelarSiSePuede();
 	}
 
 	@Override

@@ -18,7 +18,8 @@ import java.util.ArrayList;
 
 public class TestAlgoritmos {
 	
-	private AlgoritmoProbabilidades algPro;
+	private AlgoritmoProbabilidades algProDirecta;
+	private AlgoritmoProbabilidades algProReciente;
 	private EventoDeportivo evento;
 	private Oponente dummyOp1;
 	private Oponente dummyOp2;
@@ -27,7 +28,8 @@ public class TestAlgoritmos {
 	@Before
 	public void setUp() throws Exception {
 		//SetUp
-		algPro = new CompetenciaHistoricaDirecta();
+		algProDirecta = new CompetenciaHistoricaDirecta();
+		algProReciente = new CompetenciaHistoriaReciente();
 		
 		dummyOp1 = mock(Deportista.class);
 		dummyOp2 = mock(Deportista.class);
@@ -47,7 +49,7 @@ public class TestAlgoritmos {
 		
 		when(evento.participaronVs(dummyOp1, dummyOp2)).thenReturn(true);
 		
-		algPro.calcularHistoricoEntre(historico, dummyOp1, dummyOp2);
+		algProDirecta.calcularHistoricoEntre(historico, dummyOp1, dummyOp2);
 		
 		verify(evento, times(4)).participaronVs(dummyOp1, dummyOp2);
 		
@@ -57,8 +59,30 @@ public class TestAlgoritmos {
 	public void testVerificoQueLaCantidadDeVictoriasDelOponenteUnoSeaCuatro() {
 		
 		when(evento.getGanador()).thenReturn(dummyOp1);
-		assertEquals(algPro.probabilidadGanador(historico, dummyOp1),new Float(4));
+		assertEquals(algProDirecta.probabilidadGanador(historico, dummyOp1),new Float(4));
 		
 	}
-	
+
+	@Test
+	public void testCalcularCoeficiente(){
+		Float[] coeficiente;
+		ArrayList<EventoDeportivo> historicoCompleto = new ArrayList<EventoDeportivo>();
+		
+		//agrego 30 veces el evento para probar la funcionalidad.
+		for(int i = 0; i <= 30; i++) {
+			historicoCompleto.add(evento);
+		}		
+		//esto sirve para que se me generen dos listas de 30 para cada uno.
+		when(evento.participo(dummyOp1)).thenReturn(true);
+		when(evento.participo(dummyOp2)).thenReturn(true);
+		
+		//solo oponente 1 gano 10 partidos, en cambio oponente 2 gano 0.
+		when(evento.getGanador()).thenReturn(dummyOp1);
+		
+		coeficiente = algProReciente.calcularProbabilidad(historicoCompleto, dummyOp1, dummyOp2);
+		
+		assertEquals(coeficiente[0], new Float(1));
+		//assertEquals(coeficiente[0], new Float(0));
+		//assertEquals(coeficiente[0], new Float(0.5));
+	}
 }
