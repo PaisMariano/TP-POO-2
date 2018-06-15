@@ -1,14 +1,11 @@
 package criterio;
 
-import static org.mockito.Mockito.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
+import static org.mockito.Mockito.*;
 
 import eventoDeportivo.EventoDeportivo;
 import expresionLogica.ExpresionLogica;
@@ -16,20 +13,21 @@ import expresionLogica.ExpresionLogica;
 public class TestBuscador {
 	private Buscador buscador;
 	private List<EventoDeportivo> eventos;
-	Criterio criterio;
-	
+	private Criterio spyCriterio;
+	private EventoDeportivo dummyEvento;
 	@Before
 	public void setUp() {
 		buscador = new Buscador();
 		eventos = new ArrayList<EventoDeportivo>();
-		criterio = mock(Criterio.class);
-		
-		eventos.add
+		spyCriterio = mock(Criterio.class);
+		dummyEvento = mock(EventoDeportivo.class); 
+		eventos.add(dummyEvento);
 	}
 
 	@Test
-	public void test() {
-		buscador.realizarBusquedaEn(eventos, criterio) ;
+	public void testSeDelegaLaBusquedaDeseadaEnElCriterio() {
+		buscador.realizarBusquedaEn(eventos, spyCriterio);
+		verify(spyCriterio).getValor(eventos);
 	}
 
 }
