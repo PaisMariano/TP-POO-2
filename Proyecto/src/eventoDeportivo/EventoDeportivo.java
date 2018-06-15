@@ -88,8 +88,8 @@ public class EventoDeportivo {
 			public EstadoEventoDeportivo getEstado(){
 				return estado;
 			}
-			public void  setEstado(EstadoEventoDeportivo nuevoEstado){
-				this.estado=nuevoEstado;
+			public void  setEstado(EstadoEventoDeportivo _estado){
+				this.estado = _estado;
 			}
 		
 			
@@ -99,6 +99,27 @@ public class EventoDeportivo {
 
 			public Oponente getGanador(){
 				return resultado.getGanador();
+			}
+
+			public boolean esDeDeporte(Deporte deporteDeInteres) {
+				return this.nombreDeporte().equals(deporteDeInteres.getNombre());
+			}
+
+			public boolean seJugoEn(String _lugar) {
+				return this.getLugar().equals(_lugar);
+			}
+
+			private String getLugar() {
+				return lugar;
+			}
+
+			public boolean sucedioEn(Date fechaInteres) {
+				return fechaInteres.getYear() == fechaYHora.getYear() &&
+						fechaInteres.getMonth() == fechaYHora.getMonth() &&
+						 fechaInteres.getDay() == fechaYHora.getDay() &&
+						  fechaInteres.getHours() == fechaYHora.getHours() &&
+						   fechaInteres.getMinutes() == fechaYHora.getMinutes() &&
+							fechaInteres.getSeconds() == fechaYHora.getSeconds();
 			}
 
 			/*
