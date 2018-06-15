@@ -35,7 +35,8 @@ public class TestEventosDeportivo {
 	@Before
 	public void setUp(){
 		
-		fechaYHora=mock(Date.class);
+		//fechaYHora=mock(Date.class);
+		fechaYHora = new Date(2,2,2);
 		river = mock(Equipo.class);
 		boca = mock(Equipo.class);
 		chacarita =  mock(Equipo.class);
@@ -43,7 +44,7 @@ public class TestEventosDeportivo {
 		unEstadoEmpatado=new Empate();
 		unEstadoGanado1=new Ganado(chacarita);
 		
-		unEventoDeportivo= new EventoDeportivo(unDeporte, river, boca, fechaYHora, "LaCasaDeTuHermana");
+		unEventoDeportivo= new EventoDeportivo(unDeporte, river, boca, fechaYHora, "Francia");
 		mockEventoDeportivo=mock(EventoDeportivo.class);
 		estadoFinalizado= new Finalizado();
 	
@@ -112,7 +113,6 @@ public class TestEventosDeportivo {
 	
 	@Test
 	public void testEsDeUnDeterminadoDeporte() {
-		
 		assertTrue(unEventoDeportivo.esDeDeporte(unDeporte));
 	}
 	
@@ -121,6 +121,29 @@ public class TestEventosDeportivo {
 		Deporte otroDeporte = new Deporte("Natacion");
 		assertFalse(unEventoDeportivo.esDeDeporte(otroDeporte));
 	}
+	
+	@Test
+	public void testSeJugoEnUnDeterminadoLugar() {
+		assertTrue(unEventoDeportivo.seJugoEn(new String("Francia")));
+	}
+	
+	@Test
+	public void testNoSeJugoEnUnDeterminadoLugar() {
+		assertFalse(unEventoDeportivo.seJugoEn(new String("Marte")));
+	}
+	
+	@Test
+	public void testSeJugoEnUnaDeterminadaFecha() {
+		
+		assertTrue(unEventoDeportivo.sucedioEn(fechaYHora));
+	}
+	
+	@Test
+	public void testNoSeJugoEnUnaDeterminadaFecha() {
+		Date fechaCualquiera = new Date(4, 4, 4);
+		assertFalse(unEventoDeportivo.sucedioEn(fechaCualquiera));
+	}
+	
 }
 
 

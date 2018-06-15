@@ -14,11 +14,7 @@ public class CriterioPorFecha extends Criterio{
 		}
 
 			@Override
-			public List<EventoDeportivo> buscarEn(List<EventoDeportivo> _eventos) {
-				List<EventoDeportivo> resultado = _eventos
-						.stream()
-						.filter(_evento -> _evento.sucedioEn(fechaInteres))
-						.collect(Collectors.toList()); //No quiero cargarme la lista original.
-				return resultado;
+			protected boolean cumpleCondicion(EventoDeportivo _evento) {
+				return _evento.sucedioEn(fechaInteres);
 			}
 }

@@ -14,11 +14,8 @@ public class CriterioPorDeporte extends Criterio{
 		}
 
 			@Override
-			public List<EventoDeportivo> buscarEn(List<EventoDeportivo> _eventos) {
-				return _eventos
-						.stream()
-						.filter(_evento -> _evento.esDeDeporte(deporteDeInteres))
-						.collect(Collectors.toList()); //No quiero cargarme la lista original.
+			protected boolean cumpleCondicion(EventoDeportivo _evento) {
+				return _evento.esDeDeporte(deporteDeInteres);
 			}
 
 }

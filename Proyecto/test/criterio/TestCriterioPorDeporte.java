@@ -15,34 +15,21 @@ import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
 
 public class TestCriterioPorDeporte {
-	private CriterioPorDeporte criterioSUT0;
-	private CriterioPorDeporte criterioSUT1;
-	private CriterioPorDeporte criterioNoSeCumple;
+	private CriterioPorDeporte criterioSUT0, criterioNoSeCumple;
 	
 	private String lugar;
 	
-	private String futbol;
-	private String boxeo;
-	private String rugby;
+	private String futbol, boxeo, rugby, natacion;
 
 	private Date dummyFecha;
 	
-	private Deporte deporte0;
-	private Deporte deporte1;
-	private Deporte deporte2;
+	private Deporte deporte0, deporte1, deporte2, deporte3;
 	
-	private Oponente dummyOponente0;
-	private Oponente dummyOponente1;
+	private Oponente dummyOponente0, dummyOponente1;
 
-	private EventoDeportivo eventoDeportivo0;
-	private EventoDeportivo eventoDeportivo1;
-	private EventoDeportivo eventoDeportivo2;
+	private EventoDeportivo eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3, stubEventoDeportivo0, stubEventoDeportivo1, stubEventoDeportivo2, stubEventoDeportivo3;
 	
-	private EventoDeportivo stubEventoDeportivo0;
-	private EventoDeportivo stubEventoDeportivo1;
-	private EventoDeportivo stubEventoDeportivo2;
-	
-	private List<EventoDeportivo> eventos;
+	private List<EventoDeportivo> eventos, eventosConcretos, partidosDeFutbol;
 	
 		@Before
 		public void setUp() {
@@ -52,65 +39,102 @@ public class TestCriterioPorDeporte {
 			futbol = new String("Futbol");
 			boxeo = new String("Boxeo");
 			rugby = new String("Rugby");
+			natacion = new String("Natacion");
 			
 			dummyFecha = mock(Date.class);
 			
 			deporte0 = new Deporte(futbol);
 			deporte1 = new Deporte(boxeo);
 			deporte2 = new Deporte (rugby);
-			dummyOponente0 = mock(Oponente.class);
-			dummyOponente1 = dummyOponente0;
+			deporte3 = new Deporte(natacion);
 			
-			eventoDeportivo0 = new EventoDeportivo(deporte0, dummyOponente0, dummyOponente1, dummyFecha, lugar);
-			eventoDeportivo1 = new EventoDeportivo(deporte0, dummyOponente0, dummyOponente1, dummyFecha, lugar);
-			eventoDeportivo2 = new EventoDeportivo(deporte1, dummyOponente0, dummyOponente1, dummyFecha, lugar);
+			dummyOponente0 = mock(Oponente.class);
+			dummyOponente1 = mock(Oponente.class);
 			
 			stubEventoDeportivo0 = mock(EventoDeportivo.class);
 			stubEventoDeportivo1 = mock(EventoDeportivo.class);
 			stubEventoDeportivo2 = mock(EventoDeportivo.class);
+			stubEventoDeportivo3 = mock(EventoDeportivo.class);
 			
 			criterioSUT0 = new CriterioPorDeporte(deporte0);//Futbol
-			criterioSUT1 = new CriterioPorDeporte(deporte1);//Boxeo
-			criterioNoSeCumple = new CriterioPorDeporte(deporte2);//Ningun evento deportivo de la lista de eventos es de este deporte.
+			
+			criterioNoSeCumple = new CriterioPorDeporte(deporte3);//Ningun evento deportivo de la lista de eventos es de este deporte.
 			
 			eventos = new ArrayList<EventoDeportivo>(); 
+			
+			eventoDeportivo0 = new EventoDeportivo(deporte0, dummyOponente0, dummyOponente1, dummyFecha, lugar);
+			eventoDeportivo1 = new EventoDeportivo(deporte0, dummyOponente0, dummyOponente1, dummyFecha, lugar);
+			eventoDeportivo2 = new EventoDeportivo(deporte1, dummyOponente0, dummyOponente1, dummyFecha, lugar);
+			eventoDeportivo2 = new EventoDeportivo(deporte2, dummyOponente0, dummyOponente1, dummyFecha, lugar);
+			
+			eventosConcretos = new ArrayList<EventoDeportivo>(); 
+		
 			eventos.add(stubEventoDeportivo0);
 			eventos.add(stubEventoDeportivo1);
 			eventos.add(stubEventoDeportivo2);
 			
+			eventosConcretos.add(eventoDeportivo0);
+			eventosConcretos.add(eventoDeportivo1);
+			eventosConcretos.add(eventoDeportivo2);
+		
+			partidosDeFutbol = criterioSUT0.buscarEn(eventosConcretos);
 		}
 		
 		@Test
 		public void testBuscarEnDevuelveLosDosPartidosDeFutbol() {
+			List<EventoDeportivo> resultado = criterioSUT0.buscarEn(eventos);
 			
 			when(stubEventoDeportivo0.esDeDeporte(deporte0)).thenReturn(true);
-			when(stubEventoDeportivo0.esDeDeporte(deporte0)).thenReturn(true);
-			when(stubEventoDeportivo0.esDeDeporte(deporte0)).thenReturn(false);
-			
-			List<EventoDeportivo> partidosDeFutbol = criterioSUT0.buscarEn(eventos);
-			assertEquals(2, partidosDeFutbol.size());
-			
+			when(stubEventoDeportivo1.esDeDeporte(deporte0)).thenReturn(true);
+			when(stubEventoDeportivo2.esDeDeporte(deporte0)).thenReturn(false);
+			when(stubEventoDeportivo3.esDeDeporte(deporte0)).thenReturn(false);
+			assertEquals(2, resultado.size());
+			assertTrue(resultado.contains(stubEventoDeportivo0));
+			assertTrue(resultado.contains(stubEventoDeportivo1));
+			assertTrue(!resultado.contains(stubEventoDeportivo2));
 		}
-
+		
 		@Test
-		public void testBuscarEnDevuelve0Elementos() {
+		public void testBuscarEnDevuelveUnaListaVaciaAlNoCumplirNingunPartido() {
+			List<EventoDeportivo> resultado = criterioSUT0.buscarEn(eventos);
+			
+			when(stubEventoDeportivo0.esDeDeporte(deporte0)).thenReturn(false);
+			when(stubEventoDeportivo1.esDeDeporte(deporte0)).thenReturn(false);
+			when(stubEventoDeportivo2.esDeDeporte(deporte0)).thenReturn(false);
+			when(stubEventoDeportivo3.esDeDeporte(deporte0)).thenReturn(false);
+			assertTrue(resultado.isEmpty());
+		}
+		
+		@Test
+		public void testBuscarEnLaListaDeEventosConcretosDevuelveSoloDosEventos() {
+			assertEquals(2, partidosDeFutbol.size());
+		}
+		
+		@Test
+		public void testAlBuscarEnLaListaDeEventosLosPartidosDeFutbolDevuelveLosCorrectos() {
+			assertTrue(partidosDeFutbol.contains(eventoDeportivo0));
+			assertTrue(partidosDeFutbol.contains(eventoDeportivo1));
+			assertTrue(!partidosDeFutbol.contains(eventoDeportivo2));
+			assertTrue(!partidosDeFutbol.contains(eventoDeportivo3));
+		}
+		
+		@Test
+		public void testBuscarEnLaListaDeEventosConcretosDevuelveUnalistaVaciaAlNoCumplirseElCriterioDeBusqueda() {
+			assertTrue(partidosDeFutbol.isEmpty());
+		}
+		
+		@Test
+		public void testAlEnviarElMensajeSeBuscaEnSeInteraccionaConLosElementosDeEventos() {
 			criterioSUT0.buscarEn(eventos);
-			criterioSUT1.buscarEn(eventos);
 			criterioNoSeCumple.buscarEn(eventos);
 			
 			verify(stubEventoDeportivo0, times(1)).esDeDeporte(deporte0);
 			verify(stubEventoDeportivo1, times(1)).esDeDeporte(deporte0);
 			verify(stubEventoDeportivo2, times(1)).esDeDeporte(deporte0);
 			
-			
-			verify(stubEventoDeportivo0, times(1)).esDeDeporte(deporte1);
-			verify(stubEventoDeportivo1, times(1)).esDeDeporte(deporte1);
-			verify(stubEventoDeportivo2, times(1)).esDeDeporte(deporte1);
-	
-			verify(stubEventoDeportivo0, times(1)).esDeDeporte(deporte2);
-			verify(stubEventoDeportivo1, times(1)).esDeDeporte(deporte2);
-			verify(stubEventoDeportivo2, times(1)).esDeDeporte(deporte2);
-	
+			verify(stubEventoDeportivo0, times(1)).esDeDeporte(deporte3);
+			verify(stubEventoDeportivo1, times(1)).esDeDeporte(deporte3);
+			verify(stubEventoDeportivo2, times(1)).esDeDeporte(deporte3);
 		}
 	
 }

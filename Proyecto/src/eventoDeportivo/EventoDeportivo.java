@@ -106,20 +106,18 @@ public class EventoDeportivo {
 			}
 
 			public boolean seJugoEn(String _lugar) {
-				return this.getLugar().equals(_lugar);
-			}
-
-			private String getLugar() {
-				return lugar;
+				return lugar.equals(_lugar);
 			}
 
 			public boolean sucedioEn(Date fechaInteres) {
 				return fechaInteres.getYear() == fechaYHora.getYear() &&
 						fechaInteres.getMonth() == fechaYHora.getMonth() &&
-						 fechaInteres.getDay() == fechaYHora.getDay() &&
-						  fechaInteres.getHours() == fechaYHora.getHours() &&
-						   fechaInteres.getMinutes() == fechaYHora.getMinutes() &&
-							fechaInteres.getSeconds() == fechaYHora.getSeconds();
+						 fechaInteres.getDay() == fechaYHora.getDay() 
+						 //&&
+						  //fechaInteres.getHours() == fechaYHora.getHours() &&
+						   //fechaInteres.getMinutes() == fechaYHora.getMinutes() &&
+							//fechaInteres.getSeconds() == fechaYHora.getSeconds()
+						 ;
 			}
 
 			/*

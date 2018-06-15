@@ -21,4 +21,9 @@ public class CriterioPorLugar extends Criterio{
 				return resultado;
 			}
 
+			@Override
+			protected boolean cumpleCondicion(EventoDeportivo _evento) {
+				return _evento.seJugoEn(lugar);
+			}
+
 }
