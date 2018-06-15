@@ -87,13 +87,14 @@ public class TestCriterioPorDeporte {
 			when(stubEventoDeportivo0.esDeDeporte(deporte0)).thenReturn(true);
 			when(stubEventoDeportivo0.esDeDeporte(deporte0)).thenReturn(false);
 			
-			assertEquals(2, criterioSUT0.buscarEn(eventos).size());
+			List<EventoDeportivo> partidosDeFutbol = criterioSUT0.buscarEn(eventos);
+			assertEquals(2, partidosDeFutbol.size());
 			
 		}
 
 		@Test
 		public void testBuscarEnDevuelve0Elementos() {
-			
+			criterioSUT0.buscarEn(eventos);
 			criterioSUT1.buscarEn(eventos);
 			criterioNoSeCumple.buscarEn(eventos);
 			
