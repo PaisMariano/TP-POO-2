@@ -76,7 +76,6 @@ public class TestAND {
 				eventoDeportivo1 = new EventoDeportivo(deporte, oponente1, oponente1, dummyFecha, dummyLugar);
 				eventoDeportivo2 = new EventoDeportivo(otroDeporte, oponenteNoJuega, oponente1, fecha, lugar);
 				eventoDeportivo3 = new EventoDeportivo(otroDeporte, oponenteNoJuega, oponente2, fecha, lugar);
-				
 				andSUT = new AND(stubExpresionIzq, stubExpresionDer);
 				//Caso que se desea testear finalmente: andSUT = new AND(expresionLogicaCompleja2, expresionLogicaCompleja3);
 				
@@ -137,8 +136,36 @@ public class TestAND {
 			}
 			
 			@Test
-			public void test() {
+			public void testAlUnirUNaBusquedaEnLaListaDeEventosConcretosExpresionesComplejasQUeNoSeCumpleSeRetornaUnaListaVacia() {			
+				andSUT.setExpresionIzquierda(expresionLogicaCompleja0);
+				andSUT.setExpresionDerecha(expresionLogicaCompleja1);
+				resultadoAND = andSUT.getValor(eventosConcretos);
 				
+				assertEquals(0, resultadoAND.size());				
+			}
+			
+			@Test
+			public void testAlUnirUNaBusquedaEnLaListaDeEventosConcretosExpresionesComplejasQUeTerminanCumpliendosePorUnSoloPartido() {
+				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
+				andSUT.setExpresionIzquierda(expresionLogicaCompleja0);
+				andSUT.setExpresionDerecha(expresionLogicaCompleja1);
+				
+				eventosConcretos.add(eventoDeportivo4);
+				resultadoAND = andSUT.getValor(eventosConcretos);
+				
+				assertEquals(1, resultadoAND.size());				
+			}
+			
+			@Test
+			public void testAlUnirUNaBusquedaEnLaListaDeEventosConcretosExpresionesComplejasQUeTerminanCumpliendosePorUnDeterminadoPartido() {
+				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
+				andSUT.setExpresionIzquierda(expresionLogicaCompleja0);
+				andSUT.setExpresionDerecha(expresionLogicaCompleja1);
+				
+				eventosConcretos.add(eventoDeportivo4);
+				resultadoAND = andSUT.getValor(eventosConcretos);
+				
+				assertTrue(resultadoAND.contains(eventoDeportivo4));				
 			}
 			
 			@Test

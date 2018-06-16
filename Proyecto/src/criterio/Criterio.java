@@ -7,7 +7,6 @@ import expresionLogica.ExpresionLogica;
 
 public abstract class Criterio implements ExpresionLogica{
 
-	
 	@Override
 	public List<EventoDeportivo> getValor(List<EventoDeportivo> _eventos) {
 		return this.buscarEn(_eventos);
