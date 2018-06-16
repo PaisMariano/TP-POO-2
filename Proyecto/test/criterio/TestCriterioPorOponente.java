@@ -24,8 +24,7 @@ public class  TestCriterioPorOponente  {
 	
 	private Deporte dummyDeporte;
 	
-	private Oponente oponente0;
-	private Oponente oponente1;
+	private Oponente oponente0, oponente1, oponenteNoParticipa;
 
 	private EventoDeportivo eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3, stubEventoDeportivo0, stubEventoDeportivo1, stubEventoDeportivo2, stubEventoDeportivo3;
 	
@@ -41,6 +40,7 @@ public class  TestCriterioPorOponente  {
 			
 			oponente0 = new Deportista(new String("Bruno"), new String("Diaz"), dummyFecha, lugar);
 			oponente1 = new Deportista(new String("Ricardo"), new String("Tapia"), dummyFecha, lugar);
+			oponenteNoParticipa = new Deportista(new String("Ricardo"), new String("Fort"), dummyFecha, new String("Maeame"));
 			
 			stubEventoDeportivo0 = mock(EventoDeportivo.class);
 			stubEventoDeportivo1 = mock(EventoDeportivo.class);
@@ -48,7 +48,7 @@ public class  TestCriterioPorOponente  {
 			stubEventoDeportivo3 = mock(EventoDeportivo.class);
 			
 			criterioSUT = new CriterioPorOponente(oponente0);
-			criterioNoSeCumple = new CriterioPorOponente(oponente1);//Ningun evento deportivo de la lista de eventos es de este deporte.
+			criterioNoSeCumple = new CriterioPorOponente(oponenteNoParticipa);//En ningun evento deportivo de la lista de eventos, participo este deportista.
 			
 			eventos = new ArrayList<EventoDeportivo>(); 
 			
@@ -70,6 +70,74 @@ public class  TestCriterioPorOponente  {
 			eventosConcretos.add(eventoDeportivo3);
 			
 			partidosJugadosPorElOponente0 = criterioSUT.buscarEn(eventosConcretos);
+		}
+
+		@Test
+		public void testBuscarEnLaListaDeEventosConcretosDevuelveSoloDosEventos() {
+			assertEquals(2, partidosJugadosPorElOponente0.size());
+		}
+		
+		@Test
+		public void testAlBuscarEnLaListaDeEventosLosPartidosDeFutbolDevuelveLosCorrectos() {
+			assertTrue(partidosJugadosPorElOponente0.contains(eventoDeportivo0));
+			assertTrue(partidosJugadosPorElOponente0.contains(eventoDeportivo1));
+			assertFalse(partidosJugadosPorElOponente0.contains(eventoDeportivo2));
+			assertFalse(partidosJugadosPorElOponente0.contains(eventoDeportivo3));
+		}
+		
+		@Test
+		public void testElEventoDeportivo0YElEventoDeportivo1CumplenLaCondicionDelCriterioSut() {
+			boolean t1 = criterioSUT.cumpleCondicion(eventoDeportivo0);
+			boolean t2 = criterioSUT.cumpleCondicion(eventoDeportivo1);
+			
+			assertTrue(t1);
+			assertTrue(t2);
+		}
+		
+		@Test
+		public void testElEventoDeportivo2YElEventoDeportivo3NoCumplenLaCondicionDelCriterioSut() {
+			boolean t1 = criterioSUT.cumpleCondicion(eventoDeportivo2);
+			boolean t2 = criterioSUT.cumpleCondicion(eventoDeportivo3);
+			
+			assertFalse(t1);
+			assertFalse(t2);
+		}
+		
+		@Test
+		public void testNingunEventoCumpleLaCondicionDelCriterioQUeNoSeCumple() {
+			boolean f0 = criterioNoSeCumple.cumpleCondicion(eventoDeportivo0);
+			boolean f1 = criterioNoSeCumple.cumpleCondicion(eventoDeportivo1);
+			boolean f2 = criterioNoSeCumple.cumpleCondicion(eventoDeportivo2);
+			boolean f3 = criterioNoSeCumple.cumpleCondicion(eventoDeportivo3);
+			
+			assertFalse(f0);
+			assertFalse(f1);
+			assertFalse(f2);
+			assertFalse(f3);
+		}
+		
+		@Test
+		public void testBuscarEnLaListaDeEventosConcretosDevuelveUnalistaVaciaAlNoCumplirseElCriterioDeBusqueda() {
+			List<EventoDeportivo> resultado = criterioNoSeCumple.buscarEn(eventos);
+			assertTrue(resultado.isEmpty());
+		}
+		
+		@Test
+		public void testAlEnviarElMensajeSeBuscaEnSeInteraccionaConLosElementosDeEventos() {
+			criterioSUT.buscarEn(eventos);
+			
+			verify(stubEventoDeportivo0, times(1)).participo(oponente0);
+			verify(stubEventoDeportivo1, times(1)).participo(oponente0);
+			verify(stubEventoDeportivo2, times(1)).participo(oponente0);
+		}
+		
+		@Test
+		public void testAlEnviarElMensajeSeBuscaEnSeInteraccionaConLosElementosDeEventosAunqueElCriterioNoSeCumpla() {
+			criterioNoSeCumple.buscarEn(eventos);
+			
+			verify(stubEventoDeportivo0, times(1)).participo(oponenteNoParticipa);
+			verify(stubEventoDeportivo1, times(1)).participo(oponenteNoParticipa);
+			verify(stubEventoDeportivo2, times(1)).participo(oponenteNoParticipa);
 		}
 		
 		@Test
@@ -100,37 +168,4 @@ public class  TestCriterioPorOponente  {
 			assertTrue(resultado.isEmpty());
 		}
 		
-		@Test
-		public void testBuscarEnLaListaDeEventosConcretosDevuelveSoloDosEventos() {
-			assertEquals(2, partidosJugadosPorElOponente0.size());
-		}
-		
-		@Test
-		public void testAlBuscarEnLaListaDeEventosLosPartidosDeFutbolDevuelveLosCorrectos() {
-			assertTrue(partidosJugadosPorElOponente0.contains(eventoDeportivo0));
-			assertTrue(partidosJugadosPorElOponente0.contains(eventoDeportivo1));
-			assertFalse(partidosJugadosPorElOponente0.contains(eventoDeportivo2));
-			assertFalse(partidosJugadosPorElOponente0.contains(eventoDeportivo3));
-		}
-		
-		@Test
-		public void testBuscarEnLaListaDeEventosConcretosDevuelveUnalistaVaciaAlNoCumplirseElCriterioDeBusqueda() {
-			List<EventoDeportivo> resultado = criterioNoSeCumple.buscarEn(eventos);
-			assertTrue(resultado.isEmpty());
-		}
-		
-		@Test
-		public void testAlEnviarElMensajeSeBuscaEnSeInteraccionaConLosElementosDeEventos() {
-			criterioSUT.buscarEn(eventos);
-			criterioNoSeCumple.buscarEn(eventos);
-			
-			verify(stubEventoDeportivo0, times(1)).participo(oponente0);
-			verify(stubEventoDeportivo1, times(1)).participo(oponente0);
-			verify(stubEventoDeportivo2, times(1)).participo(oponente0);
-			
-			verify(stubEventoDeportivo0, times(1)).participo(oponente1);
-			verify(stubEventoDeportivo1, times(1)).participo(oponente1);
-			verify(stubEventoDeportivo2, times(1)).participo(oponente1);
-		}
-	
 }

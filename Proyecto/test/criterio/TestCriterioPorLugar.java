@@ -15,9 +15,9 @@ import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
 
 public class  TestCriterioPorLugar  {
-	private String lugar, lugarNoSeCumple;
+	private String lugar, otroLugar, lugarNoSeCumple;
 	
-	private CriterioPorLugar criterioSUT0, criterioNoSeCumple;
+	private CriterioPorLugar criterioSUT, criterioNoSeCumple;
 	
 	private Date dummyFecha;
 	
@@ -32,7 +32,8 @@ public class  TestCriterioPorLugar  {
 		@Before
 		public void setUp() {
 			lugar = new String("Tailandia");
-			lugarNoSeCumple = new String("Canada");
+			otroLugar = new String("Canada");
+			lugarNoSeCumple = new String("Narnia");
 			
 			dummyFecha = mock(Date.class);
 			
@@ -45,15 +46,15 @@ public class  TestCriterioPorLugar  {
 			stubEventoDeportivo2 = mock(EventoDeportivo.class);
 			stubEventoDeportivo3 = mock(EventoDeportivo.class);
 			
-			criterioSUT0 = new CriterioPorLugar(lugar);
-			criterioNoSeCumple = new CriterioPorLugar(lugarNoSeCumple);//Ningun evento deportivo de la lista de eventos es de este deporte.
+			criterioSUT = new CriterioPorLugar(lugar);
+			criterioNoSeCumple = new CriterioPorLugar(lugarNoSeCumple);//Ningun evento deportivo de la lista de eventos se da en este lugar.
 			
 			eventos = new ArrayList<EventoDeportivo>(); 
 			
 			eventoDeportivo0 = new EventoDeportivo(dummyDeporte, dummyOponente, dummyOponente, dummyFecha, lugar);
 			eventoDeportivo1 = new EventoDeportivo(dummyDeporte, dummyOponente, dummyOponente, dummyFecha, lugar);
-			eventoDeportivo2 = new EventoDeportivo(dummyDeporte, dummyOponente, dummyOponente, dummyFecha, lugarNoSeCumple);
-			eventoDeportivo3 = new EventoDeportivo(dummyDeporte, dummyOponente, dummyOponente, dummyFecha, lugarNoSeCumple);
+			eventoDeportivo2 = new EventoDeportivo(dummyDeporte, dummyOponente, dummyOponente, dummyFecha, otroLugar);
+			eventoDeportivo3 = new EventoDeportivo(dummyDeporte, dummyOponente, dummyOponente, dummyFecha, otroLugar);
 			
 			eventosConcretos = new ArrayList<EventoDeportivo>(); 
 		
@@ -67,32 +68,7 @@ public class  TestCriterioPorLugar  {
 			eventosConcretos.add(eventoDeportivo2);
 			eventosConcretos.add(eventoDeportivo3);
 			
-			partidosJugadosEnTailandia = criterioSUT0.buscarEn(eventosConcretos);
-		}
-		
-		@Test
-		public void testBuscarEnDevuelveLosDosPartidosDeFutbol() {
-			List<EventoDeportivo> resultado = criterioSUT0.buscarEn(eventos);
-			
-			when(stubEventoDeportivo0.seJugoEn(lugar)).thenReturn(true);
-			when(stubEventoDeportivo1.seJugoEn(lugar)).thenReturn(false);
-			when(stubEventoDeportivo2.seJugoEn(lugar)).thenReturn(false);
-			when(stubEventoDeportivo3.seJugoEn(lugar)).thenReturn(false);
-			assertEquals(1, resultado.size());
-			assertTrue(resultado.contains(stubEventoDeportivo0));
-			assertTrue(resultado.contains(stubEventoDeportivo1));
-			assertTrue(!resultado.contains(stubEventoDeportivo2));
-		}
-		
-		@Test
-		public void testBuscarEnDevuelveUnaListaVaciaAlNoCumplirNingunPartido() {
-			List<EventoDeportivo> resultado = criterioSUT0.buscarEn(eventos);
-			
-			when(stubEventoDeportivo0.seJugoEn(lugar)).thenReturn(false);
-			when(stubEventoDeportivo1.seJugoEn(lugar)).thenReturn(false);
-			when(stubEventoDeportivo2.seJugoEn(lugar)).thenReturn(false);
-			when(stubEventoDeportivo3.seJugoEn(lugar)).thenReturn(false);
-			assertTrue(resultado.isEmpty());
+			partidosJugadosEnTailandia = criterioSUT.buscarEn(eventosConcretos);
 		}
 		
 		@Test
@@ -115,17 +91,78 @@ public class  TestCriterioPorLugar  {
 		}
 		
 		@Test
+		public void testElEventoDeportivo0YElEventoDeportivo1CumplenLaCondicionDelCriterioSut() {
+			boolean t1 = criterioSUT.cumpleCondicion(eventoDeportivo0);
+			boolean t2 = criterioSUT.cumpleCondicion(eventoDeportivo1);
+			
+			assertTrue(t1);
+			assertTrue(t2);
+		}
+		
+		@Test
+		public void testElEventoDeportivo2YElEventoDeportivo3NoCumplenLaCondicionDelCriterioSut() {
+			boolean t1 = criterioSUT.cumpleCondicion(eventoDeportivo2);
+			boolean t2 = criterioSUT.cumpleCondicion(eventoDeportivo3);
+			
+			assertFalse(t1);
+			assertFalse(t2);
+		}
+		
+		@Test
+		public void testNingunEventoCumpleLaCondicionDelCriterioQUeNoSeCumple() {
+			boolean f0 = criterioNoSeCumple.cumpleCondicion(eventoDeportivo0);
+			boolean f1 = criterioNoSeCumple.cumpleCondicion(eventoDeportivo1);
+			boolean f2 = criterioNoSeCumple.cumpleCondicion(eventoDeportivo2);
+			boolean f3 = criterioNoSeCumple.cumpleCondicion(eventoDeportivo3);
+			
+			assertFalse(f0);
+			assertFalse(f1);
+			assertFalse(f2);
+			assertFalse(f3);
+		}
+		
+		@Test
 		public void testAlEnviarElMensajeSeBuscaEnSeInteraccionaConLosElementosDeEventos() {
-			criterioSUT0.buscarEn(eventos);
-			criterioNoSeCumple.buscarEn(eventos);
+			criterioSUT.buscarEn(eventos);
 			
 			verify(stubEventoDeportivo0, times(1)).seJugoEn(lugar);
 			verify(stubEventoDeportivo1, times(1)).seJugoEn(lugar);
 			verify(stubEventoDeportivo2, times(1)).seJugoEn(lugar);
+		}
+		
+		@Test
+		public void testAlEnviarElMensajeSeBuscaEnSeInteraccionaConLosElementosDeEventosAunqueElCriterioNoSeCumpla() {
+			criterioNoSeCumple.buscarEn(eventos);
 			
 			verify(stubEventoDeportivo0, times(1)).seJugoEn(lugarNoSeCumple);
 			verify(stubEventoDeportivo1, times(1)).seJugoEn(lugarNoSeCumple);
 			verify(stubEventoDeportivo2, times(1)).seJugoEn(lugarNoSeCumple);
+		}
+		
+		@Test
+		public void testBuscarEnDevuelveLosDosPartidosDeFutbol() {
+			List<EventoDeportivo> resultado = criterioSUT.buscarEn(eventos);
+			
+			when(stubEventoDeportivo0.seJugoEn(lugar)).thenReturn(true);
+			when(stubEventoDeportivo1.seJugoEn(lugar)).thenReturn(false);
+			when(stubEventoDeportivo2.seJugoEn(lugar)).thenReturn(false);
+			when(stubEventoDeportivo3.seJugoEn(lugar)).thenReturn(false);
+			
+			assertEquals(1, resultado.size());
+			assertTrue(resultado.contains(stubEventoDeportivo0));
+			assertTrue(resultado.contains(stubEventoDeportivo1));
+			assertTrue(!resultado.contains(stubEventoDeportivo2));
+		}
+		
+		@Test
+		public void testBuscarEnDevuelveUnaListaVaciaAlNoCumplirNingunPartido() {
+			List<EventoDeportivo> resultado = criterioSUT.buscarEn(eventos);
+			
+			when(stubEventoDeportivo0.seJugoEn(lugar)).thenReturn(false);
+			when(stubEventoDeportivo1.seJugoEn(lugar)).thenReturn(false);
+			when(stubEventoDeportivo2.seJugoEn(lugar)).thenReturn(false);
+			when(stubEventoDeportivo3.seJugoEn(lugar)).thenReturn(false);
+			assertTrue(resultado.isEmpty());
 		}
 	
 }

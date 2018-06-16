@@ -13,8 +13,9 @@ public class OR extends OperacionLogica {
 		@Override
 		public List<EventoDeportivo> getValor(List<EventoDeportivo> _eventos) {
 			return  this.getExpresionIzquierda().getValor(_eventos); 
-					//this.getExpresionDerecha().getValor(_eventos));
-					
-		}
+					//this.getExpresionDerecha().getValor(_eventos));		
+		} 
+
+		
 
 }
