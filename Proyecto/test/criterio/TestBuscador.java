@@ -58,7 +58,7 @@ public class TestBuscador {
 	}
 	
 	@Test
-	public void testDevuelveUnaListaConUnSoloElementoCuandoElCriterioSeCumplePorUnSoloEvento() {
+	public void testDevuelveUnaListaConUnSoloElementoCuandoElCriterioSeCumplePorUnSoloEvento() {  
 		buscador.realizarBusquedaEn(eventos, spyCriterio);
 		verify(spyCriterio).getValor(eventos);
 	}

@@ -15,18 +15,13 @@ import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
 
 public class  TestCriterioPorFecha  {
+	
 	private String nada;
-	
 	private CriterioPorFecha criterioSUT, criterioNoSeCumple;
-	
 	private Date fecha, fechaNoSeCumple, fechaCualquiera;
-	
 	private Deporte dummyDeporte;
-	
 	private Oponente dummyOponente0;
-
 	private EventoDeportivo eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3, stubEventoDeportivo0, stubEventoDeportivo1, stubEventoDeportivo2, stubEventoDeportivo3;
-	
 	private List<EventoDeportivo> eventos, eventosConcretos, partidosDeDia222;
 	
 		@Before
@@ -40,29 +35,26 @@ public class  TestCriterioPorFecha  {
 			
 			dummyOponente0 = mock(Oponente.class);
 			
+			criterioSUT = new CriterioPorFecha(fecha);
+			criterioNoSeCumple = new CriterioPorFecha(fechaNoSeCumple);//Ningun evento deportivo de la lista de eventos se jugo en este fecha.
+			
 			stubEventoDeportivo0 = mock(EventoDeportivo.class);
 			stubEventoDeportivo1 = mock(EventoDeportivo.class);
 			stubEventoDeportivo2 = mock(EventoDeportivo.class);
-			stubEventoDeportivo3 = mock(EventoDeportivo.class);
-			
-			criterioSUT = new CriterioPorFecha(fecha);
-			
-			criterioNoSeCumple = new CriterioPorFecha(fechaNoSeCumple);//Ningun evento deportivo de la lista de eventos se jugo en este fecha.
-			
-			eventos = new ArrayList<EventoDeportivo>(); 
+			stubEventoDeportivo3 = mock(EventoDeportivo.class); 
+		
+			eventos = new ArrayList<EventoDeportivo>();
+			eventos.add(stubEventoDeportivo0);
+			eventos.add(stubEventoDeportivo1);
+			eventos.add(stubEventoDeportivo2);
+			eventos.add(stubEventoDeportivo3);
 			
 			eventoDeportivo0 = new EventoDeportivo(dummyDeporte, dummyOponente0, dummyOponente0, fecha, nada);
 			eventoDeportivo1 = new EventoDeportivo(dummyDeporte, dummyOponente0, dummyOponente0, fecha, nada);
 			eventoDeportivo2 = new EventoDeportivo(dummyDeporte, dummyOponente0, dummyOponente0, fechaCualquiera, nada);
 			eventoDeportivo3 = new EventoDeportivo(dummyDeporte, dummyOponente0, dummyOponente0, fechaCualquiera, nada);
 			
-			eventosConcretos = new ArrayList<EventoDeportivo>(); 
-		
-			eventos.add(stubEventoDeportivo0);
-			eventos.add(stubEventoDeportivo1);
-			eventos.add(stubEventoDeportivo2);
-			eventos.add(stubEventoDeportivo3);
-			
+			eventosConcretos = new ArrayList<EventoDeportivo>();
 			eventosConcretos.add(eventoDeportivo0);
 			eventosConcretos.add(eventoDeportivo1);
 			eventosConcretos.add(eventoDeportivo2);
@@ -90,6 +82,7 @@ public class  TestCriterioPorFecha  {
 			List<EventoDeportivo> resultado = criterioNoSeCumple.buscarEn(eventosConcretos);
 			assertTrue(resultado.isEmpty());
 		}
+		
 		@Test
 		public void testElEventoDeportivo0YElEventoDeportivo1CumplenLaCondicionDelCriterioSut() {
 			boolean t1 = criterioSUT.cumpleCondicion(eventoDeportivo0);
@@ -120,12 +113,10 @@ public class  TestCriterioPorFecha  {
 			assertFalse(f2);
 			assertFalse(f3);
 		}
-	
 		
 		@Test
 		public void testAlEnviarElMensajeSeBuscaEnSeInteraccionaConLosElementosDeEventos() {
 			criterioSUT.buscarEn(eventos);
-			criterioNoSeCumple.buscarEn(eventos);
 			
 			verify(stubEventoDeportivo0, times(1)).sucedioEn(fecha);
 			verify(stubEventoDeportivo1, times(1)).sucedioEn(fecha);
@@ -167,6 +158,4 @@ public class  TestCriterioPorFecha  {
 			when(stubEventoDeportivo3.sucedioEn(fecha)).thenReturn(false);
 			assertTrue(resultado.isEmpty());
 		}
-		
-	
 }

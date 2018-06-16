@@ -22,13 +22,14 @@ public abstract class OperacionLogica implements ExpresionLogica{
 				return expresionDer;
 			}
 			
-			private void setExpresionIzquierda(ExpresionLogica _expresionIzquierda) {
+			public void setExpresionIzquierda(ExpresionLogica _expresionIzquierda) {
 				expresionIzq = _expresionIzquierda;
 			}
 			
-			private void setExpresionDerecha(ExpresionLogica _expresionDerecha) {
+			public void setExpresionDerecha(ExpresionLogica _expresionDerecha) {
 				expresionDer = _expresionDerecha;
 			}
 			
+			@Override
 			public abstract List<EventoDeportivo> getValor(List<EventoDeportivo> _eventos);
 }

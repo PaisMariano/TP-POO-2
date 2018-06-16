@@ -34,8 +34,6 @@ public class TestEventosDeportivo {
 	
 	@Before
 	public void setUp(){
-		
-		//fechaYHora=mock(Date.class);
 		fechaYHora = new Date(2,2,2);
 		river = mock(Equipo.class);
 		boca = mock(Equipo.class);
@@ -47,27 +45,22 @@ public class TestEventosDeportivo {
 		unEventoDeportivo= new EventoDeportivo(unDeporte, river, boca, fechaYHora, "Francia");
 		mockEventoDeportivo=mock(EventoDeportivo.class);
 		estadoFinalizado= new Finalizado();
-	
 	}	
 	
 
 	@Test
 	public void unNuevoDeporteCuentaConUnNombre() {
-	
 		assertEquals((unDeporte.getNombre()),"Boxeo");	
-		
 	}
 	
 	@Test 
 	public void testCompararSiUnOponenteParticipoEnElEvento() {
-		
 		assertFalse(unEventoDeportivo.participo(chacarita));
 		assertTrue(unEventoDeportivo.participo(river));
 	}
 	
 	@Test 
 	public void testCompararLosOponentesCompitieron() {
-		
 		assertFalse(unEventoDeportivo.participaronVs(chacarita, boca));
 		assertTrue(unEventoDeportivo.participaronVs(river, boca));
 		assertTrue(unEventoDeportivo.participaronVs(boca , river));
@@ -75,28 +68,24 @@ public class TestEventosDeportivo {
 	
 	@Test 
 	public void testVerificarQueUnEventoEstaFinalizado() {
-		
 		EstadoEventoDeportivo finalizado=new Finalizado(); 
 		unEventoDeportivo.setEstado(finalizado);
 		assertTrue(unEventoDeportivo.estaFinalizado());
-		
 	}
 
 	@Test 
 	public void testAnteDosOponentesSeCalculaLaCuota() {
-		
+
 		 Float[] probabilidades = {new Float(0.7),new Float(0.2),new Float(0.1)};
 		 
 		 unEventoDeportivo.calcularCuotas(probabilidades);
 		 assertEquals(unEventoDeportivo.getCuotaOponente1(),(float) 1,3);
 		 assertEquals(unEventoDeportivo.getCuotaOponente2(),(float)1,8);
-		 assertEquals( unEventoDeportivo.getCuotaEmpate(),(float)1,9);
-		
+		 assertEquals( unEventoDeportivo.getCuotaEmpate(),(float)1,9);		
 	}
 
 	@Test 
 	public void testSeModificaElResultadoDelEventoDeportivo() {
-		
 		//por default se inicializa como empatado
 		unEventoDeportivo.setResultado(unEstadoGanado1);
 		assertEquals(unEventoDeportivo.getResultado(),unEstadoGanado1);	
@@ -104,11 +93,9 @@ public class TestEventosDeportivo {
 	
 	@Test 
 	public void  testSeModificaElEstadoActualDelEvento() {
-	
 		//no lo toma bien por que toma identidad assertEquals(unEventoDeportivo.getEstado(), new NoComenzado());
 		unEventoDeportivo.setEstado(estadoFinalizado);
 		assertEquals(unEventoDeportivo.getEstado(), estadoFinalizado);
-	
 	}
 	
 	@Test
@@ -134,7 +121,6 @@ public class TestEventosDeportivo {
 	
 	@Test
 	public void testSeJugoEnUnaDeterminadaFecha() {
-		
 		assertTrue(unEventoDeportivo.sucedioEn(fechaYHora));
 	}
 	
