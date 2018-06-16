@@ -13,15 +13,6 @@ public class CriterioPorLugar extends Criterio{
 		}
 
 			@Override
-			public List<EventoDeportivo> buscarEn(List<EventoDeportivo> _eventos) {
-				List<EventoDeportivo> resultado = _eventos
-						.stream()
-						.filter(_evento -> _evento.seJugoEn(lugar))
-						.collect(Collectors.toList()); //No quiero cargarme la lista original.
-				return resultado;
-			}
-
-			@Override
 			protected boolean cumpleCondicion(EventoDeportivo _evento) {
 				return _evento.seJugoEn(lugar);
 			}
