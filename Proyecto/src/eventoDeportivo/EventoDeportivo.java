@@ -59,12 +59,23 @@ public class EventoDeportivo {
 				resultado = _resultado;
 			}
 			
-			public void calcularCuotas(Float[] _probabilidades){
-				this.cuotaGanador1 = 1 + (1 - _probabilidades[0]);
-				this.cuotaGanador2 = 1 + (1 - _probabilidades[1]);
-				this.cuotaEmpate   = 1 + (1 - _probabilidades[2]);
+			public void calcularCuotaOponente1(Float _probabilidad){
+			
+				this.cuotaGanador1 = 1 + (1 - _probabilidad);
+			
 			}
 			
+			public void calcularCuotaOponente2(Float _probabilidad){
+				
+				this.cuotaGanador2 = 1 + (1 - _probabilidad);
+				
+			}
+			
+			public void calcularCuotaEmpate(Float _probabilidad){
+				
+				this.cuotaEmpate   = 1 + (1 - _probabilidad);
+			}
+						
 			public float getCuotaOponente1() {
 				return this.cuotaGanador1;
 				
@@ -120,13 +131,4 @@ public class EventoDeportivo {
 						 ;
 			}
 
-			/*
-			public cuota(Casa _casa, Resultado _resultado){
-				return 1 + (1 - this.prob(_casa, _resultado));
-			}
-
-			private prob(_casa, _resultado){
-				return _casa.calcProb(this, _resultado);
-			}
-			+*/
 }

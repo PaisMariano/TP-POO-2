@@ -90,29 +90,19 @@ public class CasaDeApuestas {
 				return month;
 
 			}*/
-
-			public Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2) {
-				return algoritmo.calcularProbabilidad(eventosHistoricos, _op1, _op2);
-			}
 			
 			public void crearEventoDeportivo(Oponente _op1, Oponente _op2, Deporte deporte, Date unaFechaYHora, String unLugar) {
-				
-				//probabilidades[0] = Ganador _op1
-				//probabilidades[1] = Ganador _op2
-				//probabilidades[2] = Empate.    
-				Float[] probabilidades = this.calcularProbabilidadesDe(this.getEventosDeportivos(), _op1, _op2);
 			
 				EventoDeportivo evento = new EventoDeportivo(deporte, _op1, _op2, unaFechaYHora, unLugar);
 				
-				evento.calcularCuotas(probabilidades); //Las calcula pero cuando las pasa?
+				evento.calcularCuotaOponente1(this.algoritmo.calcularProbabilidad(this.eventosHistoricos, _op1, _op2));
+				
+				evento.calcularCuotaOponente2(this.algoritmo.calcularProbabilidad(this.eventosHistoricos, _op2, _op1));
+				
+				evento.calcularCuotaEmpate(this.algoritmo.calcularProbabilidadEmpate(this.eventosHistoricos, _op1, _op2));
 				
 				this.agregarEvento(evento);			
 				
 			}
-
-			/*
-			public Float calcularProbabilidades(Partido _partido, Resultado _resultado){
-				return algoritmo.calcProb(_partido, _resultado);
-			}
-			*/
+			
 }

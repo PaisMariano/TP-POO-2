@@ -8,30 +8,27 @@ import oponentes.Oponente;
 
 public class CompetenciaHistoricaDirecta extends AlgoritmoProbabilidades {
 
-	@Override
-	public Float[] calcularProbabilidad(List<EventoDeportivo> historicoCompleto, Oponente _op1, Oponente _op2) {
-		//Calculo el historico completo de ambos oponentes.
-		List historico = this.calcularHistoricoEntre(historicoCompleto, _op1, _op2);
-		//Calculo los coeficientes en base al historico completo.
-		return calcularCoeficientes(historico, _op1, _op2);
+	@Override	
+	public Float calcularProbabilidad(List<EventoDeportivo> historicoCompleto, Oponente _op1, Oponente _op2) {
+	
+		List<EventoDeportivo> historico = this.calcularHistoricoEntre(historicoCompleto, _op1, _op2);
+	
+		return calcularCoeficiente(historico, _op1);
 	}
 	
-	private Float[] calcularCoeficientes(List<EventoDeportivo> historico, Oponente _op1, Oponente _op2) {
+	@Override
+	public Float calcularProbabilidadEmpate(List<EventoDeportivo> historicoCompleto, Oponente _op1, Oponente _op2) {		
 		
-		Float coeficiente[] = new Float[3];
-		Float coeficienteGanadorA, coeficienteGanadorB;
-		
-		
-		coeficienteGanadorA = this.probabilidadGanador(historico, _op1);
-		coeficienteGanadorB = this.probabilidadGanador(historico, _op2);
-		
-		//Mmmmmmhh caro
-		coeficiente[0] = coeficienteGanadorA / sizeConsistente(historico);
-		coeficiente[1] = coeficienteGanadorB / sizeConsistente(historico);
-		coeficiente[2] = 1 - coeficiente[0] - coeficiente[1];
-		
-		return coeficiente;
+		return (this.calcularProbabilidad(historicoCompleto, _op1, _op2) +
+			    this.calcularProbabilidad(historicoCompleto, _op2, _op1)) / 2;
+				
 	}
+	
+	private Float calcularCoeficiente(List<EventoDeportivo> historico, Oponente _op) {
+		
+		return (this.probabilidadGanador(historico, _op) / sizeConsistente(historico));
+		
+	}	
 	
 	private Float sizeConsistente(List historico) {
 		

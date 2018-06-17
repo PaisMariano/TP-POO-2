@@ -29,7 +29,7 @@ public class TestAlgoritmos {
 	public void setUp() throws Exception {
 		//SetUp
 		algProDirecta = new CompetenciaHistoricaDirecta();
-		algProReciente = new CompetenciaHistoriaReciente();
+		algProReciente = new CompetenciaHistoricaReciente();
 		
 		dummyOp1 = mock(Deportista.class);
 		dummyOp2 = mock(Deportista.class);
