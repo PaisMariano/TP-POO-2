@@ -20,15 +20,15 @@ public class CompetenciaHistoricaReciente extends AlgoritmoProbabilidades {
 	@Override
 	public Float calcularProbabilidadEmpate(List<EventoDeportivo> historicoCompleto, Oponente _op1, Oponente _op2) {		
 		
-		return 1 - this.calcularProbabilidad(historicoCompleto, _op1, _op2) -
-			       this.calcularProbabilidad(historicoCompleto, _op2, _op1);
-				
+		return (this.calcularProbabilidad(historicoCompleto, _op1, _op2) +
+			    this.calcularProbabilidad(historicoCompleto, _op2, _op1)) / 2;
+					
 	}
 	
 	private Float calcularCoeficiente(List<EventoDeportivo> histOp, Oponente _op) {
 				
 		
-		return this.probabilidadGanador(histOp, _op);
+		return this.probabilidadGanador(histOp, _op) / 10;
 			
 	}
 		

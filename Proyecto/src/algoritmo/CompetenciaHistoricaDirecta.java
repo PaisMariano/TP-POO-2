@@ -14,14 +14,13 @@ public class CompetenciaHistoricaDirecta extends AlgoritmoProbabilidades {
 		List<EventoDeportivo> historico = this.calcularHistoricoEntre(historicoCompleto, _op1, _op2);
 	
 		return calcularCoeficiente(historico, _op1);
-	}
+	} 
 	
 	@Override
 	public Float calcularProbabilidadEmpate(List<EventoDeportivo> historicoCompleto, Oponente _op1, Oponente _op2) {		
 		
-		return (this.calcularProbabilidad(historicoCompleto, _op1, _op2) +
-			    this.calcularProbabilidad(historicoCompleto, _op2, _op1)) / 2;
-				
+		return 1 - this.calcularProbabilidad(historicoCompleto, _op1, _op2) -
+			       this.calcularProbabilidad(historicoCompleto, _op2, _op1);
 	}
 	
 	private Float calcularCoeficiente(List<EventoDeportivo> historico, Oponente _op) {

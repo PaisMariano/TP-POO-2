@@ -37,7 +37,7 @@ public abstract class AlgoritmoProbabilidades {
 		}
 		return probabilidad;
 	}
-
+ 
 	
 }	
 

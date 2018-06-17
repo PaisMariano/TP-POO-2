@@ -22,7 +22,6 @@ public class EventoDeportivo {
 	private float cuotaEmpate;
 
 
-
 		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2,Date unaFechaYHora,String unLugar) {
 
 			deporte = _deporte;
