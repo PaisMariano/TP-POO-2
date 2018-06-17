@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import eventoDeportivo.Deporte;
 import eventoDeportivo.EventoDeportivo;
 
-public class CriterioPorDeporte extends Criterio{
+public class CriterioPorDeporte extends CriterioDeBusqueda{
 	private Deporte deporteDeInteres;
 	
 		public CriterioPorDeporte(Deporte _deporte){

@@ -5,13 +5,8 @@ import java.util.List;
 import eventoDeportivo.EventoDeportivo;
 import expresionLogica.ExpresionLogica;
 
-public abstract class Criterio implements ExpresionLogica{
+public abstract class CriterioDeBusqueda {
 
-	@Override
-	public List<EventoDeportivo> getValor(List<EventoDeportivo> _eventos) {
-		return this.buscarEn(_eventos);
-	}
-	
 	//Template
 	public List<EventoDeportivo> buscarEn(List<EventoDeportivo> _eventos){
 		List<EventoDeportivo> resultado = new ArrayList<EventoDeportivo>();

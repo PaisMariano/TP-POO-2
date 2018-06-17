@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
 
-public class CriterioPorOponente extends Criterio{
+public class CriterioPorOponente extends CriterioDeBusqueda{
 	private Oponente oponenteDeInteres;
 	
 		public CriterioPorOponente(Oponente _oponente) {

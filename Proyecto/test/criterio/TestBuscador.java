@@ -10,12 +10,18 @@ import static org.mockito.Mockito.*;
 
 import eventoDeportivo.Deporte;
 import eventoDeportivo.EventoDeportivo;
+import expresionLogica.ExpresionLogica;
+import expresionLogica.OperacionLogica;
+import expresionLogica.ValorLogico;
 
 public class TestBuscador {
 	private Buscador buscador;
 	private List<EventoDeportivo> eventos;
-	private Criterio spyCriterio;
-	private Criterio mockCriterio;
+	
+	//Ambos los vemos como ExpresionLogicas
+	private ValorLogico spyValorLogico;
+	private OperacionLogica spyOperacionLogica;
+	
 	private EventoDeportivo stubEvento0;
 	private EventoDeportivo stubEvento1;
 	private EventoDeportivo stubEvento2;
@@ -34,8 +40,10 @@ public class TestBuscador {
 	public void setUp() {
 		buscador = new Buscador();
 		eventos = new ArrayList<EventoDeportivo>();
-		spyCriterio = mock(Criterio.class);
-		mockCriterio = mock(Criterio.class);
+		
+		spyValorLogico = mock(ValorLogico.class);
+		spyOperacionLogica = mock(OperacionLogica.class);
+	
 		stubEvento0 = mock(EventoDeportivo.class); 
 		stubEvento1 = mock(EventoDeportivo.class);
 		stubEvento2 = mock(EventoDeportivo.class);
@@ -44,28 +52,34 @@ public class TestBuscador {
 		eventos.add(stubEvento1);
 		eventos.add(stubEvento2);
 		
-		buscador.realizarBusquedaEn(eventos, spyCriterio);
+		buscador.realizarBusquedaEn(eventos, spyValorLogico);
 	}
 
 	@Test
-	public void testSeDelegaLaBusquedaDeseadaEnElCriterio() {
-		verify(spyCriterio).getValor(eventos);
+	public void testSeDelegaLaBusquedaDeseadaEnElValorLogico() {
+		verify(spyValorLogico).getValor(eventos);
 	}
-
+	
 	@Test
+	public void testSeDelegaLaBusquedaDeseadaEnLaValorLogico() {
+		buscador.realizarBusquedaEn(eventos, spyOperacionLogica);
+		verify(spyOperacionLogica).getValor(eventos);
+	}
+	
+	@Test //Ver
 	public void testDevuelveUnaListaVaciaCuandoElCriterioNoSeCumplePorNingunEvento() {
-		verify(spyCriterio).getValor(eventos);
+		verify(spyValorLogico).getValor(eventos);
 	}
 	
-	@Test
+	@Test //Ver
 	public void testDevuelveUnaListaConUnSoloElementoCuandoElCriterioSeCumplePorUnSoloEvento() {  
-		buscador.realizarBusquedaEn(eventos, spyCriterio);
-		verify(spyCriterio).getValor(eventos);
+		buscador.realizarBusquedaEn(eventos, spyValorLogico);
+		verify(spyValorLogico).getValor(eventos);
 	}
 	
-	@Test
+	@Test //Ver
 	public void testDevuelveUnaListaConDosElementosCuandoElCriterioSeCumplePorDosEventos() {
-		buscador.realizarBusquedaEn(eventos, spyCriterio);
-		verify(spyCriterio).getValor(eventos);
+		buscador.realizarBusquedaEn(eventos, spyValorLogico);
+		verify(spyValorLogico).getValor(eventos);
 	}
 }

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import eventoDeportivo.EventoDeportivo;
 
-public class CriterioPorFecha extends Criterio{
+public class CriterioPorFecha extends CriterioDeBusqueda{
 	private Date fechaInteres;
 	
 		public CriterioPorFecha(Date _fecha){

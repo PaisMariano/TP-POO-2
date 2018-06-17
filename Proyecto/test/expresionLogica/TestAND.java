@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import criterio.CriterioDeBusqueda;
 import criterio.CriterioPorDeporte;
 import criterio.CriterioPorFecha;
 import criterio.CriterioPorLugar;
@@ -26,6 +27,7 @@ public class TestAND {
 	private EventoDeportivo stubEventoDeportivo0, stubEventoDeportivo1, stubEventoDeportivo2, stubEventoDeportivo3, eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3; 
 	private List<EventoDeportivo> eventos, eventosConcretos, resultadoAND;
 	private ExpresionLogica expresionNoSeCumple, expresionLogicaSimple0, expresionLogicaSimple1, expresionLogicaSimple2, expresionLogicaSimple3, expresionLogicaCompleja0, expresionLogicaCompleja1, expresionLogicaCompleja2, expresionLogicaCompleja3;
+	private CriterioDeBusqueda criterioDeporte, criterioOponente, criterioFecha, criterioLugar, criterioNoSeCumple;
 	private Date dummyFecha, fecha;
 	private String dummyLugar, lugar;
 	private Deporte deporte, otroDeporte;
@@ -57,12 +59,19 @@ public class TestAND {
 				oponente2 = new Deportista(new String("Leon"), new String("Tolstoi"), dummyFecha, dummyLugar);
 				oponenteNoJuega = new Deportista(new String("Gabriel"), new String("Garcia Marquez"), dummyFecha, dummyLugar);
 				
+				
+				criterioDeporte = new CriterioPorDeporte(deporte);
+				criterioOponente = new CriterioPorOponente(oponente0);
+				criterioLugar = new CriterioPorLugar(lugar);
+				criterioFecha = new CriterioPorFecha(fecha);
+				criterioNoSeCumple = new CriterioPorOponente(oponenteNoJuega);
+				
 				//Entendiendo los criterios como las expresiones logicas simples...
-				expresionLogicaSimple0 = new CriterioPorDeporte(deporte); 
-				expresionLogicaSimple1 = new CriterioPorOponente(oponente0);
-				expresionLogicaSimple2 = new CriterioPorLugar(lugar); 
-				expresionLogicaSimple3 = new CriterioPorFecha(fecha);
-				expresionNoSeCumple = new CriterioPorOponente(oponenteNoJuega);
+				expresionLogicaSimple0 = new ValorLogico(criterioDeporte); 
+				expresionLogicaSimple1 = new ValorLogico(criterioOponente);
+				expresionLogicaSimple2 = new ValorLogico(criterioLugar); 
+				expresionLogicaSimple3 = new ValorLogico(criterioFecha);
+				expresionNoSeCumple = new ValorLogico(criterioNoSeCumple);
 				
 				//... Y las complejas como la union, mediante una operacion logica de otras expresiones, ya sea que estan sean simples o complejas.
 				expresionLogicaCompleja0 = new AND (expresionLogicaSimple0, expresionLogicaSimple1);

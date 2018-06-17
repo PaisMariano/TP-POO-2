@@ -2,7 +2,7 @@ package expresionLogica;
 
 import java.util.List;
 
-import criterio.Criterio;
+import criterio.CriterioDeBusqueda;
 import eventoDeportivo.EventoDeportivo;
 
 public abstract class OperacionLogica implements ExpresionLogica{
