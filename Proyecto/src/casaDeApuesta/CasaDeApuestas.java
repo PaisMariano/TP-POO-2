@@ -9,6 +9,7 @@ import java.util.List;
 
 import usuarios.User;
 import algoritmo.*;
+import emailNotifier.EmailBalanceNotifier;
 import eventoDeportivo.*;
 import notifier.BalanceNotifier;
 import notifier.TextMessageBalanceNotifier;
@@ -19,6 +20,7 @@ public class CasaDeApuestas {
 	private List<User> usuarios;
 	private AlgoritmoProbabilidades algoritmo; 
 	private BalanceNotifier textMessageBalanceNotifier;
+	private EmailBalanceNotifier emailBalanceNotifier;
 	private List<EventoDeportivo> eventosHistoricos;
 	
 		public CasaDeApuestas() {
@@ -26,7 +28,7 @@ public class CasaDeApuestas {
 			eventosHistoricos = new ArrayList<EventoDeportivo>();	
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
 			this.setNotifier(new TextMessageBalanceNotifier());
-							
+			emailBalanceNotifier = new EmailBalanceNotifier();
 		}		
 		
 		public CasaDeApuestas(List<User> _usuarios, AlgoritmoProbabilidades _algoritmo,BalanceNotifier _notifier, List<EventoDeportivo> _historico) {
@@ -68,9 +70,16 @@ public class CasaDeApuestas {
 			public void notificarBalanceUsuarios() {
 				Integer month = new Integer(this.numeroDelMes());
 				
-				for(User user : usuarios) {
-					textMessageBalanceNotifier.notifyBalance(user, month, this.ganancias());
+				for(User user : usuarios) {									//No tiene que retornar un Float sino un bigdecimal
+					textMessageBalanceNotifier.notifyBalance(user, month, user.gananciasBrutas(month));
 				}
+			}
+			
+			public void notificarBalanceAlMail() {
+			
+			for(Usuario user : usuarios){
+														//Falta implementar					//No tiene que retornar un Float sino un bigdecimal
+				emailBalanceNotifier.emailBalance(user,userEmail(), month, user.gananciasBrutas(month))
 			}
 	
 			//Esto no va a aca
@@ -79,12 +88,7 @@ public class CasaDeApuestas {
 				LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 				int month = localDate.getMonthValue();
 				return month;
-			
 
-			//Falta implementar
-			private BigDecimal ganancias() {
-				return null;	
-			}
 			}*/
 
 			public Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2) {
