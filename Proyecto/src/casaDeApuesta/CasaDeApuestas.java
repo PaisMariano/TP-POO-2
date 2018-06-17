@@ -86,16 +86,13 @@ public class CasaDeApuestas {
 				return null;	
 			}
 			}*/
-
+//hay que modificar 
 			public Float[] calcularProbabilidadesDe(Oponente _op1, Oponente _op2) {
 				return algoritmo.calcularProbabilidad(eventosHistoricos, _op1, _op2);
 			}
 			
 			public List<EventoDeportivo> getEventosFinalizados(){
-				//List<EventoDeportivo> list = newArra seguir
-				
-				
-				
+				//List<EventoDeportivo> list = newArra seguir		
 				return eventosHistoricos;
 			}
 			
@@ -113,7 +110,22 @@ public class CasaDeApuestas {
 				this.agregarEvento(evento);			
 				
 			}
-
+//nuevo
+			
+			public void calcularProbabilidadPrimerOponenteGanador(Oponente _op1, Oponente _op2) {
+				algoritmo.calcularProbabilidad(eventosHistoricos, _op1, _op2);
+								
+			}
+			public void calcularProbabilidadSegundoOponenteGanador(Oponente _op1, Oponente _op2) {
+				
+				
+			}
+			public void calcularProbabilidadEmpate(Oponente _op1, Oponente _op2) {
+				
+				
+			}
+			
+			
 			/*
 			public Float calcularProbabilidades(Partido _partido, Resultado _resultado){
 				return algoritmo.calcProb(_partido, _resultado);
