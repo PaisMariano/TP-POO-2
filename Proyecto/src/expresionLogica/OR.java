@@ -22,7 +22,9 @@ public class OR extends OperacionLogica {
 		
 		private void sumarTodosLosElementos(List<EventoDeportivo> listA, List<EventoDeportivo> listB) {
 			for(EventoDeportivo evento : listB) {
-				listA.add(evento);
+				if(!listA.contains(evento)) {
+					listA.add(evento);
+				}
 			}
 		}
 }
