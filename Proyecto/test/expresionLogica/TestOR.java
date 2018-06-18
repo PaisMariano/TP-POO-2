@@ -179,8 +179,7 @@ public class TestOR {
 			
 			@Test //Porqué esto no funciona?
 			public void testLaExpresionIzquierdaEnLaOperacionEsLaCorrecta() {
-				ExpresionLogica izq = orSUT.getExpresionIzquierda();
-				assertEquals(stubExpresionIzq, izq);
+				assertEquals(stubExpresionIzq, orSUT.getExpresionIzquierda());
 			}
 			
 			@Test
