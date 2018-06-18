@@ -11,9 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import algoritmo.AlgoritmoProbabilidades;
-import algoritmo.CompetenciaHistoricaReciente;
-import algoritmo.CompetenciaHistoricaDirecta;
+import algoritmo.*;
 import casaDeApuesta.CasaDeApuestas;
 import eventoDeportivo.Deporte;
 import eventoDeportivo.EventoDeportivo;

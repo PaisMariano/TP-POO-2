@@ -74,10 +74,10 @@ public class TestOR {
 				expresionNoSeCumple = new ValorLogico(criterioNoSeCumple);
 				
 				//... Y las complejas como la union, mediante una operacion logica de otras expresiones, ya sea que estan sean simples o complejas.
-				expresionLogicaCompleja0 = new OR (expresionLogicaSimple0, expresionLogicaSimple1);
-				expresionLogicaCompleja1 =new OR (expresionLogicaSimple2, expresionLogicaSimple3);
-				expresionLogicaCompleja2 = new OR(expresionLogicaSimple0, expresionLogicaSimple2);
-				expresionLogicaCompleja3 = new AND(expresionLogicaCompleja2, expresionLogicaCompleja1);
+				expresionLogicaCompleja0 = new OR (expresionLogicaSimple0, expresionLogicaSimple2);
+				expresionLogicaCompleja1 =new OR (expresionLogicaSimple1, expresionLogicaSimple3);
+				expresionLogicaCompleja2 = new AND(expresionLogicaSimple0, expresionLogicaSimple2);
+				expresionLogicaCompleja3 = new OR(expresionLogicaCompleja2, expresionLogicaCompleja1);
 				
 				eventosConcretos = new ArrayList<EventoDeportivo>();
 				
@@ -150,7 +150,7 @@ public class TestOR {
 				orSUT.setExpresionDerecha(expresionLogicaCompleja1);
 				resultadoor = orSUT.getValor(eventosConcretos);
 				
-				assertEquals(3, resultadoor.size());				
+				assertEquals(4, resultadoor.size());				
 			}
 			
 			@Test
@@ -162,7 +162,7 @@ public class TestOR {
 				eventosConcretos.add(eventoDeportivo4);
 				resultadoor = orSUT.getValor(eventosConcretos);
 				
-				assertEquals(4, resultadoor.size());				
+				assertEquals(5, resultadoor.size());				
 			}
 			
 			@Test
@@ -184,8 +184,7 @@ public class TestOR {
 			
 			@Test
 			public void testLaExpresionDerechaEnLaOperacionEsLaCorrecta() {
-				ExpresionLogica der = orSUT.getExpresionDerecha();
-				assertEquals(stubExpresionDer, der);
+				assertEquals(stubExpresionDer, orSUT.getExpresionDerecha());
 			}
 			
 			@Test
