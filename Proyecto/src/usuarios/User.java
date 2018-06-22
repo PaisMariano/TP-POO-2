@@ -3,10 +3,11 @@ package usuarios;
 import java.util.ArrayList; 
 import java.util.List;
 
+import EventoDeInteres.Interesado;
 import apuesta.Apuesta;
 import casaDeApuesta.CasaDeApuestas;
 
-public class User {
+public class User extends Interesado{
 
 	List<Apuesta> apuestas;
 	String mail;

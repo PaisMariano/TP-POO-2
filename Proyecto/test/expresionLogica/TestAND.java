@@ -24,7 +24,7 @@ import oponentes.Oponente;
 public class TestAND {
 	private OperacionLogica andSUT;
 	private ExpresionLogica stubExpresionIzq, stubExpresionDer;
-	private EventoDeportivo stubEventoDeportivo0, stubEventoDeportivo1, stubEventoDeportivo2, stubEventoDeportivo3, eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3; 
+	private EventoDeportivo eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3; 
 	private List<EventoDeportivo> eventos, eventosConcretos, resultadoAND;
 	private ExpresionLogica expresionNoSeCumple, expresionLogicaSimple0, expresionLogicaSimple1, expresionLogicaSimple2, expresionLogicaSimple3, expresionLogicaCompleja0, expresionLogicaCompleja1, expresionLogicaCompleja2, expresionLogicaCompleja3;
 	private CriterioDeBusqueda criterioDeporte, criterioOponente, criterioFecha, criterioLugar, criterioNoSeCumple;
@@ -46,10 +46,6 @@ public class TestAND {
 				stubExpresionDer = mock(ExpresionLogica.class);
 				
 				eventos = new ArrayList<EventoDeportivo>();
-				
-				stubEventoDeportivo0 = mock(EventoDeportivo.class);
-				stubEventoDeportivo1 = mock(EventoDeportivo.class);
-				stubEventoDeportivo2 = mock(EventoDeportivo.class);
 				
 				deporte = new Deporte("Boxeo");
 				otroDeporte = new Deporte("Esgrima"); 
@@ -88,11 +84,6 @@ public class TestAND {
 				andSUT = new AND(stubExpresionIzq, stubExpresionDer);
 				//Caso que se desea testear finalmente: andSUT = new AND(expresionLogicaCompleja2, expresionLogicaCompleja3);
 				
-				eventos.add(stubEventoDeportivo0);
-				eventos.add(stubEventoDeportivo1);
-				eventos.add(stubEventoDeportivo2);
-				eventos.add(stubEventoDeportivo3);
-
 				eventosConcretos.add(eventoDeportivo0);
 				eventosConcretos.add(eventoDeportivo1);
 				eventosConcretos.add(eventoDeportivo2);

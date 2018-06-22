@@ -70,7 +70,8 @@ public  class Apuesta {
 		}
 		
 		//La unica apuesta que se puede cancelar es la segura. Al reactivar vuelve al mismo tipo. 
-		//Sino deberia de guardarse el ultimo tipo en una variable para volver a el, en caso de que haya mas tipos de apuestas que 			//puedan ser cancelables.  		
+		//Sino deberia de guardarse el ultimo tipo en una variable para volver a el, en caso de que haya mas tipos de apuestas que 			
+		//puedan ser cancelables.  		
 		public void reactivarApuesta(){
 			this.setTipo(new Segura());
 		}

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import EventoDeInteres.Interesado;
 import usuarios.User;
 import algoritmo.*;
 import emailNotifier.EmailBalanceNotifier;
@@ -15,7 +16,7 @@ import notifier.BalanceNotifier;
 import notifier.TextMessageBalanceNotifier;
 import oponentes.*;
 
-public class CasaDeApuestas {
+public class CasaDeApuestas extends Interesado{
 
 	private List<User> usuarios;
 	private AlgoritmoProbabilidades algoritmo; 

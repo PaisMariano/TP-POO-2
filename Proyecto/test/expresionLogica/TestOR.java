@@ -24,7 +24,7 @@ import oponentes.Oponente;
 public class TestOR {
 	private OperacionLogica orSUT;
 	private ExpresionLogica stubExpresionIzq, stubExpresionDer;
-	private EventoDeportivo stubEventoDeportivo0, stubEventoDeportivo1, stubEventoDeportivo2, stubEventoDeportivo3, eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3; 
+	private EventoDeportivo eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3; 
 	private List<EventoDeportivo> eventos, eventosConcretos, resultadoor;
 	private ExpresionLogica expresionNoSeCumple, expresionLogicaSimple0, expresionLogicaSimple1, expresionLogicaSimple2, expresionLogicaSimple3, expresionLogicaCompleja0, expresionLogicaCompleja1, expresionLogicaCompleja2, expresionLogicaCompleja3;
 	private CriterioDeBusqueda criterioDeporte, criterioOponente, criterioFecha, criterioLugar, criterioNoSeCumple;
@@ -46,10 +46,6 @@ public class TestOR {
 				stubExpresionDer = mock(ExpresionLogica.class);
 				
 				eventos = new ArrayList<EventoDeportivo>();
-				
-				stubEventoDeportivo0 = mock(EventoDeportivo.class);
-				stubEventoDeportivo1 = mock(EventoDeportivo.class);
-				stubEventoDeportivo2 = mock(EventoDeportivo.class);
 				
 				deporte = new Deporte("Boxeo");
 				otroDeporte = new Deporte("Esgrima"); 
@@ -87,11 +83,6 @@ public class TestOR {
 				eventoDeportivo3 = new EventoDeportivo(otroDeporte, oponenteNoJuega, oponente2, fecha, lugar);
 				orSUT = new OR(stubExpresionIzq, stubExpresionDer);
 				//Caso que se desea testear finalmente: orSUT = new or(expresionLogicaCompleja2, expresionLogicaCompleja3);
-				
-				eventos.add(stubEventoDeportivo0);
-				eventos.add(stubEventoDeportivo1);
-				eventos.add(stubEventoDeportivo2);
-				eventos.add(stubEventoDeportivo3);
 
 				eventosConcretos.add(eventoDeportivo0);
 				eventosConcretos.add(eventoDeportivo1);
