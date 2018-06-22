@@ -4,12 +4,13 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import EventoDeInteres.EventoDeInteres;
 import casaDeApuesta.*;
 import estado.*;
 import oponentes.*;
 import resultados.*;
 
-public class EventoDeportivo {
+public class EventoDeportivo extends EventoDeInteres {
 	
 	Deporte deporte;
 	List<Oponente> oponentes;
@@ -56,6 +57,7 @@ public class EventoDeportivo {
 
 			public void setResultado(Resultado _resultado){
 				resultado = _resultado;
+				this.iChanged();
 			}
 			
 			public void calcularCuotaOponente1(Float _probabilidad){
@@ -100,6 +102,7 @@ public class EventoDeportivo {
 			}
 			public void  setEstado(EstadoEventoDeportivo _estado){
 				this.estado = _estado;
+				this.iChanged();
 			}
 		
 			

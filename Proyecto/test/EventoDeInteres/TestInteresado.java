@@ -24,8 +24,8 @@ public class TestInteresado {
 	
 		@Test
 		public void testAlAgregarUnEventoEsteAgregaAlInteresado() {
-			interesadoUserSUT.agregarEvento(spyEvento);
-			interesadoCasaSUT.agregarEvento(spyEvento);
+			interesadoUserSUT.agregarEventoDeInteres(spyEvento);
+			interesadoCasaSUT.agregarEventoDeInteres(spyEvento);
 
 			verify(spyEvento).agregarInteresado(interesadoUserSUT);
 			verify(spyEvento).agregarInteresado(interesadoCasaSUT);
@@ -38,8 +38,8 @@ public class TestInteresado {
 			interesadoUserSUT.setEventos(listSpy);
 			interesadoCasaSUT.setEventos(listSpy);
 			
-			interesadoUserSUT.agregarEvento(dummyEvento);
-			interesadoCasaSUT.agregarEvento(dummyEvento);
+			interesadoUserSUT.agregarEventoDeInteres(dummyEvento);
+			interesadoCasaSUT.agregarEventoDeInteres(dummyEvento);
 			
 			verify(listSpy).add(dummyEvento);
 		}

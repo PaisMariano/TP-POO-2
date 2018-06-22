@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import EventoDeInteres.EventoDeInteres;
 import EventoDeInteres.Interesado;
 import usuarios.User;
 import algoritmo.*;
@@ -102,8 +103,32 @@ public class CasaDeApuestas extends Interesado{
 				
 				evento.calcularCuotaEmpate(this.algoritmo.calcularProbabilidadEmpate(this.eventosHistoricos, _op1, _op2));
 				
-				this.agregarEvento(evento);			
+				this.agregarEvento(evento);		
 				
+				//this.agregarEventoDeInteres(evento);
+			}
+
+			@Override
+			public void changed(EventoDeInteres eventoDeInteres) {
+				for(EventoDeInteres evento : listaDeEventosInteresantes) {
+					 this.notificarALosUsuarosQueLeInterese(eventoDeInteres);
+				}
+			}
+
+			private void notificarALosUsuarosQueLeInterese(EventoDeInteres eventoDeInteres) {
+				for(User usuario : this.usuariosQueLeInteresan(eventoDeInteres)) {
+					usuario.changed(eventoDeInteres);
+				}
+			}
+
+			private List<User> usuariosQueLeInteresan(EventoDeInteres eventoDeInteres) {
+				List<User> resultado = new ArrayList <User>();
+				for(User _user: usuarios) {
+					if(_user.leInteresa(eventoDeInteres)) {
+						resultado.add(_user);
+					}
+				}
+				return resultado;
 			}
 			
 }

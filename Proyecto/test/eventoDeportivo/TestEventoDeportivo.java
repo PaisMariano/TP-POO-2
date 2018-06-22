@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 import java.sql.Date;
 
-public class TestEventosDeportivo {
+public class TestEventoDeportivo {
 
 	private Deporte unDeporte;
 	private EventoDeportivo unEventoDeportivo, mockEventoDeportivo;

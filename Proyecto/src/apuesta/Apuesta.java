@@ -1,5 +1,6 @@
 package apuesta;
 
+import EventoDeInteres.EventoDeInteres;
 import estado.*;
 import eventoDeportivo.*;
 import resultados.*;
@@ -121,6 +122,10 @@ public  class Apuesta {
 		
 		public EstadoEventoDeportivo elEstadoDelPartidoDeLaApuesta() {
 			return eventoDeportivo.getEstado();
+		}
+
+		public EventoDeInteres getEventoDeInteres() {
+			return eventoDeportivo;
 		}
 
 }
