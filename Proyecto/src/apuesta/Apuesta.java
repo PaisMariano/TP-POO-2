@@ -1,6 +1,8 @@
 package apuesta;
 
-import EventoDeInteres.EventoDeInteres;
+import java.math.BigDecimal;
+
+import EventoDeInteres.Interesante;
 import estado.*;
 import eventoDeportivo.*;
 import resultados.*;
@@ -13,7 +15,7 @@ public  class Apuesta {
 	private TipoApuesta tipo;
 	private Float cuotaConvenida;
 	
-	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo/*, CasaDeApuestas _casa*/) {
+	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo) {
 		this.setMonto(_monto);// Si monto <= 0, error.
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
@@ -41,7 +43,7 @@ public  class Apuesta {
 			return eventoDeportivo.empezoEvento();
 		}
 		
-		public Float gananciaBruta() {
+		public BigDecimal gananciaBruta() {
 			return tipo.gananciaBruta(this);
 		}
 		
@@ -53,7 +55,7 @@ public  class Apuesta {
 			return resultadoApostado;
 		}
 
-		public Float gananciaNeta() {
+		public BigDecimal gananciaNeta() { //X q esto devuelve la ganancia Bruta
 			return this.gananciaBruta();
 		}
 		
@@ -77,12 +79,12 @@ public  class Apuesta {
 			this.setTipo(new Segura());
 		}
 
-		public Float bruta(){
-			return this.cuotaConvenida() - this.monto();
+		public BigDecimal bruta(){
+			return new BigDecimal(this.cuotaConvenida() - this.monto());
 		}
 
 		public Boolean esAcertada(){
-			return this.getResultadoApostado().getGanador().equals(eventoDeportivo.getGanador());
+			return this.getResultadoApostado().getApostado().equals(eventoDeportivo.getGanador());
 		}
 
 		public void cancelarApuestaConPartidoNoComenzado() {
@@ -124,7 +126,7 @@ public  class Apuesta {
 			return eventoDeportivo.getEstado();
 		}
 
-		public EventoDeInteres getEventoDeInteres() {
+		public Interesante getEventoDeInteres() {
 			return eventoDeportivo;
 		}
 

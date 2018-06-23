@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import casaDeApuesta.CasaDeApuestas;
 import criterio.CriterioDeBusqueda;
 import criterio.CriterioPorDeporte;
 import criterio.CriterioPorFecha;
@@ -32,6 +33,7 @@ public class TestOR {
 	private String dummyLugar, lugar;
 	private Deporte deporte, otroDeporte;
 	private Oponente oponente0, oponente1, oponente2, oponenteNoJuega;
+	private CasaDeApuestas dummyCasa;
 	
 		@Before
 			public void setUp() {
@@ -62,6 +64,8 @@ public class TestOR {
 				criterioFecha = new CriterioPorFecha(fecha);
 				criterioNoSeCumple = new CriterioPorOponente(oponenteNoJuega);
 				
+				dummyCasa = mock(CasaDeApuestas.class);
+				
 				//Entendiendo los criterios como las expresiones logicas simples...
 				expresionLogicaSimple0 = new ValorLogico(criterioDeporte); 
 				expresionLogicaSimple1 = new ValorLogico(criterioOponente);
@@ -77,10 +81,10 @@ public class TestOR {
 				
 				eventosConcretos = new ArrayList<EventoDeportivo>();
 				
-				eventoDeportivo0 = new EventoDeportivo(deporte, oponente0, oponente1, dummyFecha, dummyLugar);
-				eventoDeportivo1 = new EventoDeportivo(deporte, oponente1, oponente1, dummyFecha, dummyLugar);
-				eventoDeportivo2 = new EventoDeportivo(otroDeporte, oponenteNoJuega, oponente1, fecha, lugar);
-				eventoDeportivo3 = new EventoDeportivo(otroDeporte, oponenteNoJuega, oponente2, fecha, lugar);
+				eventoDeportivo0 = new EventoDeportivo(dummyCasa, deporte, oponente0, oponente1, dummyFecha, dummyLugar);
+				eventoDeportivo1 = new EventoDeportivo(dummyCasa,deporte, oponente1, oponente1, dummyFecha, dummyLugar);
+				eventoDeportivo2 = new EventoDeportivo(dummyCasa, otroDeporte, oponenteNoJuega, oponente1, fecha, lugar);
+				eventoDeportivo3 = new EventoDeportivo(dummyCasa, otroDeporte, oponenteNoJuega, oponente2, fecha, lugar);
 				orSUT = new OR(stubExpresionIzq, stubExpresionDer);
 				//Caso que se desea testear finalmente: orSUT = new or(expresionLogicaCompleja2, expresionLogicaCompleja3);
 
@@ -146,7 +150,7 @@ public class TestOR {
 			
 			@Test
 			public void testAlUnirUNaBusquedaEnLaListaDeEventosConcretosExpresionesComplejasQUeTerminanCumpliendosePorTodosLosPartidos() {
-				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
+				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(dummyCasa, deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
 				orSUT.setExpresionIzquierda(expresionLogicaCompleja0);
 				orSUT.setExpresionDerecha(expresionLogicaCompleja1);
 				
@@ -158,7 +162,7 @@ public class TestOR {
 			
 			@Test
 			public void testAlUnirUNaBusquedaEnLaListaDeEventosConcretosExpresionesComplejasQUeTerminanCumpliendosePorUnDeterminadoPartido() {
-				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
+				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(dummyCasa, deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
 				orSUT.setExpresionIzquierda(expresionLogicaCompleja0);
 				orSUT.setExpresionDerecha(expresionLogicaCompleja1);
 				

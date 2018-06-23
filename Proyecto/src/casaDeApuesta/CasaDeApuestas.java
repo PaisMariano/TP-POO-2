@@ -7,22 +7,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import EventoDeInteres.EventoDeInteres;
+import EventoDeInteres.Interesante;
 import EventoDeInteres.Interesado;
 import usuarios.User;
 import algoritmo.*;
-import emailNotifier.EmailBalanceNotifier;
 import eventoDeportivo.*;
-import notifier.BalanceNotifier;
-import notifier.TextMessageBalanceNotifier;
+import notifier.*;
 import oponentes.*;
 
 public class CasaDeApuestas extends Interesado{
 
 	private List<User> usuarios;
 	private AlgoritmoProbabilidades algoritmo; 
-	private BalanceNotifier textMessageBalanceNotifier;
-	private EmailBalanceNotifier emailBalanceNotifier;
+	private BalanceNotifier notifier;
 	private List<EventoDeportivo> eventosHistoricos;
 	
 		public CasaDeApuestas() {
@@ -30,7 +27,6 @@ public class CasaDeApuestas extends Interesado{
 			eventosHistoricos = new ArrayList<EventoDeportivo>();	
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
 			this.setNotifier(new TextMessageBalanceNotifier());
-			emailBalanceNotifier = new EmailBalanceNotifier();
 		}		
 		
 		public CasaDeApuestas(List<User> _usuarios, AlgoritmoProbabilidades _algoritmo,BalanceNotifier _notifier, List<EventoDeportivo> _historico) {
@@ -45,21 +41,18 @@ public class CasaDeApuestas extends Interesado{
 				algoritmo = _algoritmo;
 			}
 		
-			
-			//Flexibility
 			public void setNotifier(BalanceNotifier _notifier) {
-				textMessageBalanceNotifier = _notifier;
+				this.notifier = _notifier;
 			}
 
-			//Flexibility
 			public void agregarusuario(User _usuario) {
-				usuarios.add(_usuario);
+				this.usuarios.add(_usuario);
 			}
 			
 			public  List<User> getUsuarios(){
 				return usuarios;
 			}
-			//Flexibility
+
 			public void agregarEvento(EventoDeportivo _evento) {
 				eventosHistoricos.add(_evento);
 			}
@@ -73,7 +66,7 @@ public class CasaDeApuestas extends Interesado{
 				Integer month = new Integer(this.numeroDelMes());
 				
 				for(User user : usuarios) {									//No tiene que retornar un Float sino un bigdecimal
-					textMessageBalanceNotifier.notifyBalance(user, month, user.gananciasBrutas(month));
+					notifier.notifyBalance(user, month, user.gananciasBrutas(month));
 				}
 			}
 			
@@ -83,45 +76,30 @@ public class CasaDeApuestas extends Interesado{
 														//Falta implementar					//No tiene que retornar un Float sino un bigdecimal
 				emailBalanceNotifier.emailBalance(user,userEmail(), month, user.gananciasBrutas(month))
 			}
-	
-			//Esto no va a aca
-			private int numeroDelMes() {
-				Date date = new Date();
-				LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				int month = localDate.getMonthValue();
-				return month;
-
 			}*/
 			
-			public void crearEventoDeportivo(Oponente _op1, Oponente _op2, Deporte deporte, Date unaFechaYHora, String unLugar) {
-			
-				EventoDeportivo evento = new EventoDeportivo(deporte, _op1, _op2, unaFechaYHora, unLugar);
-				
-				evento.calcularCuotaOponente1(this.algoritmo.calcularProbabilidad(this.eventosHistoricos, _op1, _op2));
-				
-				evento.calcularCuotaOponente2(this.algoritmo.calcularProbabilidad(this.eventosHistoricos, _op2, _op1));
-				
-				evento.calcularCuotaEmpate(this.algoritmo.calcularProbabilidadEmpate(this.eventosHistoricos, _op1, _op2));
-				
-				this.agregarEvento(evento);		
-				
-				//this.agregarEventoDeInteres(evento);
+			public Float calcularProbabilidadGanador(Oponente oponente1, Oponente oponente2) {
+				return this.algoritmo.calcularProbabilidad(this.eventosHistoricos, oponente1, oponente2);
 			}
-
+			
+			public Float calcularProbabilidadEmpate(Oponente oponente1, Oponente oponente2) {
+				return this.algoritmo.calcularProbabilidadEmpate(this.eventosHistoricos, oponente1, oponente2);
+			}
+		 
 			@Override
-			public void changed(EventoDeInteres eventoDeInteres) {
-				for(EventoDeInteres evento : listaDeEventosInteresantes) {
+			public void cambio(Interesante eventoDeInteres) {
+				for(Interesante evento : interesantes) {
 					 this.notificarALosUsuarosQueLeInterese(eventoDeInteres);
 				}
 			}
 
-			private void notificarALosUsuarosQueLeInterese(EventoDeInteres eventoDeInteres) {
+			private void notificarALosUsuarosQueLeInterese(Interesante eventoDeInteres) {
 				for(User usuario : this.usuariosQueLeInteresan(eventoDeInteres)) {
-					usuario.changed(eventoDeInteres);
+					usuario.cambio(eventoDeInteres);
 				}
 			}
 
-			private List<User> usuariosQueLeInteresan(EventoDeInteres eventoDeInteres) {
+			private List<User> usuariosQueLeInteresan(Interesante eventoDeInteres) {
 				List<User> resultado = new ArrayList <User>();
 				for(User _user: usuarios) {
 					if(_user.leInteresa(eventoDeInteres)) {

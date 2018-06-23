@@ -26,17 +26,17 @@ public class TestResultados {
 		
 		@Test
 		public void testElGanadorDelResultado1EsELDummyEquipo() {
-			assertEquals(ganado1.getGanador(), dummyEquipo);
+			assertEquals(ganado1.getApostado(), dummyEquipo);
 		}
 		
 		@Test
 		public void testElGanadorDelResultado2EsELDummyDeportista() {
-			assertEquals(ganado2.getGanador(), dummyDeportista);
+			assertEquals(ganado2.getApostado(), dummyDeportista);
 		}
 		
 		@Test
 		public void testElGanadorDelEmpateEsUnNullObject() {
-			Oponente oponenteNull = new None();
-			assertEquals(empate.getGanador(), oponenteNull); //No quiero preguntar si son el mismo, quiero saber si son iguales.
+			Oponente oponenteNull = null;
+			assertEquals(empate.getApostado(), oponenteNull); //No quiero preguntar si son el mismo, quiero saber si son iguales.
 		}
 }

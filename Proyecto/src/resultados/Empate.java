@@ -1,16 +1,22 @@
 package resultados;
 
+import eventoDeportivo.EventoDeportivo;
 import oponentes.*;
 
 public class Empate extends Resultado {
 	
 	public Empate() { 
-		super(new None());
+		
 	}
 
 	@Override
-	public Oponente getGanador() {
-		return ganador;
+	public Oponente getApostado() {
+		return null;
+	}
+
+	@Override
+	public Float getCuotaApuesta(EventoDeportivo _evento, Resultado _resultadoApostado) {
+		return _evento.getCuotaEmpate();
 	}
 
 }

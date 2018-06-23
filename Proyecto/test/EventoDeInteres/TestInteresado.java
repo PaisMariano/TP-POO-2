@@ -13,33 +13,33 @@ import usuarios.User;
 
 public class TestInteresado {
 	private Interesado interesadoUserSUT, interesadoCasaSUT;
-	private EventoDeInteres spyEvento;
+	private Interesante spyEvento;
 	
 		@Before
 		public void setUp() {
-			interesadoUserSUT = new User();
+			interesadoUserSUT = new User(new String(""));
 			interesadoCasaSUT = new CasaDeApuestas();
-			spyEvento = spy(EventoDeInteres.class);
+			spyEvento = spy(Interesante.class);
 		}
 	
 		@Test
 		public void testAlAgregarUnEventoEsteAgregaAlInteresado() {
-			interesadoUserSUT.agregarEventoDeInteres(spyEvento);
-			interesadoCasaSUT.agregarEventoDeInteres(spyEvento);
+			interesadoUserSUT.agregarInteresante(spyEvento);
+			interesadoCasaSUT.agregarInteresante(spyEvento);
 
 			verify(spyEvento).agregarInteresado(interesadoUserSUT);
 			verify(spyEvento).agregarInteresado(interesadoCasaSUT);
 		}
 		
 		public void testSeAgregaUnEventoALaLista() {
-			ArrayList<EventoDeInteres> listSpy = spy(ArrayList.class);
-			EventoDeInteres dummyEvento = mock(EventoDeInteres.class);
+			ArrayList<Interesante> listSpy = spy(ArrayList.class);
+			Interesante dummyEvento = mock(Interesante.class);
 			
-			interesadoUserSUT.setEventos(listSpy);
-			interesadoCasaSUT.setEventos(listSpy);
+			interesadoUserSUT.setInteresantes(listSpy);
+			interesadoCasaSUT.setInteresantes(listSpy);
 			
-			interesadoUserSUT.agregarEventoDeInteres(dummyEvento);
-			interesadoCasaSUT.agregarEventoDeInteres(dummyEvento);
+			interesadoUserSUT.agregarInteresante(dummyEvento);
+			interesadoCasaSUT.agregarInteresante(dummyEvento);
 			
 			verify(listSpy).add(dummyEvento);
 		}

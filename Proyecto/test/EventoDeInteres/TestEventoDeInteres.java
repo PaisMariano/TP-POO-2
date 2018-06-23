@@ -16,13 +16,14 @@ import static org.mockito.Mockito.*;
 
 
 public class TestEventoDeInteres {
-	private EventoDeInteres eventoSUT;
+	private Interesante eventoSUT;
 	private Interesado spyUsuario;
 	private Interesado spyCasa;
 	private Deporte dummyDeporte;
 	private Oponente dummyOponente0, dummyOponente1;
 	private Date dummyFecha;
 	private String dummyLugar;
+	private CasaDeApuestas dummyCasa;
 	
 		@Before
 		public void setUp() {
@@ -32,7 +33,9 @@ public class TestEventoDeInteres {
 			dummyFecha = mock(Date.class);
 			dummyLugar = new String("");
 			
-			eventoSUT = new EventoDeportivo(dummyDeporte, dummyOponente0, dummyOponente1, dummyFecha, dummyLugar);
+			dummyCasa = mock(CasaDeApuestas.class);
+			
+			eventoSUT = new EventoDeportivo(dummyCasa, dummyDeporte, dummyOponente0, dummyOponente1, dummyFecha, dummyLugar);
 			
 			spyUsuario = spy(User.class);
 			spyCasa = spy(CasaDeApuestas.class);
@@ -40,13 +43,13 @@ public class TestEventoDeInteres {
 			eventoSUT.agregarInteresado(spyUsuario);
 			eventoSUT.agregarInteresado(spyCasa);
 			
-			eventoSUT.iChanged();
+			eventoSUT.cambie();
 		}
 	
 		@Test
 		public void testAlSerModificadoSusInteresadosSonAvisadosDelCambio() {
-			verify(spyUsuario).changed(eventoSUT);
-			verify(spyCasa).changed(eventoSUT);
+			verify(spyUsuario).cambio(eventoSUT);
+			verify(spyCasa).cambio(eventoSUT);
 		}
 		
 		public void testSeAgreganLosInteresados() {
@@ -59,5 +62,4 @@ public class TestEventoDeInteres {
 			verify(listSpy).add(dummyInteresado);
 			verify(listSpy).add(dummyInteresado);
 		}
-
 }

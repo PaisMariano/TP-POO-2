@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Interesado {
-	protected List<EventoDeInteres> listaDeEventosInteresantes;
+	protected List<Interesante> interesantes;
 	
 		public Interesado() {
-			this.setEventos(new ArrayList<EventoDeInteres>());
+			this.setInteresantes(new ArrayList<Interesante>());
 		}
 
-			public abstract void changed(EventoDeInteres eventoDeInteres);
+			public abstract void cambio(Interesante eventoDeInteres);
 			
-			public void setEventos(List<EventoDeInteres> _eventos) {
-				listaDeEventosInteresantes = _eventos;
+			public void setInteresantes(List<Interesante> _eventos) {
+				interesantes = _eventos;
 			}
 			
-			public void agregarEventoDeInteres(EventoDeInteres _evento) {
-				listaDeEventosInteresantes.add(_evento);
+			public void agregarInteresante(Interesante _evento) {
+				interesantes.add(_evento);
 				_evento.agregarInteresado(this);
 			}
 }

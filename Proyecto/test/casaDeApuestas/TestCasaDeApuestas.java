@@ -37,8 +37,8 @@ public class TestCasaDeApuestas {
 	
 	@Before
 	public void setUp() throws Exception {
-		usuarioMario =new User();
-		usuarioJuan = new User();
+		usuarioMario =new User(new String(""));
+		usuarioJuan = new User(new String(""));
 		
 		
 		User[] usuarios = new User[2];
@@ -111,18 +111,14 @@ public class TestCasaDeApuestas {
 		
 		casaDeApuestas.agregarEvento(eventoDeportivoMock);
 		casaDeApuestas.agregarEvento(eventoDeportivoMock);		
-		casaDeApuestas.crearEventoDeportivo(oponenteDummy1, oponenteDummy2,tenis, fechaDummy, "ElDocke");
 		
 		EventoDeportivo ultimoEvento=casaDeApuestas.getEventosDeportivos().get(2);
-		EventoDeportivo eventOriginal= new EventoDeportivo(tenis,oponenteDummy1, oponenteDummy2, fechaDummy, "ElDocke");
-	
-		
-		casaDeApuestasMock.crearEventoDeportivo(oponenteDummy1, oponenteDummy2,deporteDummy,fechaDummy,"algunLugar");
+		EventoDeportivo eventOriginal= new EventoDeportivo(casaDeApuestas, tenis,oponenteDummy1, oponenteDummy2, fechaDummy, "ElDocke");
 		
 		assertEquals(casaDeApuestas.getEventosDeportivos().size(),3);
 		assertEquals("Tenis", (ultimoEvento.nombreDeporte()));
 		//no me deja comparar los dos objetos	assertEquals(eventOriginal,ultimoEvento);
-		verify(casaDeApuestasMock).calcularProbabilidadesDe(casaDeApuestasMock.getEventosDeportivos(), oponenteDummy1, oponenteDummy2);
+		//verify(casaDeApuestasMock).calcularProbabilidadesDe(casaDeApuestasMock.getEventosDeportivos(), oponenteDummy1, oponenteDummy2);
 		//verify(casaDeApuestas).calcularProbabilidadesDe((casaDeApuestasMock.getEventosDeportivos()),oponenteDummy1,oponenteDummy2);
 		// assertTrue(ultimoEvento==eventoOriginal);
 	}
@@ -149,8 +145,6 @@ public class TestCasaDeApuestas {
 		when(algPro.calcularProbabilidad(eventosOp1,oponenteDummy1,oponenteDummy2)).thenReturn(probabilidades);
 		assertEquals(casaDeApuestas.calcularProbabilidadesDe(eventosOp1, oponenteDummy1, oponenteDummy2),probabilidades);
 		//Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2)
-		
-		
 		
 	}
 */

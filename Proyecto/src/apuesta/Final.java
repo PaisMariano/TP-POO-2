@@ -1,5 +1,7 @@
 package apuesta;
 
+import java.math.BigDecimal;
+
 public class Final implements TipoApuesta {
 
 	@Override
@@ -13,7 +15,7 @@ public class Final implements TipoApuesta {
 	}
 
 	@Override
-	public Float gananciaBruta(Apuesta _apuesta) {
+	public BigDecimal gananciaBruta(Apuesta _apuesta) {
 		return _apuesta.bruta(); 
 	}
 

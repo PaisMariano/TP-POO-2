@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import casaDeApuesta.CasaDeApuestas;
+
 import static org.mockito.Mockito.*;
 
 import eventoDeportivo.Deporte;
@@ -17,16 +20,12 @@ import oponentes.Oponente;
 public class  TestCriterioPorDeporte  {
 	private String dummyLugar, boxeo, futbol, natacion;
 	private CriterioPorDeporte criterioSUT, criterioNoSeCumple;
-	
 	private Date dummyFecha;
-	
 	private Deporte deporte0, deporte1, deporte2;
-	
 	private Oponente dummyOponente;
-
 	private EventoDeportivo eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3, stubEventoDeportivo0, stubEventoDeportivo1, stubEventoDeportivo2, stubEventoDeportivo3;
-	
 	private List<EventoDeportivo> eventos, eventosConcretos, partidosDeFutbol;
+	private CasaDeApuestas dummyCasa;
 	
 		@Before
 		public void setUp() {
@@ -44,6 +43,8 @@ public class  TestCriterioPorDeporte  {
 			
 			dummyOponente = mock(Oponente.class);
 			
+			dummyCasa = mock(CasaDeApuestas.class);
+			
 			stubEventoDeportivo0 = mock(EventoDeportivo.class);
 			stubEventoDeportivo1 = mock(EventoDeportivo.class);
 			stubEventoDeportivo2 = mock(EventoDeportivo.class);
@@ -55,10 +56,10 @@ public class  TestCriterioPorDeporte  {
 			
 			eventos = new ArrayList<EventoDeportivo>(); 
 			
-			eventoDeportivo0 = new EventoDeportivo(deporte0, dummyOponente, dummyOponente, dummyFecha, dummyLugar);
-			eventoDeportivo1 = new EventoDeportivo(deporte0, dummyOponente, dummyOponente, dummyFecha, dummyLugar);
-			eventoDeportivo2 = new EventoDeportivo(deporte1, dummyOponente, dummyOponente, dummyFecha, dummyLugar);
-			eventoDeportivo3 = new EventoDeportivo(deporte1, dummyOponente, dummyOponente, dummyFecha, dummyLugar);
+			eventoDeportivo0 = new EventoDeportivo(dummyCasa, deporte0, dummyOponente, dummyOponente, dummyFecha, dummyLugar);
+			eventoDeportivo1 = new EventoDeportivo(dummyCasa, deporte0, dummyOponente, dummyOponente, dummyFecha, dummyLugar);
+			eventoDeportivo2 = new EventoDeportivo(dummyCasa, deporte1, dummyOponente, dummyOponente, dummyFecha, dummyLugar);
+			eventoDeportivo3 = new EventoDeportivo(dummyCasa, deporte1, dummyOponente, dummyOponente, dummyFecha, dummyLugar);
 			
 			eventosConcretos = new ArrayList<EventoDeportivo>(); 
 		
