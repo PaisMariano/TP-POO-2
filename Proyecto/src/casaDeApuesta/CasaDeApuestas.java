@@ -27,7 +27,7 @@ public class CasaDeApuestas extends Interesado{
 			eventosHistoricos = new ArrayList<EventoDeportivo>();	
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
 			this.setNotifier(new TextMessageBalanceNotifier());
-		}		
+		}
 		
 		public CasaDeApuestas(List<User> _usuarios, AlgoritmoProbabilidades _algoritmo,BalanceNotifier _notifier, List<EventoDeportivo> _historico) {
 			usuarios = _usuarios;
@@ -36,7 +36,6 @@ public class CasaDeApuestas extends Interesado{
 			eventosHistoricos = _historico;		
 		}
 		
-			//Flexibility
 			public void setAlgoritmo(AlgoritmoProbabilidades _algoritmo) {
 				algoritmo = _algoritmo;
 			}
@@ -45,7 +44,7 @@ public class CasaDeApuestas extends Interesado{
 				this.notifier = _notifier;
 			}
 
-			public void agregarusuario(User _usuario) {
+			public void agregarUsuario(User _usuario) {
 				this.usuarios.add(_usuario);
 			}
 			
@@ -59,6 +58,21 @@ public class CasaDeApuestas extends Interesado{
 			
 			public  List<EventoDeportivo> getEventosDeportivos(){
 				return eventosHistoricos;
+			}
+
+			public void crearUsuario(String _mail){
+				int idCorrespondiente = this.cantidadDeUsuarios() + 1;
+				Usuario nuevoUser = new User(idCorrespondiente, _mail);
+				this.agregarUsuario(nuevoUser);
+			}		
+
+			private int cantidadDeUsuarios(){
+				return usuarios.size();
+			}
+
+			public void crearApuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado,  TipoApuesta tipo, User _usuario){
+				Apuesta nuevaApuesta = new Apuesta (_monto, evento, _resultado, _tipo);
+				_usuario.agregarNuevaApuesta(nuevaApuesta);
 			}
 			
 			/*

@@ -10,15 +10,19 @@ import apuesta.Apuesta;
 import casaDeApuesta.CasaDeApuestas;
 
 public class User extends Interesado{
+	int id;
 	private List<Apuesta> apuestas;
 	private String mail;
 	
-		public User(String _mail){
-			apuestas = new ArrayList<Apuesta>(0);
+		public User(int _id, String _mail){
+			id = _id;
 			this.setMail(_mail);
+			apuestas = new ArrayList<Apuesta>(0);
 		}
 		
-		public User(List<Apuesta> _apuestas){
+		public User(int _id, String _mail, List<Apuesta> _apuestas){
+			id = _id;
+			this.setMail(_mail);
 			apuestas = _apuestas;
 		}
 		
@@ -26,7 +30,6 @@ public class User extends Interesado{
 				mail = _mail;
 			}
 			
-			//creo que hay que pasarle la apuesta a la cual se refiere la ganacia bruta y neta 
 			public BigDecimal gananciaBruta() {
 				BigDecimal total = new BigDecimal(0); 
 				for(Apuesta apuesta : apuestas) {
@@ -47,10 +50,8 @@ public class User extends Interesado{
 				apuestas.add(_apuesta);
 			}
 			
-			
 			public List<Apuesta> apuestasPropias(){			
-				return apuestas;
-				
+				return apuestas;	
 			}
 	
 			@Override
