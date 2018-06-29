@@ -130,4 +130,10 @@ public  class Apuesta {
 			return eventoDeportivo;
 		}
 
+		public boolean esApuestaDelMes(int unMes) {
+			
+			
+			return this.eventoDeportivo.estaFinalizado() && this.eventoDeportivo.esDelMes(unMes); 
+		}
+
 }

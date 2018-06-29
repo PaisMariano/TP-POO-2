@@ -121,4 +121,11 @@ public class EventoDeportivo extends Interesante {
 				return this.oponentes;
 			}
 
+		
+
+			public boolean esDelMes(int unMes) {
+				
+				return this.fechaYHora.getMonth()== unMes;
+			}
+
 }

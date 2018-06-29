@@ -14,14 +14,13 @@ public class User extends Interesado{
 	private List<Apuesta> apuestas;
 	private String mail;
 	
-		public User(int _id, String _mail){
-			id = _id;
+		public User(String _mail){
+			
 			this.setMail(_mail);
 			apuestas = new ArrayList<Apuesta>(0);
 		}
 		
-		public User(int _id, String _mail, List<Apuesta> _apuestas){
-			id = _id;
+		public User(String _mail, List<Apuesta> _apuestas){
 			this.setMail(_mail);
 			apuestas = _apuestas;
 		}
@@ -30,14 +29,26 @@ public class User extends Interesado{
 				mail = _mail;
 			}
 			
-			public BigDecimal gananciaBruta() {
+			public BigDecimal gananciaBruta(int unMes) {
 				BigDecimal total = new BigDecimal(0); 
-				for(Apuesta apuesta : apuestas) {
+				for(Apuesta apuesta : this.apuestasDelMes(unMes)) {
 					total.add(apuesta.gananciaBruta());
 				}
 				return total;
 			}
 			
+			private List<Apuesta> apuestasDelMes(int unMes) {
+				List<Apuesta> apuestasDelMes= new ArrayList<Apuesta>();
+				
+				for(Apuesta ap: apuestas) {
+					if(ap.esApuestaDelMes(unMes)) {
+						apuestasDelMes.add(ap);
+					}
+					
+				}
+				return apuestasDelMes;
+			}
+
 			public BigDecimal gananciaNeta() {
 				BigDecimal total = new BigDecimal(0); 
 				for(Apuesta apuesta : apuestas) {
@@ -73,5 +84,10 @@ public class User extends Interesado{
 	
 			public String getMail() {
 				return mail;
+			}
+
+			public BigDecimal gananciasBrutas(int unMes) {
+				// TODO Auto-generated method stub
+				return null;
 			}		
 }

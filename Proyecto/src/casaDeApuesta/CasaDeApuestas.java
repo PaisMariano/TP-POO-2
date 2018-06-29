@@ -11,20 +11,24 @@ import EventoDeInteres.Interesante;
 import EventoDeInteres.Interesado;
 import usuarios.User;
 import algoritmo.*;
+import apuesta.Apuesta;
+import apuesta.TipoApuesta;
 import eventoDeportivo.*;
 import notifier.*;
 import oponentes.*;
+import resultados.Resultado;
 
 public class CasaDeApuestas extends Interesado{
 
 	private List<User> usuarios;
 	private AlgoritmoProbabilidades algoritmo; 
 	private BalanceNotifier notifier;
-	private List<EventoDeportivo> eventosHistoricos;
+	private List<EventoDeportivo> eventos;
+
 	
 		public CasaDeApuestas() {
 			usuarios = new ArrayList<User>();
-			eventosHistoricos = new ArrayList<EventoDeportivo>();	
+			eventos = new ArrayList<EventoDeportivo>();	
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
 			this.setNotifier(new TextMessageBalanceNotifier());
 		}
@@ -33,7 +37,7 @@ public class CasaDeApuestas extends Interesado{
 			usuarios = _usuarios;
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
 			this.setNotifier(new TextMessageBalanceNotifier());
-			eventosHistoricos = _historico;		
+			eventos = _historico;		
 		}
 		
 			public void setAlgoritmo(AlgoritmoProbabilidades _algoritmo) {
@@ -49,63 +53,48 @@ public class CasaDeApuestas extends Interesado{
 			}
 			
 			public  List<User> getUsuarios(){
+				
 				return usuarios;
 			}
 
 			public void agregarEvento(EventoDeportivo _evento) {
-				eventosHistoricos.add(_evento);
+				this.eventos.add(_evento);
 			}
 			
 			public  List<EventoDeportivo> getEventosDeportivos(){
-				return eventosHistoricos;
-			}
-
-			public void crearUsuario(String _mail){
-				int idCorrespondiente = this.cantidadDeUsuarios() + 1;
-				Usuario nuevoUser = new User(idCorrespondiente, _mail);
-				this.agregarUsuario(nuevoUser);
-			}		
-
-			private int cantidadDeUsuarios(){
-				return usuarios.size();
-			}
-
-			public void crearApuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado,  TipoApuesta tipo, User _usuario){
-				Apuesta nuevaApuesta = new Apuesta (_monto, evento, _resultado, _tipo);
-				_usuario.agregarNuevaApuesta(nuevaApuesta);
+				return this.eventos;
+				
 			}
 			
-			/*
-			public void notificarBalanceUsuarios() {
-				Integer month = new Integer(this.numeroDelMes());
-				
-				for(User user : usuarios) {									//No tiene que retornar un Float sino un bigdecimal
-					notifier.notifyBalance(user, month, user.gananciasBrutas(month));
+		
+			public void notificarBalanceUsuarios(int unMes) {
+				for(User user : this.usuarios) {									
+					notifier.notifyBalance(user, unMes, user.gananciasBrutas(unMes));
 				}
 			}
 			
-			public void notificarBalanceAlMail() {
-			
-			for(Usuario user : usuarios){
-														//Falta implementar					//No tiene que retornar un Float sino un bigdecimal
-				emailBalanceNotifier.emailBalance(user,userEmail(), month, user.gananciasBrutas(month))
-			}
-			}*/
+		
 
 			public List<EventoDeportivo> getEventosFinalizados(){
-				//List<EventoDeportivo> list = newArra seguir		
-				return eventosHistoricos;
+				List<EventoDeportivo> eventosFinalizados = new ArrayList<EventoDeportivo>();
+				for (EventoDeportivo ev: this.eventos) {
+					if (ev.estaFinalizado()) {
+						eventosFinalizados.add(ev);
+						
+					}
+					
+				}
+				
+				return eventosFinalizados;
 			}
-			
-
 		
 
 			public Float calcularProbabilidadGanador(Oponente oponente1, Oponente oponente2) {
-				return this.algoritmo.calcularProbabilidad(this.eventosHistoricos, oponente1, oponente2);
+				return this.algoritmo.calcularProbabilidad(this.eventos, oponente1, oponente2);
 			}
 			
 			public Float calcularProbabilidadEmpate(Oponente oponente1, Oponente oponente2) {
-				return this.algoritmo.calcularProbabilidadEmpate(this.eventosHistoricos, oponente1, oponente2);
+				return this.algoritmo.calcularProbabilidadEmpate(this.eventos, oponente1, oponente2);
 			}
 		 
 			@Override
