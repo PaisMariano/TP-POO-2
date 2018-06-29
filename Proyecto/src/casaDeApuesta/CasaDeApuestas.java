@@ -53,7 +53,6 @@ public class CasaDeApuestas extends Interesado{
 			}
 			
 			public  List<User> getUsuarios(){
-				
 				return usuarios;
 			}
 
@@ -62,29 +61,22 @@ public class CasaDeApuestas extends Interesado{
 			}
 			
 			public  List<EventoDeportivo> getEventosDeportivos(){
-				return this.eventos;
-				
+				return this.eventos;	
 			}
 			
-		
 			public void notificarBalanceUsuarios(int unMes) {
 				for(User user : this.usuarios) {									
 					notifier.notifyBalance(user, unMes, user.gananciasBrutas(unMes));
 				}
 			}
-			
-		
 
 			public List<EventoDeportivo> getEventosFinalizados(){
 				List<EventoDeportivo> eventosFinalizados = new ArrayList<EventoDeportivo>();
 				for (EventoDeportivo ev: this.eventos) {
 					if (ev.estaFinalizado()) {
-						eventosFinalizados.add(ev);
-						
-					}
-					
-				}
-				
+						eventosFinalizados.add(ev);	
+					}	
+				}	
 				return eventosFinalizados;
 			}
 		
@@ -97,27 +89,8 @@ public class CasaDeApuestas extends Interesado{
 				return this.algoritmo.calcularProbabilidadEmpate(this.eventos, oponente1, oponente2);
 			}
 
-			private void notificarALosUsuarosQueLeInterese(Interesante eventoDeInteres) {
-				for(User usuario : this.usuariosQueLeInteresan(eventoDeInteres)) {
-					usuario.cambio(eventoDeInteres);
-				}
-			}
-
-			private List<User> usuariosQueLeInteresan(Interesante eventoDeInteres) {
-				List<User> resultado = new ArrayList <User>();
-				for(User _user: usuarios) {
-					if(_user.leInteresa(eventoDeInteres)) {
-						resultado.add(_user);
-					}
-				}
-				return resultado;
-
-			}
-
 			@Override
 			public boolean leInteresa(Interesante eventoDeInteres) {
 				return eventoDeInteres.haComenzado();
 			}
-			
-			
 }

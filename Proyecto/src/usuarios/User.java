@@ -10,7 +10,6 @@ import apuesta.Apuesta;
 import casaDeApuesta.CasaDeApuestas;
 
 public class User extends Interesado{
-	int id;
 	private List<Apuesta> apuestas;
 	private String mail;
 	
@@ -59,11 +58,6 @@ public class User extends Interesado{
 				return apuestas;	
 			}
 	
-			@Override
-			public void cambio(Interesante eventoDeInteres) {
-				//No queda claro que hace
-			}
-	
 			public boolean leInteresa(Interesante eventoDeInteres) {
 				return this.apostoAEsteEvento(eventoDeInteres);
 			}
@@ -74,14 +68,13 @@ public class User extends Interesado{
 					listaDePartidosApostados.add(_apuesta.getEventoDeInteres());
 				}
 				return listaDePartidosApostados.contains(eventoDeInteres);
-			}
+			} 
 	
 			public String getMail() {
 				return mail;
 			}
 
 			public BigDecimal gananciasBrutas(int unMes) {
-				// TODO Auto-generated method stub
 				return null;
 			}		
 }
