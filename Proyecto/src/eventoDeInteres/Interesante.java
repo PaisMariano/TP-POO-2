@@ -1,4 +1,4 @@
-package EventoDeInteres;
+package eventoDeInteres;
 
 import java.util.ArrayList;
 import java.util.List;

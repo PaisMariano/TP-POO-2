@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList; 
 import java.util.List;
 
-import EventoDeInteres.Interesante;
-import EventoDeInteres.Interesado;
 import apuesta.Apuesta;
 import casaDeApuesta.CasaDeApuestas;
+import eventoDeInteres.Interesado;
+import eventoDeInteres.Interesante;
 
 public class User extends Interesado{
 	private List<Apuesta> apuestas;
