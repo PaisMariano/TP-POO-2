@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import EventoDeInteres.Interesante;
-import EventoDeInteres.Interesado;
 import usuarios.User;
 import algoritmo.*;
 import apuesta.Apuesta;
 import apuesta.TipoApuesta;
+import eventoDeInteres.Interesado;
+import eventoDeInteres.Interesante;
 import eventoDeportivo.*;
 import notifier.*;
 import oponentes.*;

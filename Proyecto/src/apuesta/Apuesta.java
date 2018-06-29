@@ -2,8 +2,8 @@ package apuesta;
 
 import java.math.BigDecimal;
 
-import EventoDeInteres.Interesante;
 import estado.*;
+import eventoDeInteres.Interesante;
 import eventoDeportivo.*;
 import resultados.*;
 

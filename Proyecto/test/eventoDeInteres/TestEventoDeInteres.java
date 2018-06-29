@@ -1,4 +1,4 @@
-package EventoDeInteres;
+package eventoDeInteres;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import casaDeApuesta.CasaDeApuestas;
+import eventoDeInteres.Interesado;
+import eventoDeInteres.Interesante;
 import eventoDeportivo.Deporte;
 import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
@@ -43,13 +45,13 @@ public class TestEventoDeInteres {
 			eventoSUT.agregarInteresado(spyUsuario);
 			eventoSUT.agregarInteresado(spyCasa);
 			
-			eventoSUT.cambie();
+			eventoSUT.notificarCambio();
 		}
 	
 		@Test
 		public void testAlSerModificadoSusInteresadosSonAvisadosDelCambio() {
-			verify(spyUsuario).cambio(eventoSUT);
-			verify(spyCasa).cambio(eventoSUT);
+			verify(spyUsuario).recibirCambio(eventoSUT);
+			verify(spyCasa).recibirCambio(eventoSUT);
 		}
 		
 		public void testSeAgreganLosInteresados() {
