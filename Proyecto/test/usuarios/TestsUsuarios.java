@@ -4,6 +4,7 @@ import usuarios.User;
 import apuesta.Apuesta;
 import eventoDeportivo.EventoDeportivo;
 
+import java.math.BigDecimal;
 import org.junit.Before; 
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -17,7 +18,7 @@ import usuarios.*;
 
 public class TestsUsuarios{
 	
- 		Apuesta apuestaMock;
+ 		Apuesta apuestaMockEnero,apuestaMockJunio;
  		EventoDeportivo eventoDeportivoMock,resultado1;
  		User usuario1;
  	
@@ -25,7 +26,8 @@ public class TestsUsuarios{
 		public	void setUp() throws Exception {
 		
 		eventoDeportivoMock= mock(EventoDeportivo.class);
-		apuestaMock = mock(Apuesta.class);
+		apuestaMockEnero = mock(Apuesta.class);
+		apuestaMockJunio = mock(Apuesta.class);
 		usuario1 = new User("pepe@gmail.com"); 
 		
  		}
@@ -36,22 +38,41 @@ public class TestsUsuarios{
  		
  		assertTrue(usuario1.apuestasPropias().isEmpty());
  		
- 		usuario1.agregarNuevaApuesta(apuestaMock);
+ 		usuario1.agregarNuevaApuesta(apuestaMockEnero);
  		assertEquals(usuario1.apuestasPropias().size(),1);
  				
- 		
  	}
  	
  		
 	@Test
-	public	void testLasGanaciasNetasSeDeterminanSegunElMes(){
+	public	void testLasGanaciasNetasYBrutasSeDeterminanSegunElMes(){
+		
 
-		usuario1.agregarNuevaApuesta(apuestaDummy);
-		apuestaDummy.
-		when(tipoDeApuestaMock.resultado()).thenReturn(Ganador); //o su paralelo
-		assertEquals(gananciaNeta(CasaDeApuestas _casa))
+		usuario1.agregarNuevaApuesta(apuestaMockJunio);
+		usuario1.agregarNuevaApuesta(apuestaMockEnero);
+		when(apuestaMockEnero.esApuestaDelMes(1)).thenReturn(true);
+		when(apuestaMockJunio.esApuestaDelMes(1)).thenReturn(false); //o su paralelo
+		when((apuestaMockEnero).gananciaBruta()).thenReturn(new BigDecimal(100));
+		
+		usuario1.gananciaBruta(1);
+		
+		verify(apuestaMockEnero).gananciaBruta();
+		verify(apuestaMockJunio,never()).gananciaBruta();
+				
+		
+		when((apuestaMockEnero).gananciaNeta()).thenReturn(new BigDecimal(100));
+		usuario1.gananciaNeta(1);
+		
+		verify(apuestaMockEnero).gananciaNeta();
+		verify(apuestaMockJunio,never()).gananciaNeta();
+				
+		
+		
+		
 	}
 	
+	
+	/*
 	@Test
 	public	void testUsuarioHaceUnaApuestaYNoTieneTieneGanacia() {
 		
