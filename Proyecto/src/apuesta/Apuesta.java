@@ -43,7 +43,7 @@ public  class Apuesta {
 			return eventoDeportivo.empezoEvento();
 		}
 		
-		public BigDecimal gananciaBruta() {
+		public BigDecimal gananciagananciaBruta() {
 			return tipo.gananciaBruta(this);
 		}
 		
@@ -55,8 +55,8 @@ public  class Apuesta {
 			return resultadoApostado;
 		}
 
-		public BigDecimal gananciaNeta() { //X q esto devuelve la ganancia Bruta
-			return this.gananciaBruta();
+		public BigDecimal gananciaNeta() { //X q esto devuelve la ganancia gananciaBruta
+			return this.gananciagananciaBruta();
 		}
 		
 		public void cancelar() {
@@ -79,7 +79,7 @@ public  class Apuesta {
 			this.setTipo(new Segura());
 		}
 
-		public BigDecimal bruta(){
+		public BigDecimal gananciaBruta(){
 			return new BigDecimal(this.cuotaConvenida() - this.monto());
 		}
 
@@ -130,10 +130,14 @@ public  class Apuesta {
 			return eventoDeportivo;
 		}
 
+		
 		public boolean esApuestaDelMes(int unMes) {
 			
 			
 			return this.eventoDeportivo.estaFinalizado() && this.eventoDeportivo.esDelMes(unMes); 
 		}
+		
+		
+		
 
 }

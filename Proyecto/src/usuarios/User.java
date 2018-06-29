@@ -42,9 +42,9 @@ public class User extends Interesado{
 				return apuestasDelMes;
 			}
 
-			public BigDecimal gananciaNeta() {
+			public BigDecimal gananciaNeta(int unMes) {
 				BigDecimal total = new BigDecimal(0); 
-				for(Apuesta apuesta : apuestas) {
+				for(Apuesta apuesta : this.apuestasDelMes(unMes)) {
 					total.add(apuesta.gananciaNeta());
 				}
 				return total;
@@ -74,7 +74,4 @@ public class User extends Interesado{
 				return mail;
 			}
 
-			public BigDecimal gananciasBrutas(int unMes) {
-				return null;
-			}		
 }

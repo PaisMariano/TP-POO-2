@@ -32,6 +32,6 @@ public class Segura implements TipoApuesta {
 	
 		@Override
 		public BigDecimal gananciaBruta(Apuesta _apuesta) {
-			return _apuesta.bruta().multiply(new BigDecimal(this.descuento())) ;
+			return _apuesta.gananciaBruta().multiply(new BigDecimal(this.descuento())) ;
 		} 
 }

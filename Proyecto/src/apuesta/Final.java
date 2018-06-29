@@ -16,7 +16,7 @@ public class Final implements TipoApuesta {
 
 	@Override
 	public BigDecimal gananciaBruta(Apuesta _apuesta) {
-		return _apuesta.bruta(); 
+		return _apuesta.gananciaBruta(); 
 	}
 
 }
