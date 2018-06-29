@@ -72,9 +72,5 @@ public class User extends Interesado{
 	
 			public String getMail() {
 				return mail;
-			}
-
-			public BigDecimal gananciasBrutas(int unMes) {
-				return null;
-			}		
+			}	
 }

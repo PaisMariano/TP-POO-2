@@ -27,8 +27,6 @@ public class TestsUsuarios{
 		eventoDeportivoMock= mock(EventoDeportivo.class);
 		apuestaMock = mock(Apuesta.class);
 		usuario1 = new User("pepe@gmail.com"); 
-
-
 		
  		}
  		
