@@ -17,7 +17,7 @@ public class TestInteresado {
 	
 		@Before
 		public void setUp() {
-			interesadoUserSUT = new User(1,"pepe");
+			interesadoUserSUT = new User("pepe");
 			interesadoCasaSUT = new CasaDeApuestas();
 			spyEvento = spy(Interesante.class);
 		}

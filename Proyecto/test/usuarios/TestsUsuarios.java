@@ -1,6 +1,9 @@
 package usuarios;
 
+import usuarios.User;
 import apuesta.Apuesta;
+import eventoDeportivo.EventoDeportivo;
+
 import org.junit.Before; 
 import org.junit.Test;
 import org.mockito.InOrder;
@@ -13,27 +16,37 @@ import java.util.Date;
 import usuarios.*;
 
 public class TestsUsuarios{
-	/*
- 	@Before
- 		
-
+	
+ 		Apuesta apuestaMock;
+ 		EventoDeportivo eventoDeportivoMock,resultado1;
+ 		User usuario1;
+ 	
+ 		@Before
 		public	void setUp() throws Exception {
 		
 		eventoDeportivoMock= mock(EventoDeportivo.class);
-		EstadoEventoDeportivo resultado1 = mock(EstadoEventoDeportivo.class);//ver como poner el tema de los resultados
-		tipoDeApuestaMock= mock(Apuesta.class);
-		usuario1= new User();
-		apuesta1= new Apuesta(unMonto, eventoDeportivo1, resultado1,tipoDeApuesta);
-		tipoDeApuestaMock= mock(Final.class);
-		usuario1= mock(User.class);
-		unMonto = (float)400 ;
-		eventoDeportivo1= mock(EventoDeportivo.class);
-		resultadoMock = mock(Resultado.class);
-		casaMock= mock(CasaDeApuestas.class);
-		apuestaMock= mock(Apuesta.class);
+		apuestaMock = mock(Apuesta.class);
+		usuario1 = new User("pepe@gmail.com"); 
 
-	@Test//la idea es que ante una apuesta ganadora se sepa la ganacia neta.hay que ver como se toma el resultado. se tiene que poner 
-	public	void testunUsuarioHaceUnaApuestaGanadoraYTieneGananciaNetaYBruta(){
+
+		
+ 		}
+ 		
+ 		
+ 	@Test
+ 	public void testSeAgregaUnaApuestaAlUsuarioYSeIncrementanLasPropias() {
+ 		
+ 		assertTrue(usuario1.apuestasPropias().isEmpty());
+ 		
+ 		usuario1.agregarNuevaApuesta(apuestaMock);
+ 		assertEquals(usuario1.apuestasPropias().size(),1);
+ 				
+ 		
+ 	}
+ 	
+ 		
+	@Test
+	public	void testLasGanaciasNetasSeDeterminanSegunElMes(){
 
 		usuario1.agregarNuevaApuesta(apuestaDummy);
 		apuestaDummy.
@@ -44,6 +57,6 @@ public class TestsUsuarios{
 	@Test
 	public	void testUsuarioHaceUnaApuestaYNoTieneTieneGanacia() {
 		
-		
-	}*/
+	}
+ 		*/
 }

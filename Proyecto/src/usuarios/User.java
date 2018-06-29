@@ -15,14 +15,8 @@ public class User extends Interesado{
 	private String mail;
 	
 		public User(String _mail){
-			
 			this.setMail(_mail);
 			apuestas = new ArrayList<Apuesta>(0);
-		}
-		
-		public User(String _mail, List<Apuesta> _apuestas){
-			this.setMail(_mail);
-			apuestas = _apuestas;
 		}
 		
 			public void setMail(String _mail) {
