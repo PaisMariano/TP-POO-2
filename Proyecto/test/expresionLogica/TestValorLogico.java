@@ -39,5 +39,4 @@ public class TestValorLogico {
 			valorSUT.getValor(dummyList);
 			verify(spyCriterio).buscarEn(dummyList);
 		}
-
 }

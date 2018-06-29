@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import casaDeApuesta.CasaDeApuestas;
 import criterio.CriterioDeBusqueda;
 import criterio.CriterioPorDeporte;
 import criterio.CriterioPorFecha;
@@ -24,7 +25,7 @@ import oponentes.Oponente;
 public class TestAND {
 	private OperacionLogica andSUT;
 	private ExpresionLogica stubExpresionIzq, stubExpresionDer;
-	private EventoDeportivo stubEventoDeportivo0, stubEventoDeportivo1, stubEventoDeportivo2, stubEventoDeportivo3, eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3; 
+	private EventoDeportivo eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3; 
 	private List<EventoDeportivo> eventos, eventosConcretos, resultadoAND;
 	private ExpresionLogica expresionNoSeCumple, expresionLogicaSimple0, expresionLogicaSimple1, expresionLogicaSimple2, expresionLogicaSimple3, expresionLogicaCompleja0, expresionLogicaCompleja1, expresionLogicaCompleja2, expresionLogicaCompleja3;
 	private CriterioDeBusqueda criterioDeporte, criterioOponente, criterioFecha, criterioLugar, criterioNoSeCumple;
@@ -32,7 +33,7 @@ public class TestAND {
 	private String dummyLugar, lugar;
 	private Deporte deporte, otroDeporte;
 	private Oponente oponente0, oponente1, oponente2, oponenteNoJuega;
-	
+	private CasaDeApuestas dummyCasa;
 		@Before
 			public void setUp() {
 			
@@ -46,10 +47,6 @@ public class TestAND {
 				stubExpresionDer = mock(ExpresionLogica.class);
 				
 				eventos = new ArrayList<EventoDeportivo>();
-				
-				stubEventoDeportivo0 = mock(EventoDeportivo.class);
-				stubEventoDeportivo1 = mock(EventoDeportivo.class);
-				stubEventoDeportivo2 = mock(EventoDeportivo.class);
 				
 				deporte = new Deporte("Boxeo");
 				otroDeporte = new Deporte("Esgrima"); 
@@ -66,6 +63,8 @@ public class TestAND {
 				criterioFecha = new CriterioPorFecha(fecha);
 				criterioNoSeCumple = new CriterioPorOponente(oponenteNoJuega);
 				
+				dummyCasa = mock(CasaDeApuestas.class); 
+				
 				//Entendiendo los criterios como las expresiones logicas simples...
 				expresionLogicaSimple0 = new ValorLogico(criterioDeporte); 
 				expresionLogicaSimple1 = new ValorLogico(criterioOponente);
@@ -81,18 +80,13 @@ public class TestAND {
 				
 				eventosConcretos = new ArrayList<EventoDeportivo>();
 				
-				eventoDeportivo0 = new EventoDeportivo(deporte, oponente0, oponente1, dummyFecha, dummyLugar);
-				eventoDeportivo1 = new EventoDeportivo(deporte, oponente1, oponente1, dummyFecha, dummyLugar);
-				eventoDeportivo2 = new EventoDeportivo(otroDeporte, oponenteNoJuega, oponente1, fecha, lugar);
-				eventoDeportivo3 = new EventoDeportivo(otroDeporte, oponenteNoJuega, oponente2, fecha, lugar);
+				eventoDeportivo0 = new EventoDeportivo(dummyCasa, deporte, oponente0, oponente1, dummyFecha, dummyLugar);
+				eventoDeportivo1 = new EventoDeportivo(dummyCasa, deporte, oponente1, oponente1, dummyFecha, dummyLugar);
+				eventoDeportivo2 = new EventoDeportivo(dummyCasa, otroDeporte, oponenteNoJuega, oponente1, fecha, lugar);
+				eventoDeportivo3 = new EventoDeportivo(dummyCasa, otroDeporte, oponenteNoJuega, oponente2, fecha, lugar);
 				andSUT = new AND(stubExpresionIzq, stubExpresionDer);
 				//Caso que se desea testear finalmente: andSUT = new AND(expresionLogicaCompleja2, expresionLogicaCompleja3);
 				
-				eventos.add(stubEventoDeportivo0);
-				eventos.add(stubEventoDeportivo1);
-				eventos.add(stubEventoDeportivo2);
-				eventos.add(stubEventoDeportivo3);
-
 				eventosConcretos.add(eventoDeportivo0);
 				eventosConcretos.add(eventoDeportivo1);
 				eventosConcretos.add(eventoDeportivo2);
@@ -155,7 +149,7 @@ public class TestAND {
 			
 			@Test
 			public void testAlUnirUNaBusquedaEnLaListaDeEventosConcretosExpresionesComplejasQUeTerminanCumpliendosePorUnSoloPartido() {
-				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
+				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(dummyCasa, deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
 				andSUT.setExpresionIzquierda(expresionLogicaCompleja0);
 				andSUT.setExpresionDerecha(expresionLogicaCompleja1);
 				
@@ -167,7 +161,7 @@ public class TestAND {
 			
 			@Test
 			public void testAlUnirUNaBusquedaEnLaListaDeEventosConcretosExpresionesComplejasQUeTerminanCumpliendosePorUnDeterminadoPartido() {
-				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
+				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(dummyCasa, deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
 				andSUT.setExpresionIzquierda(expresionLogicaCompleja0);
 				andSUT.setExpresionDerecha(expresionLogicaCompleja1);
 				

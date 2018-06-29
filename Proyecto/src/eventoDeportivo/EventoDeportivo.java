@@ -4,12 +4,13 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import EventoDeInteres.Interesante;
 import casaDeApuesta.*;
 import estado.*;
 import oponentes.*;
 import resultados.*;
 
-public class EventoDeportivo {
+public class EventoDeportivo extends Interesante {
 	
 	Deporte deporte;
 	List<Oponente> oponentes;
@@ -22,8 +23,7 @@ public class EventoDeportivo {
 	private float cuotaEmpate;
 
 
-		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2,Date unaFechaYHora,String unLugar) {
-
+		public EventoDeportivo(CasaDeApuestas unaCasaDeApuestas,Deporte _deporte, Oponente oponente1, Oponente oponente2,Date unaFechaYHora,String unLugar) {
 			deporte = _deporte;
 			oponentes = new ArrayList<Oponente>(2);
 			this.setOponentes(oponente1, oponente2);
@@ -31,6 +31,9 @@ public class EventoDeportivo {
 			resultado = new Empate(); 
 			fechaYHora= unaFechaYHora;
 			lugar= unLugar;
+			cuotaGanador1 = this.calcularCuota(unaCasaDeApuestas.calcularProbabilidadGanador(oponente1, oponente2));
+			cuotaGanador2 = this.calcularCuota(unaCasaDeApuestas.calcularProbabilidadGanador(oponente2, oponente1));
+			cuotaEmpate   = this.calcularCuota(unaCasaDeApuestas.calcularProbabilidadEmpate(oponente1, oponente2));
 		}
 
 			private void setOponentes(Oponente _oponente1, Oponente _oponente2) {
@@ -56,23 +59,11 @@ public class EventoDeportivo {
 
 			public void setResultado(Resultado _resultado){
 				resultado = _resultado;
+				this.cambie();
 			}
 			
-			public void calcularCuotaOponente1(Float _probabilidad){
-			
-				this.cuotaGanador1 = 1 + (1 - _probabilidad);
-			
-			}
-			
-			public void calcularCuotaOponente2(Float _probabilidad){
-				
-				this.cuotaGanador2 = 1 + (1 - _probabilidad);
-				
-			}
-			
-			public void calcularCuotaEmpate(Float _probabilidad){
-				
-				this.cuotaEmpate   = 1 + (1 - _probabilidad);
+			public Float calcularCuota(Float _probabilidad){
+				return 1 + (1 - _probabilidad);
 			}
 						
 			public float getCuotaOponente1() {
@@ -100,6 +91,7 @@ public class EventoDeportivo {
 			}
 			public void  setEstado(EstadoEventoDeportivo _estado){
 				this.estado = _estado;
+				this.cambie();
 			}
 		
 			
@@ -108,7 +100,7 @@ public class EventoDeportivo {
 			}
 
 			public Oponente getGanador(){
-				return resultado.getGanador();
+				return resultado.getApostado();
 			}
 
 			public boolean esDeDeporte(Deporte deporteDeInteres) {
@@ -122,12 +114,11 @@ public class EventoDeportivo {
 			public boolean sucedioEn(Date fechaInteres) {
 				return fechaInteres.getYear() == fechaYHora.getYear() &&
 						fechaInteres.getMonth() == fechaYHora.getMonth() &&
-						 fechaInteres.getDay() == fechaYHora.getDay() 
-						 //&&
-						  //fechaInteres.getHours() == fechaYHora.getHours() &&
-						   //fechaInteres.getMinutes() == fechaYHora.getMinutes() &&
-							//fechaInteres.getSeconds() == fechaYHora.getSeconds()
-						 ;
+						 fechaInteres.getDay() == fechaYHora.getDay();
+			}
+
+			public List<Oponente> getOponentes() {
+				return this.oponentes;
 			}
 
 }

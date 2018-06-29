@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import apuesta.Apuesta;
+import casaDeApuesta.CasaDeApuestas;
 import eventoDeportivo.EventoDeportivo;
 import oponentes.Equipo;
 import resultados.Empate;
@@ -20,7 +21,7 @@ import static org.mockito.Mockito.*;
 
 import java.sql.Date;
 
-public class TestEventosDeportivo {
+public class TestEventoDeportivo {
 
 	private Deporte unDeporte;
 	private EventoDeportivo unEventoDeportivo, mockEventoDeportivo;
@@ -31,7 +32,7 @@ public class TestEventosDeportivo {
 	private Empate unEstadoEmpatado;
 	private Ganado unEstadoGanado1;
 	private EstadoEventoDeportivo estadoFinalizado;
-	
+	private CasaDeApuestas dummyCasa;
 	@Before
 	public void setUp(){
 		fechaYHora = new Date(2,2,2);
@@ -42,7 +43,7 @@ public class TestEventosDeportivo {
 		unEstadoEmpatado=new Empate();
 		unEstadoGanado1=new Ganado(chacarita);
 		
-		unEventoDeportivo= new EventoDeportivo(unDeporte, river, boca, fechaYHora, "Francia");
+		unEventoDeportivo= new EventoDeportivo(dummyCasa, unDeporte, river, boca, fechaYHora, "Francia");
 		mockEventoDeportivo=mock(EventoDeportivo.class);
 		estadoFinalizado= new Finalizado();
 	}	
@@ -78,7 +79,7 @@ public class TestEventosDeportivo {
 
 		 Float[] probabilidades = {new Float(0.7),new Float(0.2),new Float(0.1)};
 		 
-		 unEventoDeportivo.calcularCuotas(probabilidades);
+		// unEventoDeportivo.calcularCuotas(probabilidades);
 		 assertEquals(unEventoDeportivo.getCuotaOponente1(),(float) 1,3);
 		 assertEquals(unEventoDeportivo.getCuotaOponente2(),(float)1,8);
 		 assertEquals( unEventoDeportivo.getCuotaEmpate(),(float)1,9);		

@@ -1,15 +1,12 @@
 package resultados;
 
+import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente;
 
 public abstract class Resultado{
-	
-	protected Oponente ganador;
-	
-		public Resultado(Oponente _ganador) {
-			ganador = _ganador;
-		}
-	
-		public abstract Oponente getGanador();
+		
+		public abstract Oponente getApostado();
+		
+		public abstract Float getCuotaApuesta(EventoDeportivo _evento, Resultado _resultadoApostado);
 
 }

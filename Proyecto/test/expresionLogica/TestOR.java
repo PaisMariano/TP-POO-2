@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import casaDeApuesta.CasaDeApuestas;
 import criterio.CriterioDeBusqueda;
 import criterio.CriterioPorDeporte;
 import criterio.CriterioPorFecha;
@@ -24,7 +25,7 @@ import oponentes.Oponente;
 public class TestOR {
 	private OperacionLogica orSUT;
 	private ExpresionLogica stubExpresionIzq, stubExpresionDer;
-	private EventoDeportivo stubEventoDeportivo0, stubEventoDeportivo1, stubEventoDeportivo2, stubEventoDeportivo3, eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3; 
+	private EventoDeportivo eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3; 
 	private List<EventoDeportivo> eventos, eventosConcretos, resultadoor;
 	private ExpresionLogica expresionNoSeCumple, expresionLogicaSimple0, expresionLogicaSimple1, expresionLogicaSimple2, expresionLogicaSimple3, expresionLogicaCompleja0, expresionLogicaCompleja1, expresionLogicaCompleja2, expresionLogicaCompleja3;
 	private CriterioDeBusqueda criterioDeporte, criterioOponente, criterioFecha, criterioLugar, criterioNoSeCumple;
@@ -32,6 +33,7 @@ public class TestOR {
 	private String dummyLugar, lugar;
 	private Deporte deporte, otroDeporte;
 	private Oponente oponente0, oponente1, oponente2, oponenteNoJuega;
+	private CasaDeApuestas dummyCasa;
 	
 		@Before
 			public void setUp() {
@@ -46,10 +48,6 @@ public class TestOR {
 				stubExpresionDer = mock(ExpresionLogica.class);
 				
 				eventos = new ArrayList<EventoDeportivo>();
-				
-				stubEventoDeportivo0 = mock(EventoDeportivo.class);
-				stubEventoDeportivo1 = mock(EventoDeportivo.class);
-				stubEventoDeportivo2 = mock(EventoDeportivo.class);
 				
 				deporte = new Deporte("Boxeo");
 				otroDeporte = new Deporte("Esgrima"); 
@@ -66,6 +64,8 @@ public class TestOR {
 				criterioFecha = new CriterioPorFecha(fecha);
 				criterioNoSeCumple = new CriterioPorOponente(oponenteNoJuega);
 				
+				dummyCasa = mock(CasaDeApuestas.class);
+				
 				//Entendiendo los criterios como las expresiones logicas simples...
 				expresionLogicaSimple0 = new ValorLogico(criterioDeporte); 
 				expresionLogicaSimple1 = new ValorLogico(criterioOponente);
@@ -74,24 +74,19 @@ public class TestOR {
 				expresionNoSeCumple = new ValorLogico(criterioNoSeCumple);
 				
 				//... Y las complejas como la union, mediante una operacion logica de otras expresiones, ya sea que estan sean simples o complejas.
-				expresionLogicaCompleja0 = new OR (expresionLogicaSimple0, expresionLogicaSimple1);
-				expresionLogicaCompleja1 =new OR (expresionLogicaSimple2, expresionLogicaSimple3);
-				expresionLogicaCompleja2 = new OR(expresionLogicaSimple0, expresionLogicaSimple2);
-				expresionLogicaCompleja3 = new AND(expresionLogicaCompleja2, expresionLogicaCompleja1);
+				expresionLogicaCompleja0 = new OR (expresionLogicaSimple0, expresionLogicaSimple2);
+				expresionLogicaCompleja1 =new OR (expresionLogicaSimple1, expresionLogicaSimple3);
+				expresionLogicaCompleja2 = new AND(expresionLogicaSimple0, expresionLogicaSimple2);
+				expresionLogicaCompleja3 = new OR(expresionLogicaCompleja2, expresionLogicaCompleja1);
 				
 				eventosConcretos = new ArrayList<EventoDeportivo>();
 				
-				eventoDeportivo0 = new EventoDeportivo(deporte, oponente0, oponente1, dummyFecha, dummyLugar);
-				eventoDeportivo1 = new EventoDeportivo(deporte, oponente1, oponente1, dummyFecha, dummyLugar);
-				eventoDeportivo2 = new EventoDeportivo(otroDeporte, oponenteNoJuega, oponente1, fecha, lugar);
-				eventoDeportivo3 = new EventoDeportivo(otroDeporte, oponenteNoJuega, oponente2, fecha, lugar);
+				eventoDeportivo0 = new EventoDeportivo(dummyCasa, deporte, oponente0, oponente1, dummyFecha, dummyLugar);
+				eventoDeportivo1 = new EventoDeportivo(dummyCasa,deporte, oponente1, oponente1, dummyFecha, dummyLugar);
+				eventoDeportivo2 = new EventoDeportivo(dummyCasa, otroDeporte, oponenteNoJuega, oponente1, fecha, lugar);
+				eventoDeportivo3 = new EventoDeportivo(dummyCasa, otroDeporte, oponenteNoJuega, oponente2, fecha, lugar);
 				orSUT = new OR(stubExpresionIzq, stubExpresionDer);
 				//Caso que se desea testear finalmente: orSUT = new or(expresionLogicaCompleja2, expresionLogicaCompleja3);
-				
-				eventos.add(stubEventoDeportivo0);
-				eventos.add(stubEventoDeportivo1);
-				eventos.add(stubEventoDeportivo2);
-				eventos.add(stubEventoDeportivo3);
 
 				eventosConcretos.add(eventoDeportivo0);
 				eventosConcretos.add(eventoDeportivo1);
@@ -150,24 +145,24 @@ public class TestOR {
 				orSUT.setExpresionDerecha(expresionLogicaCompleja1);
 				resultadoor = orSUT.getValor(eventosConcretos);
 				
-				assertEquals(3, resultadoor.size());				
+				assertEquals(4, resultadoor.size());				
 			}
 			
 			@Test
 			public void testAlUnirUNaBusquedaEnLaListaDeEventosConcretosExpresionesComplejasQUeTerminanCumpliendosePorTodosLosPartidos() {
-				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
+				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(dummyCasa, deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
 				orSUT.setExpresionIzquierda(expresionLogicaCompleja0);
 				orSUT.setExpresionDerecha(expresionLogicaCompleja1);
 				
 				eventosConcretos.add(eventoDeportivo4);
 				resultadoor = orSUT.getValor(eventosConcretos);
 				
-				assertEquals(4, resultadoor.size());				
+				assertEquals(5, resultadoor.size());				
 			}
 			
 			@Test
 			public void testAlUnirUNaBusquedaEnLaListaDeEventosConcretosExpresionesComplejasQUeTerminanCumpliendosePorUnDeterminadoPartido() {
-				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
+				EventoDeportivo eventoDeportivo4 = new EventoDeportivo(dummyCasa, deporte, oponente1, oponente0, fecha, lugar); //Unico Evento que cumple todos los criterios.
 				orSUT.setExpresionIzquierda(expresionLogicaCompleja0);
 				orSUT.setExpresionDerecha(expresionLogicaCompleja1);
 				
@@ -179,14 +174,12 @@ public class TestOR {
 			
 			@Test //Porqué esto no funciona?
 			public void testLaExpresionIzquierdaEnLaOperacionEsLaCorrecta() {
-				ExpresionLogica izq = orSUT.getExpresionIzquierda();
-				assertEquals(stubExpresionIzq, izq);
+				assertEquals(stubExpresionIzq, orSUT.getExpresionIzquierda());
 			}
 			
 			@Test
 			public void testLaExpresionDerechaEnLaOperacionEsLaCorrecta() {
-				ExpresionLogica der = orSUT.getExpresionDerecha();
-				assertEquals(stubExpresionDer, der);
+				assertEquals(stubExpresionDer, orSUT.getExpresionDerecha());
 			}
 			
 			@Test

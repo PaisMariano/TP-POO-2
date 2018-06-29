@@ -1,8 +1,10 @@
 package apuesta;
 
+import java.math.BigDecimal;
+
 public interface TipoApuesta {
 		
-		public abstract Float gananciaBruta(Apuesta _apuesta);
+		public abstract BigDecimal gananciaBruta(Apuesta _apuesta);
 
 		public abstract void cancelar(Apuesta _apuesta);
 

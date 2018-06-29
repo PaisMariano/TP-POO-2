@@ -11,9 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import algoritmo.AlgoritmoProbabilidades;
-import algoritmo.CompetenciaHistoricaReciente;
-import algoritmo.CompetenciaHistoricaDirecta;
+import algoritmo.*;
 import casaDeApuesta.CasaDeApuestas;
 import eventoDeportivo.Deporte;
 import eventoDeportivo.EventoDeportivo;
@@ -39,8 +37,8 @@ public class TestCasaDeApuestas {
 	
 	@Before
 	public void setUp() throws Exception {
-		usuarioMario =new User();
-		usuarioJuan = new User();
+		usuarioMario =new User(new String("Mario"));
+		usuarioJuan = new User(new String("Juan"));
 		
 		
 		User[] usuarios = new User[2];
@@ -64,11 +62,14 @@ public class TestCasaDeApuestas {
 }
 
 	@Test 
-  public void testSeCreaUnaCasaDeApuestasNueva() {
+  public void testSeAgregaUnaNuevaApuestasALaCasaDeApuestas() {
 		casaDeApuestas= new  CasaDeApuestas(usuarios,algoritmoHistorico,balanceMock,eventosEmpty);
 		
 		assertEquals(casaDeApuestas.getUsuarios(),usuarios);
 		assertEquals(casaDeApuestas.getEventosDeportivos(),eventosEmpty);
+		
+		
+		casaDeApuestas.
 		
 		
 	}
@@ -113,19 +114,17 @@ public class TestCasaDeApuestas {
 		
 		casaDeApuestas.agregarEvento(eventoDeportivoMock);
 		casaDeApuestas.agregarEvento(eventoDeportivoMock);		
-		casaDeApuestas.crearEventoDeportivo(oponenteDummy1, oponenteDummy2,tenis, fechaDummy, "ElDocke");
 		
 		EventoDeportivo ultimoEvento=casaDeApuestas.getEventosDeportivos().get(2);
-		EventoDeportivo eventOriginal= new EventoDeportivo(tenis,oponenteDummy1, oponenteDummy2, fechaDummy, "ElDocke");
-	
-		
-		casaDeApuestasMock.crearEventoDeportivo(oponenteDummy1, oponenteDummy2,deporteDummy,fechaDummy,"algunLugar");
+		EventoDeportivo eventOriginal= new EventoDeportivo(casaDeApuestas, tenis,oponenteDummy1, oponenteDummy2, fechaDummy, "ElDocke");
 		
 		assertEquals(casaDeApuestas.getEventosDeportivos().size(),3);
 		assertEquals("Tenis", (ultimoEvento.nombreDeporte()));
 		//no me deja comparar los dos objetos	assertEquals(eventOriginal,ultimoEvento);
 		//verify(casaDeApuestasMock).calcularProbabilidadesDe(casaDeApuestasMock.getEventosDeportivos(), oponenteDummy1, oponenteDummy2);
+
 		//verify((casaDeApuestas).calcularProbabilidadesDe((casaDeApuestasMock.getEventosDeportivos()),oponenteDummy1,oponenteDummy2));
+
 		// assertTrue(ultimoEvento==eventoOriginal);
 	}
 	
@@ -158,8 +157,6 @@ public class TestCasaDeApuestas {
 		assertEquals(probabilidadesFinal[2],new Float(0.1));
 		
 		//Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2)
-		
-		
 		
 	}
 

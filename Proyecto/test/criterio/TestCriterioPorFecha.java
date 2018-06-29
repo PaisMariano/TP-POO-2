@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import casaDeApuesta.CasaDeApuestas;
+
 import static org.mockito.Mockito.*;
 
 import eventoDeportivo.Deporte;
@@ -23,6 +26,7 @@ public class  TestCriterioPorFecha  {
 	private Oponente dummyOponente0;
 	private EventoDeportivo eventoDeportivo0, eventoDeportivo1, eventoDeportivo2, eventoDeportivo3, stubEventoDeportivo0, stubEventoDeportivo1, stubEventoDeportivo2, stubEventoDeportivo3;
 	private List<EventoDeportivo> eventos, eventosConcretos, partidosDeDia222;
+	private CasaDeApuestas dummyCasa;
 	
 		@Before
 		public void setUp() {
@@ -30,6 +34,8 @@ public class  TestCriterioPorFecha  {
 			fecha = new Date(2,2,2);
 			fechaCualquiera = new Date(4,4,4);
 			fechaNoSeCumple = new Date(6,6,6);
+			
+			dummyCasa = mock(CasaDeApuestas.class);
 			
 			dummyDeporte = mock(Deporte.class);
 			
@@ -49,10 +55,10 @@ public class  TestCriterioPorFecha  {
 			eventos.add(stubEventoDeportivo2);
 			eventos.add(stubEventoDeportivo3);
 			
-			eventoDeportivo0 = new EventoDeportivo(dummyDeporte, dummyOponente0, dummyOponente0, fecha, nada);
-			eventoDeportivo1 = new EventoDeportivo(dummyDeporte, dummyOponente0, dummyOponente0, fecha, nada);
-			eventoDeportivo2 = new EventoDeportivo(dummyDeporte, dummyOponente0, dummyOponente0, fechaCualquiera, nada);
-			eventoDeportivo3 = new EventoDeportivo(dummyDeporte, dummyOponente0, dummyOponente0, fechaCualquiera, nada);
+			eventoDeportivo0 = new EventoDeportivo(dummyCasa, dummyDeporte, dummyOponente0, dummyOponente0, fecha, nada);
+			eventoDeportivo1 = new EventoDeportivo(dummyCasa, dummyDeporte, dummyOponente0, dummyOponente0, fecha, nada);
+			eventoDeportivo2 = new EventoDeportivo(dummyCasa, dummyDeporte, dummyOponente0, dummyOponente0, fechaCualquiera, nada);
+			eventoDeportivo3 = new EventoDeportivo(dummyCasa, dummyDeporte, dummyOponente0, dummyOponente0, fechaCualquiera, nada);
 			
 			eventosConcretos = new ArrayList<EventoDeportivo>();
 			eventosConcretos.add(eventoDeportivo0);
@@ -130,23 +136,6 @@ public class  TestCriterioPorFecha  {
 			verify(stubEventoDeportivo0, times(1)).sucedioEn(fechaNoSeCumple);
 			verify(stubEventoDeportivo1, times(1)).sucedioEn(fechaNoSeCumple);
 			verify(stubEventoDeportivo2, times(1)).sucedioEn(fechaNoSeCumple);
-		}
-		
-		@Test //Ver
-		public void testBuscarEnDevuelveLosDosPartidosDeFutbol() {
-			List<EventoDeportivo> resultado = criterioSUT.buscarEn(eventos);
-			int cantidadDeResultado = resultado.size();
-			
-			when(stubEventoDeportivo0.sucedioEn(fecha)).thenReturn(true);
-			when(stubEventoDeportivo1.sucedioEn(fecha)).thenReturn(false);
-			when(stubEventoDeportivo2.sucedioEn(fecha)).thenReturn(false);
-			when(stubEventoDeportivo3.sucedioEn(fecha)).thenReturn(false);
-			
-			//assertEquals(1, cantidadDeResultado);
-			//assertTrue(resultado.contains(stubEventoDeportivo0));
-			//assertTrue(resultado.contains(stubEventoDeportivo1));
-			assertTrue(!resultado.contains(stubEventoDeportivo2));
-			assertTrue(!resultado.contains(stubEventoDeportivo3));
 		}
 		
 		@Test

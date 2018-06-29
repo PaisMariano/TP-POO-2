@@ -51,6 +51,5 @@ public class Equipo implements Oponente {
 	public Integer cantidadDeDeportistas() {
 		return plantel.size();
 	}
-
-	}
+}
 

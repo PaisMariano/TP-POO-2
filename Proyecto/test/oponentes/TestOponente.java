@@ -11,7 +11,6 @@ import java.util.Random;
 import java.util.Date;
 import usuarios.*;
 
-
 public class TestOponente {
 	Oponente oponente;
 	Deportista deportista1;
@@ -29,10 +28,8 @@ public class TestOponente {
 		deportistaDummy= mock(Deportista.class);
 		otroDeportistaDummy= mock(Deportista.class);
 		List<Deportista> depos= new ArrayList <Deportista>();
-		unEquipo = new Equipo(depos, "Equipo1");
-	
+		unEquipo = new Equipo(depos, "Equipo1");	
 	}
-	
 
 	@Test
 	public void testUnNuevoDeportistaCuentaConNombreFNacYDireccion() {
@@ -40,8 +37,7 @@ public class TestOponente {
 		assertEquals( deportista1.getLugarDeNacimiento(),"Adrogue");		
 		assertEquals(new Date(1,2,88), deportista1.getFnacimiento());
 		assertEquals(oponente.nombre(), "Maria Marta SerraLima");
-	
-		}
+	}
 	
 	@Test 
 	public void testSeAgreganJugadoresAlPlantel() {
@@ -51,10 +47,7 @@ public class TestOponente {
 		assertEquals("feo",eq1.nombre());
 		assertEquals((Integer)1, eq1.cantidadDeDeportistas());
 		verify (spyDeports).add(deportistaDummy);
-	
-		
 	}
-	
 	
 	@Test 
 	public void testSeIntecambiaUnDeportistaPorOtro(){
@@ -65,8 +58,7 @@ public class TestOponente {
 		otroEquipo.agregarDeportista(deportista1);
 		otroEquipo.cambiarDeportista(deportista1, deportista2);
 		verify(spyDeports).remove(deportista1);
-		verify(spyDeports).add(deportista2);
-		
+		verify(spyDeports).add(deportista2);	
 	}
 	
 	@Test 
@@ -79,7 +71,5 @@ public class TestOponente {
 		otroEquipo.sacarDeportista(deportista1);
 		
 		verify(spyDeports).remove(deportista1);
-		
 	}
-	
 }

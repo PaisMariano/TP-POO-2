@@ -7,20 +7,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import EventoDeInteres.Interesante;
+import EventoDeInteres.Interesado;
 import usuarios.User;
 import algoritmo.*;
-import emailNotifier.EmailBalanceNotifier;
 import eventoDeportivo.*;
-import notifier.BalanceNotifier;
-import notifier.TextMessageBalanceNotifier;
+import notifier.*;
 import oponentes.*;
 
-public class CasaDeApuestas {
+public class CasaDeApuestas extends Interesado{
 
 	private List<User> usuarios;
 	private AlgoritmoProbabilidades algoritmo; 
-	private BalanceNotifier textMessageBalanceNotifier;
-	private EmailBalanceNotifier emailBalanceNotifier;
+	private BalanceNotifier notifier;
 	private List<EventoDeportivo> eventosHistoricos;
 	
 		public CasaDeApuestas() {
@@ -28,8 +27,7 @@ public class CasaDeApuestas {
 			eventosHistoricos = new ArrayList<EventoDeportivo>();	
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
 			this.setNotifier(new TextMessageBalanceNotifier());
-			emailBalanceNotifier = new EmailBalanceNotifier();
-		}		
+		}
 		
 		public CasaDeApuestas(List<User> _usuarios, AlgoritmoProbabilidades _algoritmo,BalanceNotifier _notifier, List<EventoDeportivo> _historico) {
 			usuarios = _usuarios;
@@ -38,26 +36,22 @@ public class CasaDeApuestas {
 			eventosHistoricos = _historico;		
 		}
 		
-			//Flexibility
 			public void setAlgoritmo(AlgoritmoProbabilidades _algoritmo) {
 				algoritmo = _algoritmo;
 			}
 		
-			
-			//Flexibility
 			public void setNotifier(BalanceNotifier _notifier) {
-				textMessageBalanceNotifier = _notifier;
+				this.notifier = _notifier;
 			}
 
-			//Flexibility
-			public void agregarusuario(User _usuario) {
-				usuarios.add(_usuario);
+			public void agregarUsuario(User _usuario) {
+				this.usuarios.add(_usuario);
 			}
 			
 			public  List<User> getUsuarios(){
 				return usuarios;
 			}
-			//Flexibility
+
 			public void agregarEvento(EventoDeportivo _evento) {
 				eventosHistoricos.add(_evento);
 			}
@@ -65,13 +59,28 @@ public class CasaDeApuestas {
 			public  List<EventoDeportivo> getEventosDeportivos(){
 				return eventosHistoricos;
 			}
+
+			public void crearUsuario(String _mail){
+				int idCorrespondiente = this.cantidadDeUsuarios() + 1;
+				Usuario nuevoUser = new User(idCorrespondiente, _mail);
+				this.agregarUsuario(nuevoUser);
+			}		
+
+			private int cantidadDeUsuarios(){
+				return usuarios.size();
+			}
+
+			public void crearApuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado,  TipoApuesta tipo, User _usuario){
+				Apuesta nuevaApuesta = new Apuesta (_monto, evento, _resultado, _tipo);
+				_usuario.agregarNuevaApuesta(nuevaApuesta);
+			}
 			
 			/*
 			public void notificarBalanceUsuarios() {
 				Integer month = new Integer(this.numeroDelMes());
 				
 				for(User user : usuarios) {									//No tiene que retornar un Float sino un bigdecimal
-					textMessageBalanceNotifier.notifyBalance(user, month, user.gananciasBrutas(month));
+					notifier.notifyBalance(user, month, user.gananciasBrutas(month));
 				}
 			}
 			
@@ -81,14 +90,6 @@ public class CasaDeApuestas {
 														//Falta implementar					//No tiene que retornar un Float sino un bigdecimal
 				emailBalanceNotifier.emailBalance(user,userEmail(), month, user.gananciasBrutas(month))
 			}
-	
-			//Esto no va a aca
-			private int numeroDelMes() {
-				Date date = new Date();
-				LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				int month = localDate.getMonthValue();
-				return month;
-
 			}*/
 
 			public List<EventoDeportivo> getEventosFinalizados(){
@@ -96,26 +97,40 @@ public class CasaDeApuestas {
 				return eventosHistoricos;
 			}
 			
+
 		
-//nuevo
-			
-			public void calcularProbabilidadPrimerOponenteGanador(Oponente _op1, Oponente _op2) {
-				algoritmo.calcularProbabilidad(eventosHistoricos, _op1, _op2);
-								
-			}
-			public void calcularProbabilidadSegundoOponenteGanador(Oponente _op1, Oponente _op2) {
-				
-				
-			}
-			public void calcularProbabilidadEmpate(Oponente _op1, Oponente _op2) {
-				
-				
+
+			public Float calcularProbabilidadGanador(Oponente oponente1, Oponente oponente2) {
+				return this.algoritmo.calcularProbabilidad(this.eventosHistoricos, oponente1, oponente2);
 			}
 			
-			
-			/*
-			public Float calcularProbabilidades(Partido _partido, Resultado _resultado){
-				return algoritmo.calcProb(_partido, _resultado);
+			public Float calcularProbabilidadEmpate(Oponente oponente1, Oponente oponente2) {
+				return this.algoritmo.calcularProbabilidadEmpate(this.eventosHistoricos, oponente1, oponente2);
 			}
-			*/
+		 
+			@Override
+			public void cambio(Interesante eventoDeInteres) {
+				for(Interesante evento : interesantes) {
+					 this.notificarALosUsuarosQueLeInterese(eventoDeInteres);
+				}
+			}
+
+			private void notificarALosUsuarosQueLeInterese(Interesante eventoDeInteres) {
+				for(User usuario : this.usuariosQueLeInteresan(eventoDeInteres)) {
+					usuario.cambio(eventoDeInteres);
+				}
+			}
+
+			private List<User> usuariosQueLeInteresan(Interesante eventoDeInteres) {
+				List<User> resultado = new ArrayList <User>();
+				for(User _user: usuarios) {
+					if(_user.leInteresa(eventoDeInteres)) {
+						resultado.add(_user);
+					}
+				}
+				return resultado;
+
+			}
+			
+			
 }
