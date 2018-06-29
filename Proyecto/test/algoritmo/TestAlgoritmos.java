@@ -29,7 +29,7 @@ public class TestAlgoritmos {
 	public void setUp() throws Exception {
 		//SetUp
 		algProDirecta = new CompetenciaHistoricaDirecta();
-		algProReciente = new CompetenciaHistoriaReciente();
+		algProReciente = new CompetenciaHistoricaReciente();
 		
 		dummyOp1 = mock(Deportista.class);
 		dummyOp2 = mock(Deportista.class);
@@ -64,25 +64,76 @@ public class TestAlgoritmos {
 	}
 
 	@Test
-	public void testCalcularCoeficiente(){
-		Float[] coeficiente;
+	public void testCalcularCoeficienteOponente1AlgoritmoReciente(){
+		Float coeficiente;
 		ArrayList<EventoDeportivo> historicoCompleto = new ArrayList<EventoDeportivo>();
 		
-		//agrego 30 veces el evento para probar la funcionalidad.
 		for(int i = 0; i <= 30; i++) {
 			historicoCompleto.add(evento);
 		}		
-		//esto sirve para que se me generen dos listas de 30 para cada uno.
 		when(evento.participo(dummyOp1)).thenReturn(true);
 		when(evento.participo(dummyOp2)).thenReturn(true);
 		
-		//solo oponente 1 gano 10 partidos, en cambio oponente 2 gano 0.
 		when(evento.getGanador()).thenReturn(dummyOp1);
 		
 		coeficiente = algProReciente.calcularProbabilidad(historicoCompleto, dummyOp1, dummyOp2);
 		
-		assertEquals(coeficiente[0], new Float(1));
-		//assertEquals(coeficiente[0], new Float(0));
-		//assertEquals(coeficiente[0], new Float(0.5));
+		assertEquals(coeficiente, new Float(1));
+	} 
+	
+	@Test
+	public void testCalcularCoeficienteEmpateAlgoritmoReciente(){
+		Float coeficiente;
+		ArrayList<EventoDeportivo> historicoCompleto = new ArrayList<EventoDeportivo>();
+		
+		for(int i = 0; i <= 30; i++) {
+			historicoCompleto.add(evento);
+		}		
+		
+		when(evento.participo(dummyOp1)).thenReturn(true);
+		when(evento.participo(dummyOp2)).thenReturn(true);
+		 
+		when(evento.getGanador()).thenReturn(dummyOp1);
+		
+		coeficiente = algProReciente.calcularProbabilidadEmpate(historicoCompleto, dummyOp1, dummyOp2);
+		
+		assertEquals(coeficiente, new Float(0.5));
 	}
+	
+	@Test
+	public void testCalcularCoeficienteOponente1AlgoritmoDirecto(){
+		Float coeficiente;
+		ArrayList<EventoDeportivo> historicoCompleto = new ArrayList<EventoDeportivo>();
+		
+		for(int i = 0; i <= 30; i++) {
+			historicoCompleto.add(evento);
+		}		
+		
+		when(evento.participaronVs(dummyOp1, dummyOp2)).thenReturn(true);
+		
+		when(evento.getGanador()).thenReturn(dummyOp1);
+		
+		coeficiente = algProDirecta.calcularProbabilidad(historicoCompleto, dummyOp1, dummyOp2);
+		
+		assertEquals(coeficiente, new Float(1));
+	} 
+	
+	@Test
+	public void testCalcularCoeficienteEmpateAlgoritmoDirecto(){
+		Float coeficiente;
+		ArrayList<EventoDeportivo> historicoCompleto = new ArrayList<EventoDeportivo>();
+		
+		for(int i = 0; i <= 30; i++) {
+			historicoCompleto.add(evento);
+		}		
+		
+		when(evento.participaronVs(dummyOp1, dummyOp2)).thenReturn(true);
+		 
+		when(evento.getGanador()).thenReturn(dummyOp1);
+		
+		coeficiente = algProDirecta.calcularProbabilidadEmpate(historicoCompleto, dummyOp1, dummyOp2);
+		
+		assertEquals(coeficiente, new Float(0));
+	}
+	  
 }

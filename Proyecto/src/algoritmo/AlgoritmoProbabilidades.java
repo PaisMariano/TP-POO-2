@@ -10,7 +10,9 @@ public abstract class AlgoritmoProbabilidades {
 	
 	//modificar para que tome 3 metodos y no una list de float
 
-	public abstract Float[] calcularProbabilidad(List<EventoDeportivo> historialCompleto, Oponente _op1, Oponente _op2);
+	public abstract Float calcularProbabilidad(List<EventoDeportivo> historialCompleto, Oponente _op1, Oponente _op2);
+	
+	public abstract Float calcularProbabilidadEmpate(List<EventoDeportivo> historicoCompleto, Oponente _op1, Oponente _op2);
 	
 	public List<EventoDeportivo> calcularHistoricoEntre(List<EventoDeportivo> historialCompleto, Oponente _op1, Oponente _op2) {
 		
@@ -37,6 +39,7 @@ public abstract class AlgoritmoProbabilidades {
 		}
 		return probabilidad;
 	}
+ 
 	
 }	
 

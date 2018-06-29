@@ -9,6 +9,7 @@ import casaDeApuesta.CasaDeApuestas;
 public class User {
 
 	List<Apuesta> apuestas;
+	String mail;
 	
 		public User(){
 			apuestas = new ArrayList<Apuesta>(0);
@@ -45,4 +46,5 @@ public class User {
 			return apuestas;
 			
 		}
+		
 }

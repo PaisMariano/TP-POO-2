@@ -22,7 +22,6 @@ public class EventoDeportivo {
 	private float cuotaEmpate;
 
 
-
 		public EventoDeportivo(Deporte _deporte, Oponente oponente1, Oponente oponente2,Date unaFechaYHora,String unLugar) {
 
 			deporte = _deporte;
@@ -59,12 +58,23 @@ public class EventoDeportivo {
 				resultado = _resultado;
 			}
 			
-			public void calcularCuotas(Float[] _probabilidades){
-				this.cuotaGanador1 = 1 + (1 - _probabilidades[0]);
-				this.cuotaGanador2 = 1 + (1 - _probabilidades[1]);
-				this.cuotaEmpate   = 1 + (1 - _probabilidades[2]);
+			public void calcularCuotaOponente1(Float _probabilidad){
+			
+				this.cuotaGanador1 = 1 + (1 - _probabilidad);
+			
 			}
 			
+			public void calcularCuotaOponente2(Float _probabilidad){
+				
+				this.cuotaGanador2 = 1 + (1 - _probabilidad);
+				
+			}
+			
+			public void calcularCuotaEmpate(Float _probabilidad){
+				
+				this.cuotaEmpate   = 1 + (1 - _probabilidad);
+			}
+						
 			public float getCuotaOponente1() {
 				return this.cuotaGanador1;
 				
@@ -88,8 +98,8 @@ public class EventoDeportivo {
 			public EstadoEventoDeportivo getEstado(){
 				return estado;
 			}
-			public void  setEstado(EstadoEventoDeportivo nuevoEstado){
-				this.estado=nuevoEstado;
+			public void  setEstado(EstadoEventoDeportivo _estado){
+				this.estado = _estado;
 			}
 		
 			
@@ -101,13 +111,23 @@ public class EventoDeportivo {
 				return resultado.getGanador();
 			}
 
-			/*
-			public cuota(Casa _casa, Resultado _resultado){
-				return 1 + (1 - this.prob(_casa, _resultado));
+			public boolean esDeDeporte(Deporte deporteDeInteres) {
+				return this.nombreDeporte().equals(deporteDeInteres.getNombre());
 			}
 
-			private prob(_casa, _resultado){
-				return _casa.calcProb(this, _resultado);
+			public boolean seJugoEn(String _lugar) {
+				return lugar.equals(_lugar);
 			}
-			+*/
+
+			public boolean sucedioEn(Date fechaInteres) {
+				return fechaInteres.getYear() == fechaYHora.getYear() &&
+						fechaInteres.getMonth() == fechaYHora.getMonth() &&
+						 fechaInteres.getDay() == fechaYHora.getDay() 
+						 //&&
+						  //fechaInteres.getHours() == fechaYHora.getHours() &&
+						   //fechaInteres.getMinutes() == fechaYHora.getMinutes() &&
+							//fechaInteres.getSeconds() == fechaYHora.getSeconds()
+						 ;
+			}
+
 }
