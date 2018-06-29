@@ -59,7 +59,7 @@ public class EventoDeportivo extends Interesante {
 
 			public void setResultado(Resultado _resultado){
 				resultado = _resultado;
-				this.cambie();
+				this.notificarCambio();
 			}
 			
 			public Float calcularCuota(Float _probabilidad){
@@ -91,7 +91,7 @@ public class EventoDeportivo extends Interesante {
 			}
 			public void  setEstado(EstadoEventoDeportivo _estado){
 				this.estado = _estado;
-				this.cambie();
+				this.notificarCambio();
 			}
 		
 			
@@ -120,8 +120,6 @@ public class EventoDeportivo extends Interesante {
 			public List<Oponente> getOponentes() {
 				return this.oponentes;
 			}
-
-		
 
 			public boolean esDelMes(int unMes) {
 				

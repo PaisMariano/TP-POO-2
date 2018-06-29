@@ -96,13 +96,6 @@ public class CasaDeApuestas extends Interesado{
 			public Float calcularProbabilidadEmpate(Oponente oponente1, Oponente oponente2) {
 				return this.algoritmo.calcularProbabilidadEmpate(this.eventos, oponente1, oponente2);
 			}
-		 
-			@Override
-			public void cambio(Interesante eventoDeInteres) {
-				for(Interesante evento : interesantes) {
-					 this.notificarALosUsuarosQueLeInterese(eventoDeInteres);
-				}
-			}
 
 			private void notificarALosUsuarosQueLeInterese(Interesante eventoDeInteres) {
 				for(User usuario : this.usuariosQueLeInteresan(eventoDeInteres)) {
@@ -119,6 +112,11 @@ public class CasaDeApuestas extends Interesado{
 				}
 				return resultado;
 
+			}
+
+			@Override
+			public boolean leInteresa(Interesante eventoDeInteres) {
+				return eventoDeInteres.haComenzado();
 			}
 			
 			

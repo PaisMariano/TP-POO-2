@@ -3,15 +3,26 @@ package EventoDeInteres;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Interesante {
-	protected List<Interesado> interesados;
+import org.mockito.Matchers;
 
+import eventoDeportivo.EventoDeportivo;
+
+public abstract class Interesante {//Observer
+	protected List<Interesado> interesados;
+	private EventoDeportivo evento;
+	
 	public Interesante() {
 		this.setInteresados(new ArrayList<Interesado>());
 	}
-		public void cambie() {
+	
+		public Interesante(EventoDeportivo _evento) {
+			evento = _evento;
+			this.setInteresados(new ArrayList<Interesado>());
+		}
+	
+		public void notificarCambio() {
 			for(Interesado interesado : interesados) {
-				interesado.cambio(this);
+				interesado.recibirCambio(this);
 			}
 		}
 
@@ -21,6 +32,18 @@ public abstract class Interesante {
 		
 		public void setInteresados(List<Interesado> _interesados) {
 			interesados = _interesados;
+		}
+		
+		public boolean haComenzado() {
+			return evento.empezoEvento();
+		}
+		
+		public boolean haTerminado() {
+			return evento.estaFinalizado();
+		}
+
+		public List<Interesado> interesados() {
+			return interesados;
 		}
 
 }
