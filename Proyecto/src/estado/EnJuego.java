@@ -20,4 +20,10 @@ public class EnJuego extends EstadoEventoDeportivo implements FactorDeCancelacio
 			//No puede ser reactivada. Excepcion?
 		}
 
+		@Override
+		public Boolean estaEmpezado() {
+			return true;
+		} 
+
+
 }

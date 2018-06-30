@@ -9,7 +9,14 @@ public abstract class EstadoEventoDeportivo implements FactorDeCancelacionOReact
 	}
 	
 	public Boolean estaEmpezado() {
-		return !this.estaFinalizado();
+		return false;
 	} 
 
+	public Boolean noHacomenzado() {
+		return false;
+	}
+
+
+	
+	
 }

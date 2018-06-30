@@ -70,7 +70,5 @@ public class User extends Interesado{
 				return listaDePartidosApostados.contains(eventoDeInteres);
 			} 
 	
-			public String getMail() {
-				return mail;
-			}
+		
 }
