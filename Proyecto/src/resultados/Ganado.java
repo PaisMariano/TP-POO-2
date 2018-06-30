@@ -24,5 +24,5 @@ public class Ganado extends Resultado {
 			}
 			return resultado;
 		}
-
+ 
 }

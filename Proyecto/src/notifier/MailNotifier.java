@@ -14,10 +14,14 @@ public class MailNotifier implements BalanceNotifier {
 		public void setEmailNotifier(EmailBalanceNotifier _emailNotifier){
 			emailNotifier = _emailNotifier;
 		}
+		
+		public EmailBalanceNotifier getEmailNotifier(){
+			return this.emailNotifier;
+		}
 	
 		@Override
 		public void notifyBalance(User user, Integer month, BigDecimal monthlyBalance) {
 			emailNotifier.emailBalance(user.getMail(), month, monthlyBalance);
-		}
+		} 
 
 }
