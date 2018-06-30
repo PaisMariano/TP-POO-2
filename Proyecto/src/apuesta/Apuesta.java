@@ -20,7 +20,6 @@ public  class Apuesta {
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
 		this.setTipo(_tipo);
-		//cuotaConvenida = _evento.cuota(_casa, _resultado) Aca lo que quiero es lo que pagaba de cuota ese partido en ese momento;
 	}
 	
 		private void setResultadoAlQueSeApuesta(Resultado _resultado) {
@@ -48,7 +47,7 @@ public  class Apuesta {
 		}
 		
 		private Float cuotaConvenida() {
-			return cuotaConvenida;
+			return resultadoApostado.getCuotaApuesta(_evento, _resultadoApostado)
 		}
 
 		public Resultado getResultadoApostado() {
@@ -129,15 +128,8 @@ public  class Apuesta {
 		public Interesante getEventoDeInteres() {
 			return eventoDeportivo;
 		}
-
 		
-		public boolean esApuestaDelMes(int unMes) {
-			
-			
+		public boolean esApuestaDelMes(int unMes) {	
 			return this.eventoDeportivo.estaFinalizado() && this.eventoDeportivo.esDelMes(unMes); 
 		}
-		
-		
-		
-
 }

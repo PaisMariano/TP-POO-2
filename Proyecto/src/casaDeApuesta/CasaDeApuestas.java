@@ -66,7 +66,7 @@ public class CasaDeApuestas extends Interesado{
 			
 			public void notificarBalanceUsuarios(int unMes) {
 				for(User user : this.usuarios) {									
-					notifier.notifyBalance(user, unMes, user.gananciasBrutas(unMes));
+					notifier.notifyBalance(user, unMes, user.gananciaBruta(unMes));
 				}
 			}
 
