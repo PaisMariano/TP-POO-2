@@ -3,6 +3,7 @@ package usuarios;
 import usuarios.User;
 import apuesta.Apuesta;
 import eventoDeportivo.EventoDeportivo;
+import eventoDeInteres.Interesante;
 
 import java.math.BigDecimal;
 import org.junit.Before; 
@@ -19,12 +20,15 @@ import usuarios.*;
 public class TestsUsuarios{
 	
  		Apuesta apuestaMockEnero,apuestaMockJunio;
- 		EventoDeportivo eventoDeportivoMock,resultado1;
+ 		EventoDeportivo eventoDeportivoMock,eventoDeportivoMock2;
  		User usuario1;
- 	
+ 		Interesante interesanteMock;
+ 		
+ 		
+ 		
  		@Before
 		public	void setUp() throws Exception {
-		
+		eventoDeportivoMock2=mock(EventoDeportivo.class);
 		eventoDeportivoMock= mock(EventoDeportivo.class);
 		apuestaMockEnero = mock(Apuesta.class);
 		apuestaMockJunio = mock(Apuesta.class);
@@ -72,10 +76,28 @@ public class TestsUsuarios{
 	}
 	
 	
-	/*
+	//seguir esto, hacer que cuendo se pregunta por un evento que no se hizo apuesta de false.
 	@Test
-	public	void testUsuarioHaceUnaApuestaYNoTieneTieneGanacia() {
+	public	void testElUsuarioSeInteresaPorLosEventoQueApuesta() {
+
+
+		interesanteMock=mock(Interesante.class);
+		
+		usuario1.agregarNuevaApuesta(apuestaMockJunio);
+		usuario1.agregarNuevaApuesta(apuestaMockEnero);
+		
+		when(apuestaMockJunio.getEventoDeInteres()).thenReturn(interesanteMock);
+		//when((apuestaMockEnero).get()).thenReturn(new BigDecimal(100));
+		
+			
+		assertTrue(usuario1.leInteresa(interesanteMock));
 		
 	}
- 		*/
+ 		
+	
+	
+	
+	
+	
+	
 }
