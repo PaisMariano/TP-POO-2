@@ -32,7 +32,7 @@ public class User extends Interesado{
 			
 			private List<Apuesta> apuestasDelMes(int unMes) {
 				List<Apuesta> apuestasDelMes= new ArrayList<Apuesta>();
-				
+			
 				for(Apuesta ap: apuestas) {
 					if(ap.esApuestaDelMes(unMes)) {
 						apuestasDelMes.add(ap);
@@ -58,6 +58,7 @@ public class User extends Interesado{
 				return apuestas;	
 			}
 	
+			@Override
 			public boolean leInteresa(Interesante eventoDeInteres) {
 				return this.apostoAEsteEvento(eventoDeInteres);
 			}
@@ -72,7 +73,5 @@ public class User extends Interesado{
 
 			public String getMail() {
 				return mail;
-			} 
-	
-		
+			} 		
 }

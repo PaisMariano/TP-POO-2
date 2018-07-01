@@ -130,4 +130,14 @@ public class EventoDeportivo extends Interesante {
 				return this.fechaYHora.getMonth()== unMes;
 			}
 
+			@Override
+			public boolean haComenzado() {
+				return this.empezoEvento();
+			}
+
+			@Override
+			public boolean haTerminado() {
+				return this.estaFinalizado();
+			}
+
 }
