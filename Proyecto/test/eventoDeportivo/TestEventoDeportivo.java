@@ -1,13 +1,15 @@
 package eventoDeportivo;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals; 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import apuesta.Apuesta;
 import casaDeApuesta.CasaDeApuestas;
 import eventoDeportivo.EventoDeportivo;
+import resultados.Resultado;
 import oponentes.Equipo;
+import oponentes.Oponente;
 import resultados.Empate;
 import resultados.Ganado;
 import eventoDeportivo.Deporte;
@@ -20,52 +22,88 @@ import estado.NoComenzado;
 import static org.mockito.Mockito.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class TestEventoDeportivo {
 
-	private Deporte unDeporte;
-	private EventoDeportivo unEventoDeportivo, mockEventoDeportivo;
-	private Equipo boca;
-	private Equipo river;
+	private Deporte unDeporteFutbol,deporteBoxeo;
+	private EventoDeportivo unEventoDeportivo,otroEventoDeportivo, mockEventoDeportivo;
+	private Oponente boca,river,chacarita;
+	
 	private Date fechaYHora;	
-	private Equipo chacarita; 
-	private Empate unEstadoEmpatado;
-	private Ganado unEstadoGanado1;
+	 
+	private Resultado resultadoEmpatado,resultadoGanadorRiver;
+
 	private EstadoEventoDeportivo estadoFinalizado;
 	private CasaDeApuestas dummyCasa;
+	
+	
 	@Before
 	public void setUp(){
 		fechaYHora = new Date(2,2,2);
 		river = mock(Equipo.class);
 		boca = mock(Equipo.class);
 		chacarita =  mock(Equipo.class);
-		unDeporte = new Deporte("Boxeo");
-		unEstadoEmpatado=new Empate();
-		unEstadoGanado1=new Ganado(chacarita);
 		
-		unEventoDeportivo= new EventoDeportivo(dummyCasa, unDeporte, river, boca, fechaYHora, "Francia");
+		unDeporteFutbol = new Deporte("Futbol");
+		deporteBoxeo=new Deporte("Boxeo");
+		
+		resultadoEmpatado=new Empate();
+		resultadoGanadorRiver=new Ganado(river);
+		dummyCasa=mock(CasaDeApuestas.class);	
+		estadoFinalizado = new Finalizado();
+		
+		unEventoDeportivo= new EventoDeportivo(dummyCasa, unDeporteFutbol, river, boca, fechaYHora, "Francia");
 		mockEventoDeportivo=mock(EventoDeportivo.class);
-		estadoFinalizado= new Finalizado();
+
+		
 	}	
 	
 
 	@Test
-	public void unNuevoDeporteCuentaConUnNombre() {
-		assertEquals((unDeporte.getNombre()),"Boxeo");	
+	public void unEventoDeportivoAlComenzarModificaSuEstado() {
+		assertTrue(unEventoDeportivo.noHaComenzado());
+		assertFalse(unEventoDeportivo.estaFinalizado());
+		assertFalse(unEventoDeportivo.empezoEvento());
+		assertEquals((unEventoDeportivo.getDeporte()),unDeporteFutbol);	
+		
+		unEventoDeportivo.setEstado(estadoFinalizado);
+		
+		assertTrue(unEventoDeportivo.estaFinalizado());
+		
 	}
 	
 	@Test 
 	public void testCompararSiUnOponenteParticipoEnElEvento() {
+		assertTrue(unEventoDeportivo.esDeDeporte(unDeporteFutbol));
+		assertFalse(unEventoDeportivo.esDeDeporte(deporteBoxeo));
 		assertFalse(unEventoDeportivo.participo(chacarita));
 		assertTrue(unEventoDeportivo.participo(river));
+		assertTrue(unEventoDeportivo.participaronVs(river,boca));
+		assertFalse (unEventoDeportivo.participaronVs(chacarita,boca));
+		
+		ArrayList <Oponente >oponentes= new ArrayList<Oponente>();
+		oponentes.add(river);
+		oponentes.add(boca);
+		
+		assertEquals(unEventoDeportivo.getOponentes(),oponentes);
 	}
 	
 	@Test 
-	public void testCompararLosOponentesCompitieron() {
-		assertFalse(unEventoDeportivo.participaronVs(chacarita, boca));
-		assertTrue(unEventoDeportivo.participaronVs(river, boca));
-		assertTrue(unEventoDeportivo.participaronVs(boca , river));
+	public void testAlIngresarElresultadoSeNotifica() {
+		//unEventoDeportivo.setResultado(resultadoEmpatado);
+		
+		
+		
+		//assertEquals(unEventoDeportivo.getResultado(),resultadoEmpatado);
+		//unEventoDeportivo.setResultado(resultadoGanadorRiver);
+		//assertEquals(unEventoDeportivo.getResultado(),resultadoGanadorRiver);
+			
+		//assertEquals(unEventoDeportivo.getGanador(),river);
+		//assertTrue(unEventoDeportivo.participaronVs(boca ,river));
 	} 
+	
+		
 	
 	@Test 
 	public void testVerificarQueUnEventoEstaFinalizado() {
@@ -73,23 +111,40 @@ public class TestEventoDeportivo {
 		unEventoDeportivo.setEstado(finalizado);
 		assertTrue(unEventoDeportivo.estaFinalizado());
 	}
-
+		/*
+		 * 
+		 * 
+		 * 
+		
+	//dummyCasa, unDeporteFutbol, river, boca, fechaYHora, "Francia"
 	@Test 
-	public void testAnteDosOponentesSeCalculaLaCuota() {
-
-		 Float[] probabilidades = {new Float(0.7),new Float(0.2),new Float(0.1)};
-		 
-		// unEventoDeportivo.calcularCuotas(probabilidades);
-		 assertEquals(unEventoDeportivo.getCuotaOponente1(),(float) 1,3);
-		 assertEquals(unEventoDeportivo.getCuotaOponente2(),(float)1,8);
-		 assertEquals( unEventoDeportivo.getCuotaEmpate(),(float)1,9);		
+	public void testAlCrearUnEventoDeportivoSeCalCulanLasCuotas() {
+		otroEventoDeportivo= mock(EventoDeportivo.class);
+	//	new EventoDeportivo(dummyCasa, unDeporteFutbol, river, boca, fechaYHora, "Francia")).calcularCuota((float)100);
+	
+		dummyCasa.calcularProbabilidadGanador(river, boca)
+		when(dummyCasa.calcularProbabilidadGanador(river, boca)).thenReturn(new Float(100));
+		when(dummyCasa.calcularProbabilidadGanador(river, boca)).thenReturn(new Float(100));
+		
+		verify(otroEventoDeportivo)
+		//when(mockEventoDeportivo.getCuotaEmpate()).thenReturn(new Float(200));
+		//when(mockEventoDeportivo.getCuotaOponente2()).thenReturn(new Float(300));
+		
+		 assertEquals(mockEventoDeportivo.getCuotaOponente1(),(float)100,0);
+		 assertEquals( mockEventoDeportivo.getCuotaEmpate(),(float)(200),0);
+		 assertEquals(mockEventoDeportivo.getCuotaOponente2(),(float)300,0);		
+		
+		
 	}
-
+	
+	
+ */
 	@Test 
 	public void testSeModificaElResultadoDelEventoDeportivo() {
-		//por default se inicializa como empatado
-		unEventoDeportivo.setResultado(unEstadoGanado1);
-		assertEquals(unEventoDeportivo.getResultado(),unEstadoGanado1);	
+		
+		
+		unEventoDeportivo.setResultado(resultadoGanadorRiver);
+		assertEquals(unEventoDeportivo.getResultado(),resultadoGanadorRiver);	
 	}
 	
 	@Test 
@@ -98,7 +153,7 @@ public class TestEventoDeportivo {
 		unEventoDeportivo.setEstado(estadoFinalizado);
 		assertEquals(unEventoDeportivo.getEstado(), estadoFinalizado);
 	}
-	
+	/*
 	@Test
 	public void testEsDeUnDeterminadoDeporte() {
 		assertTrue(unEventoDeportivo.esDeDeporte(unDeporte));
@@ -130,7 +185,7 @@ public class TestEventoDeportivo {
 		Date fechaCualquiera = new Date(4, 4, 4);
 		assertFalse(unEventoDeportivo.sucedioEn(fechaCualquiera));
 	}
-	
+	*/
 }
 
 
