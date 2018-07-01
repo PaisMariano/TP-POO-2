@@ -68,7 +68,13 @@ public class User extends Interesado{
 					listaDePartidosApostados.add(_apuesta.getEventoDeInteres());
 				}
 				return listaDePartidosApostados.contains(eventoDeInteres);
-			} 
+			}
+
+			public String getMail() {
+				return this.mail ;
+			}
+
+			
 	
 		
 }

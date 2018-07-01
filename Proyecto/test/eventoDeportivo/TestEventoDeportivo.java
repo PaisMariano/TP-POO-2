@@ -91,26 +91,17 @@ public class TestEventoDeportivo {
 	
 	@Test 
 	public void testAlIngresarElresultadoSeNotifica() {
-		//unEventoDeportivo.setResultado(resultadoEmpatado);
-		
-		
-		
-		//assertEquals(unEventoDeportivo.getResultado(),resultadoEmpatado);
-		//unEventoDeportivo.setResultado(resultadoGanadorRiver);
-		//assertEquals(unEventoDeportivo.getResultado(),resultadoGanadorRiver);
-			
-		//assertEquals(unEventoDeportivo.getGanador(),river);
-		//assertTrue(unEventoDeportivo.participaronVs(boca ,river));
+		unEventoDeportivo.setResultado(resultadoEmpatado);
+		assertEquals(unEventoDeportivo.getResultado(),resultadoEmpatado);
+	
+		unEventoDeportivo.setResultado(resultadoGanadorRiver);
+		assertEquals(unEventoDeportivo.getResultado(),resultadoGanadorRiver);
+		assertTrue(unEventoDeportivo.participaronVs(boca ,river));
 	} 
 	
 		
 	
-	@Test 
-	public void testVerificarQueUnEventoEstaFinalizado() {
-		EstadoEventoDeportivo finalizado=new Finalizado(); 
-		unEventoDeportivo.setEstado(finalizado);
-		assertTrue(unEventoDeportivo.estaFinalizado());
-	}
+	
 		/*
 		 * 
 		 * 
@@ -138,21 +129,7 @@ public class TestEventoDeportivo {
 	}
 	
 	
- */
-	@Test 
-	public void testSeModificaElResultadoDelEventoDeportivo() {
-		
-		
-		unEventoDeportivo.setResultado(resultadoGanadorRiver);
-		assertEquals(unEventoDeportivo.getResultado(),resultadoGanadorRiver);	
-	}
-	
-	@Test 
-	public void  testSeModificaElEstadoActualDelEvento() {
-		//no lo toma bien por que toma identidad assertEquals(unEventoDeportivo.getEstado(), new NoComenzado());
-		unEventoDeportivo.setEstado(estadoFinalizado);
-		assertEquals(unEventoDeportivo.getEstado(), estadoFinalizado);
-	}
+
 	/*
 	@Test
 	public void testEsDeUnDeterminadoDeporte() {

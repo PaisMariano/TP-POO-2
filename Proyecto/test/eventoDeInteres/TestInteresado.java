@@ -1,4 +1,4 @@
-package eventoDeInteres;
+package EventoDeInteres;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;

@@ -62,8 +62,8 @@ public class TestCasaDeApuestas {
 }
 
 	@Test 
-  public void testSeAgregaUnaNuevaApuestasALaCasaDeApuestas() {
-		casaDeApuestas= new  CasaDeApuestas(usuarios,algoritmoHistorico,balanceMock,eventosEmpty);
+	public void testSeAgregaUnaNuevaApuestasALaCasaDeApuestas() {
+		casaDeApuestas= new  CasaDeApuestas(usuarios,algoritmoMock,balanceMock,eventosEmpty);
 		
 		assertEquals(casaDeApuestas.getUsuarios(),usuarios);
 		assertEquals(casaDeApuestas.getEventosDeportivos(),eventosEmpty);
@@ -97,10 +97,10 @@ public class TestCasaDeApuestas {
 		assertEquals(casaDeApuestas1.getEventosDeportivos(),spyEventos);
 
 	
-}//ver manana 
+}/*
 	@Test
 	public void testSeCreaUnEventoDeportivo(){
-		casaDeApuestas= new  CasaDeApuestas(usuarios,algoritmoHistorico,balanceMock,eventosEmpty);
+		casaDeApuestas= new  CasaDeApuestas(usuarios,algoritmoMock,balanceMock,eventosEmpty);
 		casaDeApuestasMock= mock(CasaDeApuestas.class);
 		
 		Oponente oponenteDummy1=mock(Oponente.class);
@@ -127,35 +127,34 @@ public class TestCasaDeApuestas {
 		// assertTrue(ultimoEvento==eventoOriginal);
 	}
 	
+	*/
 	
 	
-	
-	@Test //raro y mal 
+	@Test 
 	public void testAlTenerDosOponentesSeConoceSusProbabilidadesDeGanar() {
 
 		Oponente oponenteDummy1=mock(Oponente.class);
 		Oponente oponenteDummy2=mock(Oponente.class);
 		
-		Float[] probabilidades = {new Float(0.7),new Float(0.2),new Float(0.1)};
 		List <EventoDeportivo> eventosOp1 =new ArrayList <EventoDeportivo>();
 
+		casaDeApuestas= new  CasaDeApuestas(usuarios,algoritmoMock,balanceMock,eventosOp1);
 		
-		AlgoritmoProbabilidades algPro =mock(AlgoritmoProbabilidades.class);
+		when(algoritmoMock.calcularProbabilidadEmpate(eventosOp1,oponenteDummy1,oponenteDummy2)).thenReturn((float)10);
+		when(algoritmoMock.calcularProbabilidad(eventosOp1,oponenteDummy1,oponenteDummy2)).thenReturn((float)20);
 	
 		
-		casaDeApuestas= new  CasaDeApuestas(usuarios,algPro,balanceMock,eventosOp1);
-		Date fechaDummy= mock(Date.class);
-		
-	
-		//mmmm ver .... 
-		//when(algPro.calcularProbabilidad(eventosOp1,oponenteDummy1,oponenteDummy2)).thenReturn(probabilidades);
-		//Float[] probabilidadesFinal =  casaDeApuestas.calcularProbabilidadesDe( oponenteDummy1, oponenteDummy2);
-		
-		//assertEquals(probabilidadesFinal[0],new Float(0.7));
-		//assertEquals(probabilidadesFinal[1],new Float(0.2));
-		//assertEquals(probabilidadesFinal[2],new Float(0.1));
-		
-		//Float[] calcularProbabilidadesDe(List<EventoDeportivo> eventoHistorico, Oponente _op1, Oponente _op2)
+		Float pGanador=	casaDeApuestas.calcularProbabilidadGanador(oponenteDummy1,oponenteDummy2);
+		Float pEmpate=	casaDeApuestas.calcularProbabilidadEmpate(oponenteDummy1,oponenteDummy2);
+			
+	//	assertTrue(pGanador == (float)20);
+	//	assertTrue(pEmpate== (float)10);
+
+		casaDeApuestas.calcularProbabilidadEmpate(oponenteDummy1, oponenteDummy2);
+		//	verify(algoritmoMock).calcularProbabilidad(eventosOp1,oponenteDummy1,oponenteDummy2);
+			verify(algoritmoMock).calcularProbabilidadEmpate(eventosOp1,oponenteDummy1,oponenteDummy2);
+			
+			
 		
 	}
 
