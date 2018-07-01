@@ -10,8 +10,8 @@ public class Finalizado extends EstadoEventoDeportivo  implements FactorDeCancel
 	}
 	
 		@Override
-		public Boolean estaFinalizado() {
-			return new Boolean(true);
+		public boolean estaFinalizado() {
+			return true;
 		}
 
 		@Override

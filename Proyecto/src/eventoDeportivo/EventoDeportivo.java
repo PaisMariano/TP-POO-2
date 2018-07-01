@@ -24,6 +24,7 @@ public class EventoDeportivo extends Interesante {
 
 
 		public EventoDeportivo(CasaDeApuestas unaCasaDeApuestas,Deporte _deporte, Oponente oponente1, Oponente oponente2,Date unaFechaYHora,String unLugar) {
+			super();
 			deporte = _deporte;
 			oponentes = new ArrayList<Oponente>(2);
 			this.setOponentes(oponente1, oponente2);
@@ -33,7 +34,7 @@ public class EventoDeportivo extends Interesante {
 			lugar= unLugar;
 			cuotaGanador1 = this.calcularCuota(unaCasaDeApuestas.calcularProbabilidadGanador(oponente1, oponente2));
 			cuotaGanador2 = this.calcularCuota(unaCasaDeApuestas.calcularProbabilidadGanador(oponente2, oponente1));
-			cuotaEmpate   = this.calcularCuota(unaCasaDeApuestas.calcularProbabilidadEmpate(oponente1, oponente2));
+			cuotaEmpate   = this.calcularCuota(unaCasaDeApuestas.calcularProbabilidadEmpate(oponente1, oponente2));			
 		}
 
 			private void setOponentes(Oponente _oponente1, Oponente _oponente2) {

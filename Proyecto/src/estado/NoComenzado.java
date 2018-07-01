@@ -5,7 +5,7 @@ import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacio
 
 public class NoComenzado extends EstadoEventoDeportivo implements FactorDeCancelacionOReactivacionDeApuesta{
 	@Override
-	public Boolean noHacomenzado()  {
+	public boolean noHacomenzado()  {
 		return true;
 	}
 	@Override

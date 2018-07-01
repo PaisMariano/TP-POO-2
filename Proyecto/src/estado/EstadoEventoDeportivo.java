@@ -4,15 +4,15 @@ import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacio
 
 public abstract class EstadoEventoDeportivo implements FactorDeCancelacionOReactivacionDeApuesta{
 
-	public Boolean estaFinalizado() {
-		return new Boolean(false);
+	public boolean estaFinalizado() {
+		return false;
 	}
 	
-	public Boolean estaEmpezado() {
+	public boolean estaEmpezado() {
 		return false;
 	} 
 
-	public Boolean noHacomenzado() {
+	public boolean noHacomenzado() {
 		return false;
 	}
 

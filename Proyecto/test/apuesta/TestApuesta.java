@@ -9,7 +9,7 @@ import estado.EstadoEventoDeportivo;
 import static org.mockito.Mockito.*;
 
 
-public class TestsApuestas {
+public class TestApuesta {
 
 	@Before
 	public void setUp() throws Exception {

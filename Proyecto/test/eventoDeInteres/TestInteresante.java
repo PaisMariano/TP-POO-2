@@ -17,7 +17,7 @@ import usuarios.User;
 import static org.mockito.Mockito.*;
 
 
-public class TestEventoDeInteres {
+public class TestInteresante {
 	private Interesante eventoSUT;
 	private Interesado spyUsuario;
 	private Interesado spyCasa;
@@ -39,21 +39,23 @@ public class TestEventoDeInteres {
 			
 			eventoSUT = new EventoDeportivo(dummyCasa, dummyDeporte, dummyOponente0, dummyOponente1, dummyFecha, dummyLugar);
 			
-			spyUsuario = spy(User.class);
-			spyCasa = spy(CasaDeApuestas.class);
+			spyUsuario = mock(User.class);
+			spyCasa = mock(CasaDeApuestas.class);
 			
 			eventoSUT.agregarInteresado(spyUsuario);
 			eventoSUT.agregarInteresado(spyCasa);
 			
-			eventoSUT.notificarCambio();
 		}
 	
 		@Test
 		public void testAlSerModificadoSusInteresadosSonAvisadosDelCambio() {
+			eventoSUT.notificarCambio();
+			
 			verify(spyUsuario).recibirCambio(eventoSUT);
 			verify(spyCasa).recibirCambio(eventoSUT);
 		}
 		
+		@Test
 		public void testSeAgreganLosInteresados() {
 			ArrayList<Interesado> listSpy = spy(ArrayList.class);
 			Interesado dummyInteresado = mock(Interesado.class);
@@ -61,7 +63,6 @@ public class TestEventoDeInteres {
 			eventoSUT.setInteresados(listSpy);
 			eventoSUT.agregarInteresado(dummyInteresado);
 			
-			verify(listSpy).add(dummyInteresado);
 			verify(listSpy).add(dummyInteresado);
 		}
 }

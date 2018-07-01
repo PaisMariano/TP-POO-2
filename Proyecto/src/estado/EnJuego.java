@@ -21,7 +21,7 @@ public class EnJuego extends EstadoEventoDeportivo implements FactorDeCancelacio
 		}
 
 		@Override
-		public Boolean estaEmpezado() {
+		public boolean estaEmpezado() {
 			return true;
 		} 
 
