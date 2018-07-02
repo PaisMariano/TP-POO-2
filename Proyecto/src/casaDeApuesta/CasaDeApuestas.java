@@ -80,7 +80,6 @@ public class CasaDeApuestas extends Interesado{
 				return eventosFinalizados;
 			}
 		
-
 			public Float calcularProbabilidadGanador(Oponente oponente1, Oponente oponente2) {
 				return this.algoritmo.calcularProbabilidad(this.eventos, oponente1, oponente2);
 			}

@@ -13,10 +13,10 @@ public  class Apuesta {
 	private EventoDeportivo eventoDeportivo;
 	private Resultado resultadoApostado;
 	private TipoApuesta tipo;
-	private Float cuotaConvenida;
 	
 	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo) {
-			this.setMonto(_monto);
+		// _monto > 0
+		this.setMonto(_monto);
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
 		this.setTipo(_tipo);
@@ -31,9 +31,6 @@ public  class Apuesta {
 		}
 
 		private void setMonto(Float _monto) {
-			if(_monto < 0) {
-				this.errorSaldoIncorrecto();
-			}
 			montoApostado = _monto;	
 		}
 		
@@ -46,7 +43,7 @@ public  class Apuesta {
 		}
 		
 		public Boolean empezoEvento() {
-			return eventoDeportivo.empezoEvento();
+			return eventoDeportivo.haComenzado();
 		}
 		
 		public BigDecimal gananciaBruta() {
@@ -81,7 +78,7 @@ public  class Apuesta {
 			this.setTipo(new Segura());
 		}
 
-		public Boolean esAcertada(){
+		public boolean esAcertada(){
 			return this.getResultadoApostado().getApostado().equals(eventoDeportivo.getGanador());
 		}
 

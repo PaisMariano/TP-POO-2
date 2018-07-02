@@ -52,6 +52,7 @@ public class User extends Interesado{
 		
 			public void agregarNuevaApuesta(Apuesta _apuesta) {
 				apuestas.add(_apuesta);
+				_apuesta.getEventoDeInteres().agregarInteresado(this);
 			}
 			
 			public List<Apuesta> apuestasPropias(){			

@@ -75,6 +75,8 @@ public class TestsUsuarios{
 		
 	}
 	
+	//Leer: Esto forma parte del comportamiento de Interesado/Interesante, ya lo testeo ahi. Si queres Copia y pega, pero sin borar la 
+	//clase de test de Interesado.
 	
 	//seguir esto, hacer que cuendo se pregunta por un evento que no se hizo apuesta de false.
 	@Test
