@@ -19,8 +19,14 @@ public class TestEnJuego {
 		}
 	
 		@Test
-		public void test() {
-			fail("Not yet implemented");
+		public void testAlCancelarLaApuestaSeLeCobraUnaPenalidadDe200() {
+			enJuego.cancelar(apuesta);
+			verify(apuesta).cambiarElTipoDeApuestaACancelada();
+			verify(apuesta).reducirMontoConPenalidad(new Float(200));
 		}
 
+		@Test
+		public void testSePuedeReactivarLaApuesta() {
+			//Esto tiene que romper
+		}
 }

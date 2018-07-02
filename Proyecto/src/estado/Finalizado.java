@@ -24,4 +24,16 @@ public class Finalizado extends EstadoEventoDeportivo  implements FactorDeCancel
 			//Tampoco deberia ser reactivada con el partido finalizado.
 		}
 
+		@Override
+		public void setPenalidad(Float _penalidad) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Float getPenalidad() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 }
