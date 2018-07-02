@@ -32,6 +32,18 @@ public class TestApuesta {
 	}
 	
 	@Test
+	public void testAlSerCreadaLaApuestaElMontoEsElPAsadoEnElConstructor() {
+		assertEquals(monto, apuestaSUT.monto());
+	}
+	
+	@Test
+	public void testSeModificaElMontoDeLaApuesta() {
+		Float esperado = new Float(16);
+		apuestaSUT.setMonto(esperado);
+		assertEquals(esperado, apuestaSUT.monto());
+	}
+	
+	@Test
 	public void testLaApuestaEsCreadaConsistentemente() {
 		assertEquals(monto, apuestaSUT.monto());
 		assertEquals(spyResultado, apuestaSUT.getResultadoApostado());

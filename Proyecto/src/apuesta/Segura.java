@@ -12,8 +12,12 @@ public class Segura implements TipoApuesta {
 		public void setPorcentajeDescuento(Float _n) {
 			porcentajeDescuento = _n;
 		}
+		
+		public Float getPorcentajeDescuento() {
+			return porcentajeDescuento;
+		}
 
-		private Float descuento(){
+		public Float descuento(){
 			return new Float(100) - porcentajeDescuento;
 		}
 	
@@ -25,11 +29,12 @@ public class Segura implements TipoApuesta {
 	
 		@Override
 		public void reactivar(Apuesta _apuesta){
-			_apuesta.reactivarApuesta();//Esto no deberia de llegar	
+			_apuesta.reactivarApuesta();	
 		}
 	
 		@Override
 		public BigDecimal gananciaBruta(Apuesta _apuesta) {
-			return _apuesta.gananciaBruta().multiply(new BigDecimal(this.descuento())) ;
+			BigDecimal subTotal = new BigDecimal(_apuesta.monto() * _apuesta.cuotaConvenida());
+			return subTotal.multiply(new BigDecimal(this.descuento())).divide(new BigDecimal(100)) ;
 		} 
 }

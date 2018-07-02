@@ -18,13 +18,21 @@ import java.math.BigDecimal;
 			}
 			
 			@Test
-			public void testAlCancelarTiraError() {
-			//	finalSUT.cancelar(stubApuesta);
+			public void testAlCancelarTiraError() throws Exception {
+				finalSUT.cancelar(stubApuesta);
+				verify(stubApuesta, never());
 				//Falta implementar, como corroborar que la excepcion se lance?
 			}
 			
 			@Test
-			public void testLaGananciaBrutaEsCero() {
+			public void testAlReactivarTiraError()throws Exception{
+				finalSUT.reactivar(stubApuesta);
+				verify(stubApuesta, never());
+				//Falta implementar, como corroborar que la excepcion se lance?
+			}
+			
+			@Test
+			public void testLaGananciaBrutaEsLaMultiplicacionEntreLaCuotaConvenidaYElMonto() {
 				Float dos = new Float(2);
 				Float cuatro = new Float(4);
 				
@@ -33,11 +41,5 @@ import java.math.BigDecimal;
 				
 				BigDecimal esperado = new BigDecimal(dos * cuatro); 
 				assertEquals(esperado, finalSUT.gananciaBruta(stubApuesta));
-			}
-			@Test
-			public void testAlReactivarTiraError(){
-				//	finalSUT.reactivar(stubApuesta);
-				//Falta implementar, como corroborar que la excepcion se lance?
-		
 			}
 }

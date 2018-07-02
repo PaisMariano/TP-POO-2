@@ -30,12 +30,8 @@ public  class Apuesta {
 			tipo = _tipo;
 		}
 
-		private void setMonto(Float _monto) {
+		public void setMonto(Float _monto) {
 			montoApostado = _monto;	
-		}
-		
-		private Exception errorSaldoIncorrecto() {
-			return new Exception("Saldo incorrecto");
 		}
 		
 		public Float monto() {

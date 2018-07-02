@@ -20,7 +20,7 @@ public class Final implements TipoApuesta {
 	}
 	
 	private Exception errorApuestaFinal() {
-		return new Exception("Este tipo de apuesta no puede ser cancelada o reactivada. ");
+		return new Exception("Este tipo de apuesta no puede ser cancelada o reactivada.");
 	}
 
 }
