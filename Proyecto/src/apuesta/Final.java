@@ -6,17 +6,21 @@ public class Final implements TipoApuesta {
 
 	@Override
 	public void cancelar(Apuesta _apuesta) {
-		// Error? No deberia llegar aca, no es cancelable.
+		this.errorApuestaFinal();
 	}
 
 	@Override
 	public void reactivar(Apuesta _apuesta) {
-		// Error? No deberia llegar aca, no es reactivable entonces no es cancelable.
+		this.errorApuestaFinal();
 	}
 
 	@Override
 	public BigDecimal gananciaBruta(Apuesta _apuesta) {
-		return _apuesta.gananciaBruta(); 
+		return new BigDecimal (_apuesta.cuotaConvenida() * _apuesta.monto());
+	}
+	
+	private Exception errorApuestaFinal() {
+		return new Exception("Este tipo de apuesta no puede ser cancelada o reactivada. ");
 	}
 
 }

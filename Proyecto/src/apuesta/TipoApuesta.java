@@ -9,5 +9,4 @@ public interface TipoApuesta {
 		public abstract void cancelar(Apuesta _apuesta);
 
 		public abstract void reactivar(Apuesta _apuesta);
-		
 }

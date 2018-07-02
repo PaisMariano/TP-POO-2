@@ -16,11 +16,10 @@ public  class Apuesta {
 	private Float cuotaConvenida;
 	
 	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo) {
-		this.setMonto(_monto);// Si monto <= 0, error.
+			this.setMonto(_monto);
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
 		this.setTipo(_tipo);
-		//cuotaConvenida = _evento.cuota(_casa, _resultado) Aca lo que quiero es lo que pagaba de cuota ese partido en ese momento;
 	}
 	
 		private void setResultadoAlQueSeApuesta(Resultado _resultado) {
@@ -32,7 +31,14 @@ public  class Apuesta {
 		}
 
 		private void setMonto(Float _monto) {
+			if(_monto < 0) {
+				this.errorSaldoIncorrecto();
+			}
 			montoApostado = _monto;	
+		}
+		
+		private Exception errorSaldoIncorrecto() {
+			return new Exception("Saldo incorrecto");
 		}
 		
 		public Float monto() {
@@ -43,20 +49,20 @@ public  class Apuesta {
 			return eventoDeportivo.empezoEvento();
 		}
 		
-		public BigDecimal gananciagananciaBruta() {
+		public BigDecimal gananciaBruta() {
 			return tipo.gananciaBruta(this);
 		}
 		
-		private Float cuotaConvenida() {
-			return cuotaConvenida;
+		Float cuotaConvenida() {
+			return resultadoApostado.getCuotaApuesta(eventoDeportivo, resultadoApostado);
 		}
 
 		public Resultado getResultadoApostado() {
 			return resultadoApostado;
 		}
 
-		public BigDecimal gananciaNeta() { //X q esto devuelve la ganancia gananciaBruta
-			return this.gananciagananciaBruta();
+		public BigDecimal gananciaNeta() { 
+			return this.gananciaBruta().subtract(new BigDecimal (montoApostado)) ;
 		}
 		
 		public void cancelar() {
@@ -67,20 +73,12 @@ public  class Apuesta {
 			tipo.reactivar(this);		
 		}
 
-		//este metodo es comun para cualquier tipo de apuesta. Pero no se conserva 
-		private void cancelarApuesta(){
+		void cancelarApuesta(){
 			this.setTipo(new Cancelada());			
 		}
 		
-		//La unica apuesta que se puede cancelar es la segura. Al reactivar vuelve al mismo tipo. 
-		//Sino deberia de guardarse el ultimo tipo en una variable para volver a el, en caso de que haya mas tipos de apuestas que 			
-		//puedan ser cancelables.  		
 		public void reactivarApuesta(){
 			this.setTipo(new Segura());
-		}
-
-		public BigDecimal gananciaBruta(){
-			return new BigDecimal(this.cuotaConvenida() - this.monto());
 		}
 
 		public Boolean esAcertada(){
@@ -129,15 +127,8 @@ public  class Apuesta {
 		public Interesante getEventoDeInteres() {
 			return eventoDeportivo;
 		}
-
 		
-		public boolean esApuestaDelMes(int unMes) {
-			
-			
+		public boolean esApuestaDelMes(int unMes) {	
 			return this.eventoDeportivo.estaFinalizado() && this.eventoDeportivo.esDelMes(unMes); 
 		}
-		
-		
-		
-
 }
