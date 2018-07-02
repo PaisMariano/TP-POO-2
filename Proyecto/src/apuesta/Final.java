@@ -2,7 +2,7 @@ package apuesta;
 
 import java.math.BigDecimal;
 
-public class Final implements TipoApuesta {
+public class Final extends TipoApuesta {
 
 	@Override
 	public void cancelar(Apuesta _apuesta) {
@@ -16,7 +16,7 @@ public class Final implements TipoApuesta {
 
 	@Override
 	public BigDecimal gananciaBruta(Apuesta _apuesta) {
-		return new BigDecimal (_apuesta.cuotaConvenida() * _apuesta.monto());
+		return super.gananciaBruta(_apuesta);
 	}
 	
 	private Exception errorApuestaFinal() {

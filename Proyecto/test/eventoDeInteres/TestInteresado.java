@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import apuesta.Apuesta;
+import apuesta.ITipoApuesta;
 import apuesta.TipoApuesta;
 import casaDeApuesta.CasaDeApuestas;
 import eventoDeInteres.Interesado;

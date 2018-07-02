@@ -2,7 +2,7 @@ package apuesta;
 
 import java.math.BigDecimal;
 
-public class Segura implements TipoApuesta { 
+public class Segura extends TipoApuesta { 
 	private Float porcentajeDescuento;
 	
 	public Segura() {
@@ -22,19 +22,8 @@ public class Segura implements TipoApuesta {
 		}
 	
 		@Override
-		public void cancelar(Apuesta _apuesta) {
-			//Asumimos que una apuesta segura tiene que ser >= a $200?  		
-			_apuesta.cancelarSiSePuede();
-		}
-	
-		@Override
-		public void reactivar(Apuesta _apuesta){
-			_apuesta.reactivarApuesta();	
-		}
-	
-		@Override
 		public BigDecimal gananciaBruta(Apuesta _apuesta) {
-			BigDecimal subTotal = new BigDecimal(_apuesta.monto() * _apuesta.cuotaConvenida());
+			BigDecimal subTotal = super.gananciaBruta(_apuesta);
 			return subTotal.multiply(new BigDecimal(this.descuento())).divide(new BigDecimal(100)) ;
 		} 
 }

@@ -22,12 +22,12 @@ public  class Apuesta {
 		this.setTipo(_tipo);
 	}
 	
-		private void setResultadoAlQueSeApuesta(Resultado _resultado) {
-			resultadoApostado = _resultado;
+		public void setTipo(TipoApuesta _tipo) {
+			tipo = _tipo;
 		}
 
-		private void setTipo(TipoApuesta _tipo){
-			tipo = _tipo;
+		private void setResultadoAlQueSeApuesta(Resultado _resultado) {
+			resultadoApostado = _resultado;
 		}
 
 		public void setMonto(Float _monto) {
@@ -66,11 +66,11 @@ public  class Apuesta {
 			tipo.reactivar(this);		
 		}
 
-		void cancelarApuesta(){
+		void cambiarElTipoDeApuestaACancelada(){
 			this.setTipo(new Cancelada());			
 		}
 		
-		public void reactivarApuesta(){
+		public void cambiarElTipoDeApuestaASegura(){
 			this.setTipo(new Segura());
 		}
 
@@ -101,7 +101,7 @@ public  class Apuesta {
 		}	
 		
 		private void cancelarApuestaRestandole(Float unMonto) {
-			this.cancelarApuesta();
+			this.cambiarElTipoDeApuestaACancelada();
 			this.restarAlMonto(unMonto);
 		}
 

@@ -44,4 +44,12 @@ public class TestSegura {
 			BigDecimal esperado = new BigDecimal(170);
 			assertEquals(esperado, segura.gananciaBruta(apuesta));
 		}
+		
+		@Test
+		public void testLaGanaciaBrutaEs0() {
+			when(apuesta.cuotaConvenida()).thenReturn(new Float(200));
+			when(apuesta.monto()).thenReturn(new Float(0));
+			BigDecimal esperado = new BigDecimal(0);
+			assertEquals(esperado, segura.gananciaBruta(apuesta));
+		}
 }

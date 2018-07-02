@@ -10,7 +10,7 @@ import java.util.List;
 import usuarios.User;
 import algoritmo.*;
 import apuesta.Apuesta;
-import apuesta.TipoApuesta;
+import apuesta.ITipoApuesta;
 import eventoDeInteres.Interesado;
 import eventoDeInteres.Interesante;
 import eventoDeportivo.*;

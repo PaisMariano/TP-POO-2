@@ -2,11 +2,18 @@ package apuesta;
 
 import java.math.BigDecimal;
 
-public interface TipoApuesta {
-		
-		public abstract BigDecimal gananciaBruta(Apuesta _apuesta);
+public abstract class TipoApuesta {
 
-		public abstract void cancelar(Apuesta _apuesta);
-
-		public abstract void reactivar(Apuesta _apuesta);
+	public BigDecimal gananciaBruta(Apuesta _apuesta) {
+		return new BigDecimal(_apuesta.monto() * _apuesta.cuotaConvenida());
+	}
+	
+	public void cancelar(Apuesta _apuesta) {
+		_apuesta.elEstadoDelPartidoDeLaApuesta().cancelar(_apuesta);
+	}
+	
+	public void reactivar(Apuesta _apuesta) {
+		_apuesta.elEstadoDelPartidoDeLaApuesta().reactivar(_apuesta);
+	}
+	
 }
