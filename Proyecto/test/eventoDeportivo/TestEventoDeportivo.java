@@ -96,44 +96,8 @@ public class TestEventoDeportivo {
 		unEventoDeportivo.setResultado(resultadoGanadorRiver);
 		assertEquals(unEventoDeportivo.getResultado(),resultadoGanadorRiver);
 		assertTrue(unEventoDeportivo.participaronVs(boca ,river));
-	} 
-	
-		
-	
-	
-		/*
-		 * 
-		 * 
-		 * 
-		
-	//dummyCasa, unDeporteFutbol, river, boca, fechaYHora, "Francia"
-	@Test 
-	public void testAlCrearUnEventoDeportivoSeCalCulanLasCuotas() {
-		otroEventoDeportivo= mock(EventoDeportivo.class);
-	//	new EventoDeportivo(dummyCasa, unDeporteFutbol, river, boca, fechaYHora, "Francia")).calcularCuota((float)100);
-	
-		dummyCasa.calcularProbabilidadGanador(river, boca)
-		when(dummyCasa.calcularProbabilidadGanador(river, boca)).thenReturn(new Float(100));
-		when(dummyCasa.calcularProbabilidadGanador(river, boca)).thenReturn(new Float(100));
-		
-		verify(otroEventoDeportivo)
-		//when(mockEventoDeportivo.getCuotaEmpate()).thenReturn(new Float(200));
-		//when(mockEventoDeportivo.getCuotaOponente2()).thenReturn(new Float(300));
-		
-		 assertEquals(mockEventoDeportivo.getCuotaOponente1(),(float)100,0);
-		 assertEquals( mockEventoDeportivo.getCuotaEmpate(),(float)(200),0);
-		 assertEquals(mockEventoDeportivo.getCuotaOponente2(),(float)300,0);		
-		
-		
-	}
-	
-	
+	}	
 
-	/*
-	@Test
-	public void testEsDeUnDeterminadoDeporte() {
-		assertTrue(unEventoDeportivo.esDeDeporte(unDeporte));
-	}
 	
 	@Test
 	public void testNoEsDeUnDeterminadoDeporte() {
@@ -161,7 +125,7 @@ public class TestEventoDeportivo {
 		Date fechaCualquiera = new Date(4, 4, 4);
 		assertFalse(unEventoDeportivo.sucedioEn(fechaCualquiera));
 	}
-	*/
+	
 }
 
 
