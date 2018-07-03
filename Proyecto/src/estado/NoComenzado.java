@@ -5,16 +5,26 @@ import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacio
 
 public class NoComenzado extends EstadoEventoDeportivo implements FactorDeCancelacionOReactivacionDeApuesta{
 	@Override
-	public Boolean noHacomenzado()  {
+	public boolean noHacomenzado()  {
 		return true;
 	}
 	@Override
 		public  void cancelar(Apuesta _apuesta){
-			_apuesta.cancelarApuestaConPartidoNoComenzado();
+			//_apuesta.cancelarApuestaConPartidoNoComenzado();
 		}
 	@Override
 		public  void reactivar(Apuesta _apuesta){
-			_apuesta.reactivarApuesta();
+			_apuesta.cambiarElTipoDeApuestaASegura();
 		}
+	@Override
+	public void setPenalidad(Float _penalidad) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Float getPenalidad() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 }

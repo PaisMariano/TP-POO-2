@@ -2,7 +2,7 @@ package apuesta;
 
 import java.math.BigDecimal;
 
-public class Cancelada implements TipoApuesta {
+public class Cancelada extends TipoApuesta {
 	
 	public Cancelada() {
 		
@@ -13,12 +13,6 @@ public class Cancelada implements TipoApuesta {
 			this.errorDeApuestaCancelada();
 		}
 		
-		@Override
-		//Depende del estado del partido si se puede o no
-		public void reactivar(Apuesta _apuesta) {
-			_apuesta.reactivarSiPuede();
-		}
-	
 		@Override
 		public BigDecimal gananciaBruta(Apuesta _apuesta){
 			return new BigDecimal(0);

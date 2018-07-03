@@ -13,32 +13,25 @@ public  class Apuesta {
 	private EventoDeportivo eventoDeportivo;
 	private Resultado resultadoApostado;
 	private TipoApuesta tipo;
-	private Float cuotaConvenida;
 	
 	public Apuesta(Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo) {
-			this.setMonto(_monto);
+		// _monto > 0
+		this.setMonto(_monto);
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
 		this.setTipo(_tipo);
 	}
 	
+		public void setTipo(TipoApuesta _tipo) {
+			tipo = _tipo;
+		}
+
 		private void setResultadoAlQueSeApuesta(Resultado _resultado) {
 			resultadoApostado = _resultado;
 		}
 
-		private void setTipo(TipoApuesta _tipo){
-			tipo = _tipo;
-		}
-
-		private void setMonto(Float _monto) {
-			if(_monto < 0) {
-				this.errorSaldoIncorrecto();
-			}
+		public void setMonto(Float _monto) {
 			montoApostado = _monto;	
-		}
-		
-		private Exception errorSaldoIncorrecto() {
-			return new Exception("Saldo incorrecto");
 		}
 		
 		public Float monto() {
@@ -46,7 +39,7 @@ public  class Apuesta {
 		}
 		
 		public Boolean empezoEvento() {
-			return eventoDeportivo.empezoEvento();
+			return eventoDeportivo.haComenzado();
 		}
 		
 		public BigDecimal gananciaBruta() {
@@ -73,43 +66,21 @@ public  class Apuesta {
 			tipo.reactivar(this);		
 		}
 
-		void cancelarApuesta(){
+		public void cambiarElTipoDeApuestaACancelada(){
 			this.setTipo(new Cancelada());			
 		}
 		
-		public void reactivarApuesta(){
+		public void cambiarElTipoDeApuestaASegura(){
 			this.setTipo(new Segura());
 		}
 
-		public Boolean esAcertada(){
+		public boolean esAcertada(){
 			return this.getResultadoApostado().getApostado().equals(eventoDeportivo.getGanador());
-		}
-
-		public void cancelarApuestaConPartidoNoComenzado() {
-			this.cancelarApuestaRestandole(this.penalidadPartidoNoComenzado());//Asumimos que el monto es mayor a 200.
-		}
-		
-		private void restarAlMonto(Float unaPenalidad) {
-			this.setMonto(Math.max(this.montoApostado - unaPenalidad, new Float(0))); //El maximo entre 0 y el monto menos la penalidad. Con esto salvo la diferencia de si la apuesta es menor a 200$
 		}
 		
 		private Float penalidadPartidoNoComenzado() {
 			Float descuentoDe200pesos = new Float(200); 
 			return descuentoDe200pesos;
-		}
-
-		public void cancelarApuestaConPartidoEnJuego() {
-			this.cancelarApuestaRestandole(this.penalidadPartidoEnJuego());
-		}
-
-		private Float penalidadPartidoEnJuego() {
-			Float descuentoPorcentaje = new Float(30);
-			return this.montoApostado * descuentoPorcentaje;
-		}	
-		
-		private void cancelarApuestaRestandole(Float unMonto) {
-			this.cancelarApuesta();
-			this.restarAlMonto(unMonto);
 		}
 
 		public void cancelarSiSePuede() {
@@ -130,5 +101,9 @@ public  class Apuesta {
 		
 		public boolean esApuestaDelMes(int unMes) {	
 			return this.eventoDeportivo.estaFinalizado() && this.eventoDeportivo.esDelMes(unMes); 
+		}
+
+		public void reducirMontoConPenalidad(Float i) {
+			montoApostado += i;
 		}
 }

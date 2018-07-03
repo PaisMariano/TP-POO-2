@@ -65,21 +65,4 @@ public class TestBuscador {
 		buscador.realizarBusquedaEn(eventos, spyOperacionLogica);
 		verify(spyOperacionLogica).getValor(eventos);
 	}
-	
-	@Test //Ver
-	public void testDevuelveUnaListaVaciaCuandoElCriterioNoSeCumplePorNingunEvento() {
-		verify(spyValorLogico).getValor(eventos);
-	}
-	
-	@Test //Ver
-	public void testDevuelveUnaListaConUnSoloElementoCuandoElCriterioSeCumplePorUnSoloEvento() {  
-		buscador.realizarBusquedaEn(eventos, spyValorLogico);
-		verify(spyValorLogico).getValor(eventos);
-	}
-	
-	@Test //Ver
-	public void testDevuelveUnaListaConDosElementosCuandoElCriterioSeCumplePorDosEventos() {
-		buscador.realizarBusquedaEn(eventos, spyValorLogico);
-		verify(spyValorLogico).getValor(eventos);
-	}
 }

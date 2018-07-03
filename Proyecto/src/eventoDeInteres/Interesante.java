@@ -9,16 +9,10 @@ import eventoDeportivo.EventoDeportivo;
 
 public abstract class Interesante {//Observer
 	protected List<Interesado> interesados;
-	private EventoDeportivo evento;
-	
+
 	public Interesante() {
 		this.setInteresados(new ArrayList<Interesado>());
 	}
-	
-		public Interesante(EventoDeportivo _evento) {
-			evento = _evento;
-			this.setInteresados(new ArrayList<Interesado>());
-		}
 	
 		public void notificarCambio() {
 			for(Interesado interesado : interesados) {
@@ -33,17 +27,14 @@ public abstract class Interesante {//Observer
 		public void setInteresados(List<Interesado> _interesados) {
 			interesados = _interesados;
 		}
-		
-		public boolean haComenzado() {
-			return evento.empezoEvento();
-		}
-		
-		public boolean haTerminado() {
-			return evento.estaFinalizado();
-		}
 
 		public List<Interesado> interesados() {
 			return interesados;
 		}
 
+		public abstract  boolean haComenzado();	
+		
+		public abstract boolean haTerminado();
+		
+		
 }

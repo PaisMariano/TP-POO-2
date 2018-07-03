@@ -1,11 +1,10 @@
 package usuarios;
 
-import java.math.BigDecimal;
+import java.math.BigDecimal; 
 import java.util.ArrayList; 
 import java.util.List;
 
 import apuesta.Apuesta;
-import casaDeApuesta.CasaDeApuestas;
 import eventoDeInteres.Interesado;
 import eventoDeInteres.Interesante;
 
@@ -15,7 +14,7 @@ public class User extends Interesado{
 	
 		public User(String _mail){
 			this.setMail(_mail);
-			apuestas = new ArrayList<Apuesta>(0);
+			apuestas = new ArrayList<Apuesta>();
 		}
 		
 			public void setMail(String _mail) {
@@ -30,9 +29,10 @@ public class User extends Interesado{
 				return total;
 			}
 			
+			
 			private List<Apuesta> apuestasDelMes(int unMes) {
 				List<Apuesta> apuestasDelMes= new ArrayList<Apuesta>();
-				
+			
 				for(Apuesta ap: apuestas) {
 					if(ap.esApuestaDelMes(unMes)) {
 						apuestasDelMes.add(ap);
@@ -52,12 +52,14 @@ public class User extends Interesado{
 		
 			public void agregarNuevaApuesta(Apuesta _apuesta) {
 				apuestas.add(_apuesta);
+				_apuesta.getEventoDeInteres().agregarInteresado(this);
 			}
 			
 			public List<Apuesta> apuestasPropias(){			
 				return apuestas;	
 			}
 	
+			@Override
 			public boolean leInteresa(Interesante eventoDeInteres) {
 				return this.apostoAEsteEvento(eventoDeInteres);
 			}
@@ -70,11 +72,11 @@ public class User extends Interesado{
 				return listaDePartidosApostados.contains(eventoDeInteres);
 			}
 
+			
+			
 			public String getMail() {
+
 				return this.mail ;
 			}
-
 			
-	
-		
 }

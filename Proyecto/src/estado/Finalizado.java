@@ -10,8 +10,8 @@ public class Finalizado extends EstadoEventoDeportivo  implements FactorDeCancel
 	}
 	
 		@Override
-		public Boolean estaFinalizado() {
-			return new Boolean(true);
+		public boolean estaFinalizado() {
+			return true;
 		}
 
 		@Override
@@ -22,6 +22,18 @@ public class Finalizado extends EstadoEventoDeportivo  implements FactorDeCancel
 		@Override
 		public void reactivar(Apuesta _apuesta){
 			//Tampoco deberia ser reactivada con el partido finalizado.
+		}
+
+		@Override
+		public void setPenalidad(Float _penalidad) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Float getPenalidad() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 }
