@@ -4,40 +4,29 @@ import apuesta.Apuesta;
 import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacionDeApuesta;
 
 public class EnJuego extends EstadoEventoDeportivo implements FactorDeCancelacionOReactivacionDeApuesta{
-	private Float penalidad;
-
+ 
 		public EnJuego(){
-			this.setPenalidad(new Float(200));
+			super(new Float(30));
 		}
 		
+			public Float penalidad(Apuesta _apuesta) {
+				return _apuesta.monto() * penalidad / new Float(100);
+			}
 		
-		@Override
-		public void setPenalidad(Float _penalidad) {
-			penalidad = _penalidad;
-		}
-		
-		public Float getPenalidad() {
-			return penalidad;
-		}
-	
-		@Override
-		public void cancelar(Apuesta _apuesta) {
+			@Override
+			public void cancelar(Apuesta _apuesta) {
 				_apuesta.cambiarElTipoDeApuestaACancelada();
-				_apuesta.reducirMontoConPenalidad(this.penalidad());
-		}
+				_apuesta.reducirMontoConPenalidad(this.penalidad(_apuesta));
+			}
 	
-		private Float penalidad() {
-			return penalidad;
-		}
-
-		@Override
-		public void reactivar(Apuesta _apuesta){
-			//No puede ser reactivada. Excepcion?
-		}
-
-		@Override
-		public boolean estaEmpezado() {
-			return true;
-		}
+			@Override
+			public void reactivar(Apuesta _apuesta){
+				//Rompe - Con el partido en juego no se puede reactivar.
+			}
+	
+			@Override
+			public boolean estaEmpezado() {
+				return true;
+			}
 
 }

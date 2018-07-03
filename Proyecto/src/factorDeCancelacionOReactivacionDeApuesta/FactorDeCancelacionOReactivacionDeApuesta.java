@@ -8,7 +8,4 @@ public interface FactorDeCancelacionOReactivacionDeApuesta {
 	
 	public void reactivar(Apuesta _apuesta);
 
-	public void setPenalidad(Float _penalidad);
-	
-	public Float getPenalidad();
 }

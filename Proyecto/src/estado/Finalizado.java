@@ -6,7 +6,7 @@ import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacio
 public class Finalizado extends EstadoEventoDeportivo  implements FactorDeCancelacionOReactivacionDeApuesta{
 	
 	public Finalizado() {
-		
+		super(new Float(0));//No tiene penalizacion. Pero podria tenerla.
 	}
 	
 		@Override
@@ -16,24 +16,11 @@ public class Finalizado extends EstadoEventoDeportivo  implements FactorDeCancel
 
 		@Override
 		public void cancelar(Apuesta _apuesta) {
-			//NO puede ser cancelada. Excepcion?
+			//No puede ser cancelada. Excepcion
 		}
 
 		@Override
 		public void reactivar(Apuesta _apuesta){
-			//Tampoco deberia ser reactivada con el partido finalizado.
+			//No puede ser cancelada. Excepcion
 		}
-
-		@Override
-		public void setPenalidad(Float _penalidad) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public Float getPenalidad() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
 }

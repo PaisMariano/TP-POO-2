@@ -19,8 +19,14 @@ public class TestFinalizado {
 		}
 	
 		@Test
-		public void test() {
-			fail("Not yet implemented");
+		public void testSeLePideCancelarALaApuestaYFalla() {
+			//Lanza excepcion
+		}
+		
+		@Test
+		public void testSeLePideReactivarALaApuestaYFalla() {
+			//Lanza excepcion
+			//Esto tiene que romper
 		}
 
 }

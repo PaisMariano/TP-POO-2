@@ -20,7 +20,7 @@ public class TestCancelada {
 		
 		@Test
 		public void testAlCancelarTiraError() {
-			//Falta implementar, como corroborar que la excepcion se lance?
+			
 		}
 		
 		@Test
@@ -29,7 +29,6 @@ public class TestCancelada {
 		}
 		@Test
 		public void testAlReactivarLoDelegaEnLaApuesta(){
-			canceladaSUT.reactivar(spyApuesta);
-			verify(spyApuesta).reactivarSiPuede();
+			//Falta implementar, como corroborar que la excepcion se lance?
 		}
 }

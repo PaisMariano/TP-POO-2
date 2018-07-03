@@ -78,23 +78,6 @@ public  class Apuesta {
 			return this.getResultadoApostado().getApostado().equals(eventoDeportivo.getGanador());
 		}
 		
-		private Float penalidadPartidoNoComenzado() {
-			Float descuentoDe200pesos = new Float(200); 
-			return descuentoDe200pesos;
-		}
-
-		public void cancelarSiSePuede() {
-			this.elEstadoDelPartidoDeLaApuesta().cancelar(this);
-		}
-
-		public void reactivarSiPuede() {
-			this.elEstadoDelPartidoDeLaApuesta().reactivar(this);
-		}
-		
-		public EstadoEventoDeportivo elEstadoDelPartidoDeLaApuesta() {
-			return eventoDeportivo.getEstado();
-		}
-
 		public Interesante getEventoDeInteres() {
 			return eventoDeportivo;
 		}
@@ -104,6 +87,10 @@ public  class Apuesta {
 		}
 
 		public void reducirMontoConPenalidad(Float i) {
-			montoApostado += i;
+			montoApostado -= i;
+		}
+
+		public EstadoEventoDeportivo elEstadoDelPartidoDeLaApuesta() {
+			return eventoDeportivo.getEstado();
 		}
 }
