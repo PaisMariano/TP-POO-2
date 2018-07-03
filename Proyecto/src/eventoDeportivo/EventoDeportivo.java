@@ -53,9 +53,6 @@ public class EventoDeportivo extends Interesante {
 			public Boolean estaFinalizado() {
 				return estado.estaFinalizado();
 			}
-			public Boolean noHaComenzado() {
-				return estado.noHacomenzado();
-			}
 			
 			public Boolean empezoEvento() {
 				return  (this.estado.estaEmpezado());

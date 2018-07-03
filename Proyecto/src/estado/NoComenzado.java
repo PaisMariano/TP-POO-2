@@ -8,11 +8,6 @@ public class NoComenzado extends EstadoEventoDeportivo implements FactorDeCancel
 		public NoComenzado() {
 			super(new Float(200));
 		}
-	
-			@Override
-			public boolean noHacomenzado()  {
-				return true;
-			}
 		
 			@Override
 			public void cancelar(Apuesta _apuesta) {

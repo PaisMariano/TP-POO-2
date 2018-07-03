@@ -16,10 +16,6 @@ public abstract class EstadoEventoDeportivo implements FactorDeCancelacionOReact
 		public boolean estaEmpezado() {
 			return false;
 		} 
-	
-		public boolean noHacomenzado() {
-			return false;
-		}
 		
 		public void setPenalidad(Float _penalidad) {
 			penalidad = _penalidad;

@@ -11,6 +11,7 @@ import usuarios.User;
 import algoritmo.*;
 import apuesta.Apuesta;
 import apuesta.ITipoApuesta;
+import apuesta.TipoApuesta;
 import criterio.Buscador;
 import eventoDeInteres.Interesado;
 import eventoDeInteres.Interesante;
@@ -28,7 +29,6 @@ public class CasaDeApuestas extends Interesado{
 	private Buscador buscador;
 	private List<EventoDeportivo> eventos;
 
-	
 		public CasaDeApuestas() {
 			usuarios = new ArrayList<User>();
 			eventos = new ArrayList<EventoDeportivo>();	
@@ -73,7 +73,13 @@ public class CasaDeApuestas extends Interesado{
 			}
 			
 			public List<EventoDeportivo> buscar(ExpresionLogica _expresion){
-				return buscador.realizarBusquedaEn(eventos, _expresion);
+				return buscador.realizarBusquedaEn(this.getEventosFinalizados(), _expresion);
+			}
+			
+			public void crearApuesta(User _user, Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo ) {
+				//Try catch la excepcion !usuarios.contains(_user)?
+				Apuesta nuevaApuesta = new Apuesta(_monto, _evento, _resultado, _tipo);
+				_user.agregarNuevaApuesta(nuevaApuesta);
 			}
 			
 			
