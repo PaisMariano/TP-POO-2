@@ -17,10 +17,12 @@ import java.math.BigDecimal;
 
 public class TestApuesta {
 	private Apuesta apuestaSUT;
+	private Apuesta apuestaSpy;
 	private EventoDeportivo spyEvento;
 	private Resultado spyResultado;
 	private TipoApuesta spyTipo;
 	private Float monto;
+	
 	
 	@Before
 	public void setUp(){
@@ -29,6 +31,8 @@ public class TestApuesta {
 		spyResultado = mock(Resultado.class);
 		spyTipo = mock(TipoApuesta.class);
 		apuestaSUT = new Apuesta(monto, spyEvento, spyResultado, spyTipo);
+		apuestaSpy = mock(Apuesta.class);
+		
 	}
 	
 	@Test
@@ -131,6 +135,15 @@ public class TestApuesta {
 		apuestaSUT.setMonto(new Float(32));
 		apuestaSUT.reducirMontoConPenalidad(new Float(16));
 		assertEquals(new Float(16), apuestaSUT.monto());
+	}
+	
+	@Test
+	public void testCambiarElTipoDeApuestaACancelada(){
+			
+		
+		this.apuestaSpy.cambiarElTipoDeApuestaACancelada();
+				
+		
 	}
 
 }

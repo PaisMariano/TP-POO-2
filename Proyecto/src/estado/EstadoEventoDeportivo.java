@@ -22,8 +22,7 @@ public abstract class EstadoEventoDeportivo implements FactorDeCancelacionOReact
 			penalidad = _penalidad;
 		}
 	
-		@Override
-		public Float penalidad(Apuesta _apuesta) {
-			return penalidad;
-		}
+		
+		public abstract Float penalidad(Apuesta _apuesta);
+		
 }

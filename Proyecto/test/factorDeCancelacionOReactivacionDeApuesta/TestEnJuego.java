@@ -43,4 +43,6 @@ public class TestEnJuego {
 			//Lanza excepcion
 			enJuego.reactivar(apuesta);
 		}
+		
+
 }
