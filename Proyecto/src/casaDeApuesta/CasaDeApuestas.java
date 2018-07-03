@@ -76,12 +76,7 @@ public class CasaDeApuestas extends Interesado{
 				return buscador.realizarBusquedaEn(this.getEventosFinalizados(), _expresion);
 			}
 			
-			public void crearApuesta(User _user, Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo ) {
-				//Try catch la excepcion !usuarios.contains(_user)?
-				Apuesta nuevaApuesta = new Apuesta(_monto, _evento, _resultado, _tipo);
-				_user.agregarNuevaApuesta(nuevaApuesta);
-			}
-			
+		
 			
 			public void notificarBalanceUsuarios(int unMes) {
 				for(User user : this.usuarios) {									
