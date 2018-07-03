@@ -4,27 +4,24 @@ import apuesta.Apuesta;
 import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacionDeApuesta;
 
 public class NoComenzado extends EstadoEventoDeportivo implements FactorDeCancelacionOReactivacionDeApuesta{
-	@Override
-	public boolean noHacomenzado()  {
-		return true;
-	}
-	@Override
-		public  void cancelar(Apuesta _apuesta){
-			//_apuesta.cancelarApuestaConPartidoNoComenzado();
+	
+		public NoComenzado() {
+			super(new Float(200));
 		}
-	@Override
-		public  void reactivar(Apuesta _apuesta){
-			_apuesta.cambiarElTipoDeApuestaASegura();
-		}
-	@Override
-	public void setPenalidad(Float _penalidad) {
-		// TODO Auto-generated method stub
 		
-	}
-	@Override
-	public Float getPenalidad() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+			@Override
+			public void cancelar(Apuesta _apuesta) {
+				_apuesta.cambiarElTipoDeApuestaACancelada();
+				_apuesta.reducirMontoConPenalidad(this.penalidad(_apuesta));
+			}
 		
+			@Override
+			public void reactivar(Apuesta _apuesta){
+				_apuesta.cambiarElTipoDeApuestaASegura();
+			}
+
+			@Override
+			public Float penalidad(Apuesta _apuesta) {
+				return penalidad;
+			}
 }

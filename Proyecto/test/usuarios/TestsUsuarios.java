@@ -21,38 +21,45 @@ import java.util.Date;
 import usuarios.*;
 
 public class TestsUsuarios{
-		
+		User usuario1;
  		Apuesta apuestaMockEnero,apuestaMockJunio,apuesta;
  		EventoDeportivo eventoDeportivoMock,eventoDeportivoMock2;
- 		User usuario1;
+ 		
  		Interesante interesanteMock;
  		Resultado resultado;
  		Segura tipoDeApuesta;
  		
  		@Before
 		public	void setUp() throws Exception {
+
+		usuario1 = new User("pepe@gmail.com"); 
+
+		apuestaMockEnero = mock(Apuesta.class);
+		apuestaMockJunio = mock(Apuesta.class);
  		resultado = mock(Resultado.class);
  		tipoDeApuesta = mock(Segura.class);
 		eventoDeportivoMock2=mock(EventoDeportivo.class);
 		eventoDeportivoMock= mock(EventoDeportivo.class);
 		apuesta=new Apuesta((float)10,eventoDeportivoMock,resultado,tipoDeApuesta);
-		usuario1 = new User("pepe@gmail.com"); 
-		apuestaMockEnero = mock(Apuesta.class);
-		apuestaMockJunio = mock(Apuesta.class);
+
+		when(apuestaMockJunio.getEventoDeInteres()).thenReturn(eventoDeportivoMock);
+		when(apuestaMockEnero.getEventoDeInteres()).thenReturn(eventoDeportivoMock);
+
  		}
  		
 
- 	 	/*
+ 	 	
  	@Test
  	public void testSeAgregaUnaApuestaAlUsuarioYSeIncrementanLasPropias() {
  		
+
  		assertTrue(usuario1.apuestasPropias().isEmpty());
  		
  		usuario1.agregarNuevaApuesta(apuestaMockEnero);
- 		//assertEquals(usuario1.apuestasPropias().size(),1);
+ 		assertEquals(usuario1.apuestasPropias().size(),1);
  				
  	}
- 	*/
+ 	
 	@Test
 	public	void testLasGanaciasNetasYBrutasSeDeterminanSegunElMes(){
 
@@ -79,11 +86,7 @@ public class TestsUsuarios{
 		
 		
 	}
-	/*
-	//Leer: Esto forma parte del comportamiento de Interesado/Interesante, ya lo testeo ahi. Si queres Copia y pega, pero sin borar la 
-	//clase de test de Interesado.
 	
-	//seguir esto, hacer que cuendo se pregunta por un evento que no se hizo apuesta de false.
 	@Test
 	public	void testElUsuarioSeInteresaPorLosEventoQueApuesta() {
 
@@ -94,12 +97,10 @@ public class TestsUsuarios{
 		usuario1.agregarNuevaApuesta(apuestaMockEnero);
 		
 		when(apuestaMockJunio.getEventoDeInteres()).thenReturn(interesanteMock);
-		//when((apuestaMockEnero).get()).thenReturn(new BigDecimal(100));
 		
-			
 		assertTrue(usuario1.leInteresa(interesanteMock));
 		
-	}    */
+	}    
  		
 }
 	

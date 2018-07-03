@@ -11,9 +11,12 @@ import usuarios.User;
 import algoritmo.*;
 import apuesta.Apuesta;
 import apuesta.ITipoApuesta;
+import apuesta.TipoApuesta;
+import criterio.Buscador;
 import eventoDeInteres.Interesado;
 import eventoDeInteres.Interesante;
 import eventoDeportivo.*;
+import expresionLogica.ExpresionLogica;
 import notifier.*;
 import oponentes.*;
 import resultados.Resultado;
@@ -23,16 +26,17 @@ public class CasaDeApuestas extends Interesado{
 	private List<User> usuarios;
 	private AlgoritmoProbabilidades algoritmo; 
 	private BalanceNotifier notifier;
+	private Buscador buscador;
 	private List<EventoDeportivo> eventos;
 
-	
 		public CasaDeApuestas() {
 			usuarios = new ArrayList<User>();
 			eventos = new ArrayList<EventoDeportivo>();	
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
+			this.setBuscador(new Buscador());
 			this.setNotifier(new TextMessageBalanceNotifier());
 		}
-		
+
 		public CasaDeApuestas(List<User> _usuarios, AlgoritmoProbabilidades _algoritmo,BalanceNotifier _notifier, List<EventoDeportivo> _historico) {
 			usuarios = _usuarios;
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
@@ -63,6 +67,21 @@ public class CasaDeApuestas extends Interesado{
 			public  List<EventoDeportivo> getEventosDeportivos(){
 				return this.eventos;	
 			}
+			
+			public void setBuscador(Buscador _buscador) {
+				buscador = _buscador;
+			}
+			
+			public List<EventoDeportivo> buscar(ExpresionLogica _expresion){
+				return buscador.realizarBusquedaEn(this.getEventosFinalizados(), _expresion);
+			}
+			
+			public void crearApuesta(User _user, Float _monto, EventoDeportivo _evento, Resultado _resultado, TipoApuesta _tipo ) {
+				//Try catch la excepcion !usuarios.contains(_user)?
+				Apuesta nuevaApuesta = new Apuesta(_monto, _evento, _resultado, _tipo);
+				_user.agregarNuevaApuesta(nuevaApuesta);
+			}
+			
 			
 			public void notificarBalanceUsuarios(int unMes) {
 				for(User user : this.usuarios) {									

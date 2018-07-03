@@ -62,7 +62,6 @@ public class TestEventoDeportivo {
 
 	@Test
 	public void unEventoDeportivoAlComenzarModificaSuEstado() {
-		assertTrue(unEventoDeportivo.noHaComenzado());
 		assertFalse(unEventoDeportivo.estaFinalizado());
 		assertFalse(unEventoDeportivo.empezoEvento());
 		assertEquals((unEventoDeportivo.getDeporte()),unDeporteFutbol);	

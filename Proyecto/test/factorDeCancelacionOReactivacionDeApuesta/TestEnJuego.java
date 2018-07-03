@@ -9,7 +9,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 public class TestEnJuego {
-	private EstadoEventoDeportivo enJuego;
+	private EnJuego enJuego;
 	private Apuesta apuesta;
 	
 		@Before
@@ -17,16 +17,32 @@ public class TestEnJuego {
 			apuesta = mock(Apuesta.class);
 			enJuego = new EnJuego();
 		}
+		
+		@Test
+		public void testLaPenalidadEsDel30Porciento() {
+			when(apuesta.monto()).thenReturn(new Float(1000));
+		
+			
+			Float total = enJuego.penalidad(apuesta);
+			assertEquals(new Float(300),total);
+		}
 	
 		@Test
-		public void testAlCancelarLaApuestaSeLeCobraUnaPenalidadDe200() {
+		public void testAlCancelarLaApuestaSeLeCobraUnaPenalidadDeL30PorcientoDelMonto() {
+			when(apuesta.monto()).thenReturn(new Float(2000));
+		
 			enJuego.cancelar(apuesta);
+			
 			verify(apuesta).cambiarElTipoDeApuestaACancelada();
-			verify(apuesta).reducirMontoConPenalidad(new Float(200));
+			verify(apuesta).reducirMontoConPenalidad(new Float(600));
 		}
 
 		@Test
-		public void testSePuedeReactivarLaApuesta() {
+		public void testSePuedeReactivarLaApuesta() throws Exception{
 			//Esto tiene que romper
+			//Lanza excepcion
+			enJuego.reactivar(apuesta);
 		}
+		
+
 }

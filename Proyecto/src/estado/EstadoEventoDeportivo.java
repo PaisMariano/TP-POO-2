@@ -1,22 +1,28 @@
 package estado;
 
+import apuesta.Apuesta;
 import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacionDeApuesta;
 
 public abstract class EstadoEventoDeportivo implements FactorDeCancelacionOReactivacionDeApuesta{
-
-	public boolean estaFinalizado() {
-		return false;
+	protected Float penalidad;
+	
+	public EstadoEventoDeportivo(Float _penalidad) {
+		this.setPenalidad(_penalidad);
 	}
 	
-	public boolean estaEmpezado() {
-		return false;
-	} 
-
-	public boolean noHacomenzado() {
-		return false;
-	}
-
-
+		public boolean estaFinalizado() {
+			return false;
+		}
+		
+		public boolean estaEmpezado() {
+			return false;
+		} 
+		
+		public void setPenalidad(Float _penalidad) {
+			penalidad = _penalidad;
+		}
 	
-	
+		
+		public abstract Float penalidad(Apuesta _apuesta);
+		
 }
