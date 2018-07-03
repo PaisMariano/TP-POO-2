@@ -9,6 +9,7 @@ public class EnJuego extends EstadoEventoDeportivo implements FactorDeCancelacio
 			super(new Float(30));
 		}
 		
+			@Override
 			public Float penalidad(Apuesta _apuesta) {
 				return _apuesta.monto() * penalidad / new Float(100);
 			}

@@ -20,14 +20,12 @@ import java.math.BigDecimal;
 			@Test
 			public void testAlCancelarTiraError() throws Exception {
 				finalSUT.cancelar(stubApuesta);
-				verify(stubApuesta, never());
 				//Falta implementar, como corroborar que la excepcion se lance?
 			}
 			
 			@Test
 			public void testAlReactivarTiraError()throws Exception{
 				finalSUT.reactivar(stubApuesta);
-				verify(stubApuesta, never());
 				//Falta implementar, como corroborar que la excepcion se lance?
 			}
 			

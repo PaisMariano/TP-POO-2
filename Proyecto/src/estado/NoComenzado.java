@@ -12,11 +12,16 @@ public class NoComenzado extends EstadoEventoDeportivo implements FactorDeCancel
 			@Override
 			public void cancelar(Apuesta _apuesta) {
 				_apuesta.cambiarElTipoDeApuestaACancelada();
-				_apuesta.reducirMontoConPenalidad(this.penalidad());
+				_apuesta.reducirMontoConPenalidad(this.penalidad(_apuesta));
 			}
 		
 			@Override
 			public void reactivar(Apuesta _apuesta){
 				_apuesta.cambiarElTipoDeApuestaASegura();
+			}
+
+			@Override
+			public Float penalidad(Apuesta _apuesta) {
+				return penalidad;
 			}
 }

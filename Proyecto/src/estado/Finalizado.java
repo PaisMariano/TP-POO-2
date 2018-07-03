@@ -23,4 +23,9 @@ public class Finalizado extends EstadoEventoDeportivo  implements FactorDeCancel
 		public void reactivar(Apuesta _apuesta){
 			//No puede ser cancelada. Excepcion
 		}
+
+		@Override
+		public Float penalidad(Apuesta _apuesta) {
+			return penalidad;
+		}
 }

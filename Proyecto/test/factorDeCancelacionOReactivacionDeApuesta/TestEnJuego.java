@@ -17,6 +17,15 @@ public class TestEnJuego {
 			apuesta = mock(Apuesta.class);
 			enJuego = new EnJuego();
 		}
+		
+		@Test
+		public void testLaPenalidadEsDel30Porciento() {
+			when(apuesta.monto()).thenReturn(new Float(1000));
+		
+			
+			Float total = enJuego.penalidad(apuesta);
+			assertEquals(new Float(300),total);
+		}
 	
 		@Test
 		public void testAlCancelarLaApuestaSeLeCobraUnaPenalidadDeL30PorcientoDelMonto() {
@@ -29,8 +38,9 @@ public class TestEnJuego {
 		}
 
 		@Test
-		public void testSePuedeReactivarLaApuesta() {
+		public void testSePuedeReactivarLaApuesta() throws Exception{
 			//Esto tiene que romper
 			//Lanza excepcion
+			enJuego.reactivar(apuesta);
 		}
 }

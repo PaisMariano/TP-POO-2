@@ -21,6 +21,11 @@ public class TestNoComenzado {
 		}
 		
 		@Test
+		public void testLaPenalidadEsDe200Pesos() {
+			assertEquals(new Float(200), noComenzado.penalidad(apuesta));
+		}
+		
+		@Test
 		public void testAlCancelarLaApuestaSeLeCobraUnaPenalidadDe200() {
 			noComenzado.cancelar(apuesta);
 			verify(apuesta).cambiarElTipoDeApuestaACancelada();

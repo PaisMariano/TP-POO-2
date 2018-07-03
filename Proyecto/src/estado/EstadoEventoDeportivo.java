@@ -1,5 +1,6 @@
 package estado;
 
+import apuesta.Apuesta;
 import factorDeCancelacionOReactivacionDeApuesta.FactorDeCancelacionOReactivacionDeApuesta;
 
 public abstract class EstadoEventoDeportivo implements FactorDeCancelacionOReactivacionDeApuesta{
@@ -21,7 +22,8 @@ public abstract class EstadoEventoDeportivo implements FactorDeCancelacionOReact
 			penalidad = _penalidad;
 		}
 	
-		public Float penalidad() {
+		@Override
+		public Float penalidad(Apuesta _apuesta) {
 			return penalidad;
 		}
 }
