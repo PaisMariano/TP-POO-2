@@ -3,6 +3,10 @@ package apuesta;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import estado.EstadoEventoDeportivo;
+import eventoDeportivo.EventoDeportivo;
+
 import static org.mockito.Mockito.*;
 
 import java.math.BigDecimal;
@@ -10,16 +14,18 @@ import java.math.BigDecimal;
 public class TestCancelada {
 	private Apuesta spyApuesta;
 	private TipoApuesta canceladaSUT;
+	private EstadoEventoDeportivo spyEstado;
 
 		@Before
 		public void setUp() {
 			canceladaSUT = new Cancelada();
 			spyApuesta = mock(Apuesta.class);
-			
+			spyEstado = mock(EstadoEventoDeportivo.class);
 		}
 		
 		@Test
-		public void testAlCancelarTiraError() {
+		public void testAlCancelarTiraError() throws Exception{
+			canceladaSUT.cancelar(spyApuesta);
 			
 		}
 		
@@ -27,8 +33,15 @@ public class TestCancelada {
 		public void testLaGananciaBrutaEsCero() {
 			assertEquals(new BigDecimal(0), canceladaSUT.gananciaBruta(spyApuesta));
 		}
+		
 		@Test
-		public void testAlReactivarLoDelegaEnLaApuesta(){
-			//Falta implementar, como corroborar que la excepcion se lance?
+		public void testAlReactivarLoDelegaEnELEstadoDelPartidoDeLaApuesta(){
+			
+			when(spyApuesta.elEstadoDelPartidoDeLaApuesta()).thenReturn(spyEstado);
+			
+			canceladaSUT.reactivar(spyApuesta);
+			
+			verify(spyApuesta).elEstadoDelPartidoDeLaApuesta();
+			verify(spyEstado).reactivar(spyApuesta);
 		}
 }

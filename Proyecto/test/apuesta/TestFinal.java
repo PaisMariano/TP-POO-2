@@ -8,13 +8,14 @@ import static org.mockito.Mockito.*;
 import java.math.BigDecimal;
 
 	public class TestFinal {
-		private Apuesta stubApuesta;
+		private Apuesta stubApuesta, spyApuesta;
 		private TipoApuesta finalSUT;
 
 			@Before
 			public void setUp() {
 				finalSUT = new Final();
 				stubApuesta = mock(Apuesta.class);
+				spyApuesta = mock(Apuesta.class);
 			}
 			
 			@Test

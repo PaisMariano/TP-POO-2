@@ -85,4 +85,5 @@ public class TestSegura {
 			verify(estadoEventoDep).reactivar(spyApuesta);
 			
 		}
+		
 }
