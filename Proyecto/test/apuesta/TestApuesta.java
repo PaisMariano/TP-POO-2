@@ -141,8 +141,9 @@ public class TestApuesta {
 	public void testCambiarElTipoDeApuestaACancelada(){
 			
 		
-		this.apuestaSpy.cambiarElTipoDeApuestaACancelada();
-				
+		apuestaSUT.cambiarElTipoDeApuestaACancelada();
+		verify(apuestaSpy).cambiarElTipoDeApuestaACancelada();
+		verify(apuestaSpy).setTipo(new Cancelada());		
 		
 	}
 

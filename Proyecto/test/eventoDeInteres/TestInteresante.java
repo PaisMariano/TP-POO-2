@@ -1,4 +1,4 @@
-package EventoDeInteres;
+package eventoDeInteres;
 
 import org.junit.Before;
 import org.junit.Test;
