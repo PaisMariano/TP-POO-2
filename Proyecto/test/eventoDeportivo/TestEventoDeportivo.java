@@ -126,6 +126,101 @@ public class TestEventoDeportivo {
 		assertFalse(unEventoDeportivo.sucedioEn(fechaCualquiera));
 	}
 	
+	@Test	
+	public void testGetCuotaOponente1() {
+		
+		when(dummyCasa.calcularProbabilidadGanador(river, boca)).thenReturn(new Float(0.5));
+		
+		EventoDeportivo eve = new EventoDeportivo(dummyCasa, unDeporteFutbol, river, boca, fechaYHora, "Francia");
+		
+		Float total = eve.getCuotaOponente1();
+		
+		assertEquals(total, new Float(1.5));
+		
+	}
+	
+	@Test	
+	public void testGetCuotaOponente2() {
+		
+		when(dummyCasa.calcularProbabilidadGanador(boca, river)).thenReturn(new Float(0.5));
+		
+		EventoDeportivo eve = new EventoDeportivo(dummyCasa, unDeporteFutbol, river, boca, fechaYHora, "Francia");
+		
+		Float total = eve.getCuotaOponente2();
+		
+		assertEquals(total, new Float(1.5));
+		
+		
+	}
+	
+	@Test	
+	public void testGetCuotaEmpate() {
+		
+		when(dummyCasa.calcularProbabilidadEmpate(river, boca)).thenReturn(new Float(0.2));
+		
+		EventoDeportivo eve = new EventoDeportivo(dummyCasa, unDeporteFutbol, river, boca, fechaYHora, "Francia");
+		
+		Float total = eve.getCuotaEmpate();
+		
+		assertEquals(total, new Float(1.8));
+				
+		
+	}
+	
+	@Test	
+	public void testGetEstado() {
+		
+		NoComenzado estado = new NoComenzado();
+		
+		unEventoDeportivo.setEstado(estado);
+		
+		assertEquals(unEventoDeportivo.getEstado(), estado);	
+		
+	}
+	
+	@Test	
+	public void testGetResultado() {
+		
+		unEventoDeportivo.setResultado(resultadoGanadorRiver);
+		
+		assertEquals(unEventoDeportivo.getResultado(), resultadoGanadorRiver);
+		
+	}
+	
+	@Test	
+	public void testGetGanador() {
+		
+		unEventoDeportivo.setResultado(resultadoGanadorRiver);
+		
+		assertEquals(unEventoDeportivo.getGanador(), river);
+		
+	}
+	
+	@Test	
+	public void testEsDelMes() {
+		
+		assertEquals(this.unEventoDeportivo.esDelMes(2), true);
+		
+	}
+	
+	@Test	
+	public void testHaComenzado() {		
+		
+		unEventoDeportivo.setEstado(estadoFinalizado);
+		
+		assertEquals(unEventoDeportivo.haComenzado(), false);
+		
+	}
+	
+	@Test	
+	public void testHaTerminado() {
+		
+		unEventoDeportivo.setEstado(estadoFinalizado);
+		
+		assertEquals(unEventoDeportivo.haTerminado(), true);
+		
+	}
+	
 }
 
 
