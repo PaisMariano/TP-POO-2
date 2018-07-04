@@ -13,8 +13,10 @@ import org.mockito.Mock;
 
 import algoritmo.*;
 import casaDeApuesta.CasaDeApuestas;
+import criterio.Buscador;
 import eventoDeportivo.Deporte;
 import eventoDeportivo.EventoDeportivo;
+import expresionLogica.ExpresionLogica;
 import notifier.BalanceNotifier;
 import notifier.TextMessageBalanceNotifier;
 import oponentes.Deportista;
@@ -23,7 +25,7 @@ import oponentes.Oponente;
 import usuarios.User;
 
 public class TestCasaDeApuestas {
-
+	private ExpresionLogica expMock;
 	private CasaDeApuestas casaDeApuestas1, casaDeApuestas, casaDeApuestasMock;
 	private ArrayList<User> usuariosEmpty, usuarios;
 	private ArrayList<EventoDeportivo> eventosEmpty;
@@ -32,16 +34,19 @@ public class TestCasaDeApuestas {
 	private EventoDeportivo eventoDeportivoMock, eventoDeportivoMock2;
 	private BalanceNotifier balanceMock;
 	private CompetenciaHistoricaDirecta algoritmoHistorico;
+	private Buscador buscadorMock;
 
 	@Before
 	public void setUp() throws Exception {
-
+		
 		eventosEmpty = new ArrayList<EventoDeportivo>();
 		eventoDeportivoMock = mock(EventoDeportivo.class);
 		eventoDeportivoMock2 = mock(EventoDeportivo.class);
 		balanceMock = mock(TextMessageBalanceNotifier.class);
 		algoritmoMock = mock(AlgoritmoProbabilidades.class);
-
+		buscadorMock= mock(Buscador.class);
+		expMock = mock (ExpresionLogica.class);
+			
 	}
 
 	@Test
@@ -114,18 +119,22 @@ public class TestCasaDeApuestas {
 		
 		verify(spyAlgoritmo).calcularProbabilidad(eventosEmpty, oponenteMock1, oponenteMock2);
 	}
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Test
+	public void testLaCasaDeApuestasPuedeBuscarEventosSegunCriterios() {
+		
+		casaDeApuestas = new CasaDeApuestas(usuarios, algoritmoMock, balanceMock, eventosEmpty);
+		casaDeApuestas.setBuscador(buscadorMock);
+		when(buscadorMock.realizarBusquedaEn(eventosEmpty, expMock)).thenReturn(eventosEmpty);
+		casaDeApuestas.buscar(expMock);
+		
+		verify(buscadorMock).realizarBusquedaEn(eventosEmpty, expMock);
+		
+		
+		
+	}
 	
 	@Test
 	public void testLaCasaDeApuestasConoceSusEventosFinalizados() {
