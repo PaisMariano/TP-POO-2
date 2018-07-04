@@ -88,7 +88,7 @@ public class EventoDeportivo extends Interesante {
 			}
 
 			public EstadoEventoDeportivo getEstado(){
-				return estado;
+				return this.estado;
 			}
 			public void  setEstado(EstadoEventoDeportivo _estado){
 				this.estado = _estado;

@@ -29,7 +29,7 @@ public class CompetenciaHistoricaDirecta extends AlgoritmoProbabilidades {
 		
 	}	
 	
-	private Float sizeConsistente(List historico) {
+	private Float sizeConsistente(List <EventoDeportivo> historico) {
 		
 		int size = historico.size();
 		

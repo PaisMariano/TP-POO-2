@@ -2,11 +2,13 @@ package apuesta;
 
 import apuesta.Apuesta;
 import eventoDeportivo.EventoDeportivo;
+import oponentes.Oponente;
 import resultados.Resultado;
 import eventoDeportivo.Deporte;
 import org.junit.Before;
 import org.junit.Test;
 import estado.EstadoEventoDeportivo;
+import eventoDeInteres.Interesante;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -138,12 +140,46 @@ public class TestApuesta {
 	}
 	
 	@Test
-	public void testCambiarElTipoDeApuestaACancelada(){
-			
-		
-		this.apuestaSpy.cambiarElTipoDeApuestaACancelada();
-				
-		
+	public void testSeLePideALaApuestaElEstadoDelPartido() {
+		apuestaSUT.elEstadoDelPartidoDeLaApuesta();
+		verify(spyEvento).getEstado();
+	}
+	
+	@Test
+	public void testSeLePideALaApuestaElEventoDeInteres() {
+		Interesante esperado = apuestaSUT.getEventoDeInteres();
+		assertEquals(esperado, spyEvento);
+	}
+	
+	@Test
+	public void testLaApuestaEsAcertada() {
+		Oponente ganador = mock(Oponente.class);
+		when(spyEvento.getGanador()).thenReturn(ganador);
+		when(spyResultado.getApostado()).thenReturn(ganador);
+		assertTrue(apuestaSUT.esAcertada());
+	}
+	
+	@Test
+	public void testLaApuestaNoEsAcertada() {
+		Oponente perdedor = mock(Oponente.class);
+		Oponente ganador = mock(Oponente.class);
+		when(spyEvento.getGanador()).thenReturn(ganador);
+		when(spyResultado.getApostado()).thenReturn(perdedor);
+		assertFalse(apuestaSUT.esAcertada());
+	}
+	
+	@Test
+	public void testCambiarElTipoDeApuestaACancelada(){	
+		apuestaSUT.cambiarElTipoDeApuestaACancelada();
+		verify(apuestaSpy).cambiarElTipoDeApuestaACancelada();
+		verify(apuestaSpy).setTipo(new Cancelada());		
+	}
+	
+	@Test
+	public void testCambiarElTipoDeApuestaASegura(){	
+		apuestaSUT.cambiarElTipoDeApuestaASegura();
+		verify(apuestaSpy).cambiarElTipoDeApuestaACancelada();
+		verify(apuestaSpy).setTipo(new Segura());		
 	}
 
 }

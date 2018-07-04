@@ -19,7 +19,7 @@ public  class Apuesta {
 		this.setMonto(_monto);
 		eventoDeportivo = _evento;
 		this.setResultadoAlQueSeApuesta(_resultado);
-		this.setTipo(_tipo);
+		this.setTipo(_tipo); 
 	}
 	
 		public void setTipo(TipoApuesta _tipo) {
@@ -75,7 +75,7 @@ public  class Apuesta {
 		}
 
 		public boolean esAcertada(){
-			return this.getResultadoApostado().getApostado().equals(eventoDeportivo.getGanador());
+			return resultadoApostado.getApostado().equals(eventoDeportivo.getGanador());
 		}
 		
 		public Interesante getEventoDeInteres() {
