@@ -199,26 +199,43 @@ public class TestEventoDeportivo {
 	@Test	
 	public void testEsDelMes() {
 		
-		assertEquals(this.unEventoDeportivo.esDelMes(2), true);
+		assertTrue(this.unEventoDeportivo.esDelMes(2));
 		
 	}
 	
 	@Test	
-	public void testHaComenzado() {		
+	public void testElEventoNoEsDelMes() {
+		assertFalse(this.unEventoDeportivo.esDelMes(8));
+	}
+	
+	@Test	
+	public void testElEventoHaComenzado() {		
 		
 		unEventoDeportivo.setEstado(estadoFinalizado);
 		
-		assertEquals(unEventoDeportivo.haComenzado(), false);
+		assertFalse(unEventoDeportivo.haComenzado());
 		
 	}
 	
 	@Test	
-	public void testHaTerminado() {
+	public void testElEventoHaHaTerminado() {
 		
 		unEventoDeportivo.setEstado(estadoFinalizado);
 		
-		assertEquals(unEventoDeportivo.haTerminado(), true);
+		assertTrue(unEventoDeportivo.haTerminado());
 		
+	}
+	
+	@Test
+	public void testUnEventoDeportivoNoParticipoUnoDeLosOponentes() {
+		Oponente sanLorenzo = mock(Oponente.class); 
+		assertFalse(unEventoDeportivo.participaronVs(boca, sanLorenzo));
+	}
+	
+	@Test
+	public void testUnEventoDeportivoNoParticipoElOtroDeLosOponentes() {
+		Oponente sanLorenzo = mock(Oponente.class); 
+		assertFalse(unEventoDeportivo.participaronVs(sanLorenzo, river));
 	}
 	
 }
