@@ -75,7 +75,7 @@ public  class Apuesta {
 		}
 
 		public boolean esAcertada(){
-			return this.getResultadoApostado().getApostado().equals(eventoDeportivo.getGanador());
+			return resultadoApostado.getApostado().equals(eventoDeportivo.getGanador());
 		}
 		
 		public Interesante getEventoDeInteres() {
