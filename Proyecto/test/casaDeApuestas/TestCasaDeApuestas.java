@@ -79,18 +79,54 @@ public class TestCasaDeApuestas {
 
 	@Test
 	public void testSeCreaUnEventoDeportivo() {
-		casaDeApuestas = new CasaDeApuestas(usuarios, algoritmoMock, balanceMock, eventosEmpty);
-		casaDeApuestasMock = mock(CasaDeApuestas.class);
+//		casaDeApuestasMock = mock(CasaDeApuestas.class);
 
+		casaDeApuestas = new CasaDeApuestas(usuarios, algoritmoMock, balanceMock, eventosEmpty);
 		casaDeApuestas.agregarEvento(eventoDeportivoMock);
 		casaDeApuestas.agregarEvento(eventoDeportivoMock2);
 
+		algoritmoHistorico=new CompetenciaHistoricaDirecta();
+
+		
 		when(eventoDeportivoMock2.nombreDeporte()).thenReturn("Tenis");
 		assertEquals("Tenis", (eventoDeportivoMock2.nombreDeporte()));
 		assertEquals(casaDeApuestas.getEventosDeportivos().size(), 2);
+		
 
+
+		
 	}
 
+	@Test
+	public void testLaCasaDeApuestasCalculaLasProbabilidadesDeGanaYEmpatar() {
+
+		Oponente oponenteMock1= mock(Oponente.class);
+		Oponente oponenteMock2= mock(Oponente.class);
+		
+		AlgoritmoProbabilidades spyAlgoritmo = mock(AlgoritmoProbabilidades.class);
+		casaDeApuestas = new CasaDeApuestas(usuarios, spyAlgoritmo, balanceMock, eventosEmpty);
+		casaDeApuestas.setAlgoritmo(spyAlgoritmo);
+		//when(spyAlgoritmo.calcularProbabilidad(eventosEmpty, oponenteMock1, oponenteMock2)).thenReturn((float)100);
+		casaDeApuestas.calcularProbabilidadGanador(oponenteMock1, oponenteMock2);
+		casaDeApuestas.calcularProbabilidadEmpate(oponenteMock1, oponenteMock2);
+
+		verify(spyAlgoritmo).calcularProbabilidadEmpate(eventosEmpty, oponenteMock1, oponenteMock2);
+		
+		verify(spyAlgoritmo).calcularProbabilidad(eventosEmpty, oponenteMock1, oponenteMock2);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Test
 	public void testLaCasaDeApuestasConoceSusEventosFinalizados() {
 

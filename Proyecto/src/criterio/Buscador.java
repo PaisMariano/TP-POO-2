@@ -10,7 +10,7 @@ public class Buscador {
 		public Buscador() {
 		}
 		
-			public List<EventoDeportivo> realizarBusquedaEn(List<EventoDeportivo> _eventos, ExpresionLogica _expresionCriterio) {
+	public List<EventoDeportivo> realizarBusquedaEn(List<EventoDeportivo> _eventos, ExpresionLogica _expresionCriterio) {
 				return _expresionCriterio.getValor(_eventos);
 			}						
 }

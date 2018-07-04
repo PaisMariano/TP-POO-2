@@ -93,13 +93,21 @@ public class CasaDeApuestas extends Interesado{
 				}	
 				return eventosFinalizados;
 			}
+			public List<EventoDeportivo> getEventos() {
+				return eventos;
+			}
 		
+			public AlgoritmoProbabilidades algoritmoActual() {
+				return this.algoritmo;
+			}
 			public Float calcularProbabilidadGanador(Oponente oponente1, Oponente oponente2) {
-				return this.algoritmo.calcularProbabilidad(this.eventos, oponente1, oponente2);
+				return this.algoritmoActual().calcularProbabilidad(this.getEventos(), oponente1, oponente2);
 			}
 			
+			
+
 			public Float calcularProbabilidadEmpate(Oponente oponente1, Oponente oponente2) {
-				return this.algoritmo.calcularProbabilidadEmpate(this.eventos, oponente1, oponente2);
+				return this.algoritmo.calcularProbabilidadEmpate(this.getEventos(), oponente1, oponente2);
 			}
 
 			@Override
