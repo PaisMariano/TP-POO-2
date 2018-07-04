@@ -2,6 +2,8 @@ package casaDeApuestas;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +48,7 @@ public class TestCasaDeApuestas {
 		algoritmoMock = mock(AlgoritmoProbabilidades.class);
 		buscadorMock= mock(Buscador.class);
 		expMock = mock (ExpresionLogica.class);
-			
+		usuarioMock1 = mock(User.class);
 	}
 
 	@Test
@@ -153,6 +155,27 @@ public class TestCasaDeApuestas {
 		finalizados.add(eventoDeportivoMock2);
 		assertEquals(casaDeApuestas.getEventosFinalizados(), finalizados);
 
+	}
+	
+	@Test
+	public void testNotificarBalanceUsuarios() {
+		
+		this.usuarios = new ArrayList<User>();
+		this.usuarios.add(usuarioMock1);
+		casaDeApuestas = new CasaDeApuestas(this.usuarios, algoritmoMock, balanceMock, eventosEmpty);
+		
+		BigDecimal valor = new BigDecimal(1);
+		int unMes = 2;
+		when(usuarioMock1.gananciaBruta(unMes)).thenReturn(valor);
+		
+		
+		
+		casaDeApuestas.notificarBalanceUsuarios(unMes);	
+		
+		verify(balanceMock).notifyBalance(usuarioMock1, unMes, usuarioMock1.gananciaBruta(unMes));
+		
+		
+		
 	}
 
 }

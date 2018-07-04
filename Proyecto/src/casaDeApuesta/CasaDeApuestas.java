@@ -40,7 +40,7 @@ public class CasaDeApuestas extends Interesado{
 		public CasaDeApuestas(List<User> _usuarios, AlgoritmoProbabilidades _algoritmo,BalanceNotifier _notifier, List<EventoDeportivo> _historico) {
 			usuarios = _usuarios;
 			this.setAlgoritmo(new CompetenciaHistoricaDirecta());
-			this.setNotifier(new TextMessageBalanceNotifier());
+			this.setNotifier(_notifier);
 			eventos = _historico;		
 		}
 		
