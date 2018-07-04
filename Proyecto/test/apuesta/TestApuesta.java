@@ -7,6 +7,7 @@ import eventoDeportivo.Deporte;
 import org.junit.Before;
 import org.junit.Test;
 import estado.EstadoEventoDeportivo;
+import eventoDeInteres.Interesante;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -138,10 +139,22 @@ public class TestApuesta {
 	}
 	
 	@Test
+	public void testSeLePideALaApuestaElEstadoDelPartido() {
+		apuestaSUT.elEstadoDelPartidoDeLaApuesta();
+		verify(spyEvento).getEstado();
+	}
+	
+	@Test
+	public void testSeLePideALaApuestaElEventoDeInteres() {
+		Interesante esperado = apuestaSUT.getEventoDeInteres();
+		assertEquals(esperado, spyEvento);
+	}
+	
+	@Test
 	public void testCambiarElTipoDeApuestaACancelada(){
 			
 		
-		apuestaSUT.cambiarElTipoDeApuestaACancelada();
+		apuestaSpy.cambiarElTipoDeApuestaACancelada();
 		verify(apuestaSpy).cambiarElTipoDeApuestaACancelada();
 		verify(apuestaSpy).setTipo(new Cancelada());		
 		
