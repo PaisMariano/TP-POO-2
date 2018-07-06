@@ -52,7 +52,7 @@ public class User extends Interesado{
 		
 			public void agregarNuevaApuesta(Apuesta _apuesta) {
 				apuestas.add(_apuesta);
-				 this.agregarSeComoInteresadoA(_apuesta);/// revisar el metodo como hacer para que pueda testearlo
+				 this.agregarSeComoInteresadoA(_apuesta);
 			}
 			
 			private void agregarSeComoInteresadoA(Apuesta _apuesta) {

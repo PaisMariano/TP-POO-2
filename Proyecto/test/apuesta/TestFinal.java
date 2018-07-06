@@ -20,14 +20,26 @@ import java.math.BigDecimal;
 			
 			@Test
 			public void testAlCancelarTiraError() throws Exception {
-				finalSUT.cancelar(stubApuesta);
-				//Falta implementar, como corroborar que la excepcion se lance?
+					try {
+                				finalSUT.cancelar(stubApuesta);
+            				}
+					catch(Exception e) {
+						String mensajeOriginal= new String("Este tipo de apuesta no puede ser cancelada o reactivada.");
+						String mensajeTraido= e.getMessage();
+						assertEquals(mensajeOriginal,mensajeTraido);
+				}
 			}
 			
 			@Test
 			public void testAlReactivarTiraError()throws Exception{
-				finalSUT.reactivar(stubApuesta);
-				//Falta implementar, como corroborar que la excepcion se lance?
+					try {
+                				finalSUT.reactivar(stubApuesta);
+            				}
+					catch(Exception e){
+						String mensajeOriginal = new String("Este tipo de apuesta no puede ser cancelada o reactivada.");
+						String mensajeTraido= e.getMessage();
+						assertEquals(mensajeOriginal,mensajeTraido);  
+				}
 			}
 			
 			@Test

@@ -7,8 +7,6 @@ import eventoDeportivo.EventoDeportivo;
 import oponentes.Oponente; 
 
 public abstract class AlgoritmoProbabilidades {
-	
-	//modificar para que tome 3 metodos y no una list de float
 
 	public abstract Float calcularProbabilidad(List<EventoDeportivo> historialCompleto, Oponente _op1, Oponente _op2);
 	

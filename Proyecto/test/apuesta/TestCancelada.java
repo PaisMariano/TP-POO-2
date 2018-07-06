@@ -25,7 +25,18 @@ public class TestCancelada {
 		
 		@Test
 		public void testAlCancelarTiraError() throws Exception{
-			canceladaSUT.cancelar(spyApuesta);
+			try {
+                		canceladaSUT.cancelar(spyApuesta);
+            		}
+            
+			catch(Exception e){
+
+	                String mensajeOriginal= new String("Esta apuesta no puede ser cancelada");
+	                String mensajeTraido= e.getMessage();
+	                assertEquals(mensajeOriginal,mensajeTraido);               
+            }
+
+
 			
 		}
 		
