@@ -33,7 +33,7 @@ public class TestApuesta {
 		spyResultado = mock(Resultado.class);
 		spyTipo = mock(TipoApuesta.class);
 		apuestaSUT = new Apuesta(monto, spyEvento, spyResultado, spyTipo);
-		apuestaSpy = mock(Apuesta.class);
+		apuestaSpy = spy(apuestaSUT);
 		
 	}
 	
@@ -176,9 +176,9 @@ public class TestApuesta {
 	}
 	
 	@Test
-	public void testCambiarElTipoDeApuestaASegura(){	
+	public void testCambiarElTipoDeApuestaASegura(){
 		apuestaSUT.cambiarElTipoDeApuestaASegura();
-		verify(apuestaSpy).cambiarElTipoDeApuestaACancelada();
+		verify(apuestaSpy).cambiarElTipoDeApuestaASegura();
 		verify(apuestaSpy).setTipo(new Segura());		
 	}
 
